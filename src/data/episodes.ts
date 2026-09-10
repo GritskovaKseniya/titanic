@@ -1,3 +1,5 @@
+import { saveDoc, seedCollection, useLiveCollection } from './liveCollection';
+
 export interface Episode {
   number: number;
   title: { ru: string; en: string };
@@ -7,9 +9,9 @@ export interface Episode {
   /** Vimeo video id or private-hash URL. Empty until the episode is published. */
   vimeoId: string;
   /**
-   * Path under public/ to this episode's poster (e.g. `/posters/01.jpg`).
-   * Empty until the poster is supplied — the episode row then falls back to
-   * a plain timecode numeral instead of a broken image.
+   * Public URL of this episode's poster (Firebase Storage, once uploaded via
+   * /admin). Empty until supplied — the episode row then falls back to a
+   * plain timecode numeral instead of a broken image.
    */
   posterUrl: string;
 }
@@ -20,7 +22,7 @@ export interface Episode {
 // survived, is what the episode itself tells, so it's deliberately left out
 // here. Replace the copy with the show's own research and fill
 // `vimeoId`/`posterUrl` as episodes are cut and their posters are ready.
-export const episodes: Episode[] = [
+export const defaultEpisodes: Episode[] = [
   {
     number: 1,
     title: { ru: 'Маргарет «Молли» Браун', en: 'Margaret "Molly" Brown' },
@@ -132,3 +134,16 @@ export const episodes: Episode[] = [
     posterUrl: '',
   },
 ];
+
+/** Live episode list from Firestore, falling back to `defaultEpisodes`. */
+export const useEpisodes = (): Episode[] => useLiveCollection<Episode>('episodes', defaultEpisodes, 'number');
+
+export const saveEpisode = (episode: Episode): Promise<void> =>
+  saveDoc('episodes', String(episode.number), episode);
+
+/** One-time (idempotent) load of the starter roster into Firestore. */
+export const seedEpisodes = (): Promise<void> =>
+  seedCollection(
+    'episodes',
+    defaultEpisodes.map((e) => ({ id: String(e.number), data: e })),
+  );

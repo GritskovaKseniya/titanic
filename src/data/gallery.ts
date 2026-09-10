@@ -1,3 +1,5 @@
+import { removeDoc, saveDoc, seedCollection, useLiveCollection } from './liveCollection';
+
 export type GalleryHue = 'coral' | 'gold' | 'navy';
 
 export interface GalleryItem {
@@ -5,13 +7,13 @@ export interface GalleryItem {
   episodeNumber: number;
   hue: GalleryHue;
   caption: { ru: string; en: string };
+  /** Public Storage URL of the real still, once uploaded via /admin. Falls back to a `hue` gradient tile until then. */
+  imageUrl?: string;
 }
 
-// Placeholder tiles standing in for the real AI stills — swap `hue` gradients
-// for actual images in public/gallery/ and point `image` (add the field) at
-// them once files are supplied. Captions describe real reconstructed beats
-// so the grid reads correctly before assets land.
-export const galleryItems: GalleryItem[] = [
+// Placeholder tiles standing in for the real AI stills — once real images are
+// uploaded through /admin they carry `imageUrl` and the gradient is unused.
+export const defaultGalleryItems: GalleryItem[] = [
   {
     id: 'gallery-01',
     episodeNumber: 2,
@@ -49,3 +51,15 @@ export const galleryItems: GalleryItem[] = [
     caption: { ru: 'Мостик за минуту до столкновения', en: 'The bridge, one minute before impact' },
   },
 ];
+
+export const useGalleryItems = (): GalleryItem[] => useLiveCollection<GalleryItem>('gallery', defaultGalleryItems);
+
+export const saveGalleryItem = (item: GalleryItem): Promise<void> => saveDoc('gallery', item.id, item);
+
+export const deleteGalleryItem = (id: string): Promise<void> => removeDoc('gallery', id);
+
+export const seedGallery = (): Promise<void> =>
+  seedCollection(
+    'gallery',
+    defaultGalleryItems.map((g) => ({ id: g.id, data: g })),
+  );

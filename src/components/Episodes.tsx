@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Play, X } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
-import { episodes } from '../data/episodes';
+import { useEpisodes } from '../data/episodes';
 import { buildVimeoEmbed } from '../utils/video';
 
 export const Episodes: React.FC = () => {
   const { t, language } = useLanguage();
+  const episodes = useEpisodes();
   const [openEpisode, setOpenEpisode] = useState<number | null>(null);
 
   const active = episodes.find((e) => e.number === openEpisode);

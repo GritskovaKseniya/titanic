@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
-import { galleryItems, GalleryHue } from '../data/gallery';
+import { useGalleryItems, GalleryHue } from '../data/gallery';
 
 const HUE_GRADIENT: Record<GalleryHue, string> = {
   coral: 'linear-gradient(150deg, #8b2c63 0%, #f14fa0 55%, #1a2f38 100%)',
@@ -10,6 +10,7 @@ const HUE_GRADIENT: Record<GalleryHue, string> = {
 
 export const Gallery: React.FC = () => {
   const { t, language } = useLanguage();
+  const galleryItems = useGalleryItems();
 
   return (
     <section id="gallery" className="py-20 sm:py-28 bg-darkSec border-y hairline">
@@ -29,10 +30,11 @@ export const Gallery: React.FC = () => {
             <figure
               key={item.id}
               className="group relative aspect-[4/5] overflow-hidden border hairline"
-              style={{ background: HUE_GRADIENT[item.hue] }}
+              style={item.imageUrl ? undefined : { background: HUE_GRADIENT[item.hue] }}
             >
-              {/* Placeholder tile — replace with an <img> pointing at the real
-                  generated still once files are added to public/gallery/. */}
+              {item.imageUrl && (
+                <img src={item.imageUrl} alt="" className="absolute inset-0 w-full h-full object-cover" />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
               <span className="badge badge-synth absolute top-3 left-3">{t.badges.synth}</span>
               <figcaption className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">

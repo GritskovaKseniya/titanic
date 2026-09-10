@@ -1,0 +1,15 @@
+rules_version = '2';
+
+// Posters, gallery stills and team photos are public assets; only the
+// signed-in admin account uploads. Same single-shared-login trust model as
+// firestore.rules.
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null
+        && request.resource.size < 15 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+  }
+}

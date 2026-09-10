@@ -1,9 +1,11 @@
 import React from 'react';
-import { Anchor, Instagram, Mail } from 'lucide-react';
+import { Anchor, AtSign, Mail } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useSiteSettings } from '../data/siteSettings';
 
 export const Footer: React.FC = () => {
   const { t } = useLanguage();
+  const { contactEmail, socialLinks } = useSiteSettings();
   const year = new Date().getFullYear();
 
   return (
@@ -18,12 +20,23 @@ export const Footer: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <a href="https://instagram.com/" target="_blank" rel="noreferrer" className="text-ash hover:text-accent transition-colors">
-              <Instagram className="w-5 h-5" />
-            </a>
-            <a href="mailto:hello@example.com" className="text-ash hover:text-accent transition-colors">
-              <Mail className="w-5 h-5" />
-            </a>
+            {socialLinks.map((link) => (
+              <a
+                key={link.id}
+                href={link.url}
+                target="_blank"
+                rel="noreferrer"
+                title={link.label}
+                className="text-ash hover:text-accent transition-colors"
+              >
+                <AtSign className="w-5 h-5" />
+              </a>
+            ))}
+            {contactEmail && (
+              <a href={`mailto:${contactEmail}`} title={t.footer.contact} className="text-ash hover:text-accent transition-colors">
+                <Mail className="w-5 h-5" />
+              </a>
+            )}
           </div>
         </div>
         <div className="border-t hairline mt-8 pt-6 timecode text-[11px] text-ash">
