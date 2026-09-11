@@ -9,7 +9,7 @@ export const Header: React.FC = () => {
   const navLinks = [
     { href: '#episodes', label: t.nav.episodes },
     { href: '#gallery', label: t.nav.gallery },
-    { href: '#team', label: t.nav.team },
+    { href: '#details', label: t.nav.details },
   ];
 
   return (

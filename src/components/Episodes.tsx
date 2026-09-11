@@ -4,6 +4,12 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { useEpisodes } from '../data/episodes';
 import { buildVimeoEmbed } from '../utils/video';
 
+const HUE_GRADIENTS = [
+  'linear-gradient(150deg, #123240 0%, #c9962f 60%, #071820 100%)',
+  'linear-gradient(150deg, #8b2c63 0%, #f14fa0 55%, #1a2f38 100%)',
+  'linear-gradient(150deg, #050f15 0%, #123240 55%, #8b2c63 130%)',
+];
+
 export const Episodes: React.FC = () => {
   const { t, language } = useLanguage();
   const episodes = useEpisodes();
@@ -17,7 +23,7 @@ export const Episodes: React.FC = () => {
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="grid md:grid-cols-12 gap-6 mb-12">
           <div className="md:col-span-7">
-            <span className="slate-label">{t.episodes.label}</span>
+            <span className="slate-label">{t.episodes.season}</span>
             <h2 className="mt-2 text-3xl sm:text-4xl font-heading font-semibold uppercase text-bone leading-[1.05]">
               {t.episodes.heading}
             </h2>
@@ -25,48 +31,46 @@ export const Episodes: React.FC = () => {
           <p className="md:col-span-5 text-ash self-end md:justify-self-end max-w-md">{t.episodes.description}</p>
         </div>
 
-        <div className="border-t hairline">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {episodes.map((ep) => {
             const embed = buildVimeoEmbed(ep.vimeoId);
+            const thumb = ep.posterUrl ? undefined : { background: HUE_GRADIENTS[ep.number % HUE_GRADIENTS.length] };
             return (
-              <div
-                key={ep.number}
-                className="group grid grid-cols-[3rem_1fr_auto] sm:grid-cols-[4.5rem_1fr_auto] gap-4 sm:gap-6 items-center border-b hairline py-5 sm:py-6 hover:bg-darkSec/60 transition-colors sm:px-3 sm:-mx-3"
-              >
-                {ep.posterUrl ? (
-                  <img
-                    src={ep.posterUrl}
-                    alt=""
-                    className="w-full aspect-[2/3] object-cover border hairline"
-                  />
-                ) : (
-                  <span className="timecode text-ash text-sm sm:text-base">{String(ep.number).padStart(2, '0')}</span>
-                )}
-                <div className="min-w-0">
+              <article key={ep.number} id={`episode-${ep.number}`} className="group scroll-mt-24">
+                <button
+                  onClick={() => embed && setOpenEpisode(ep.number)}
+                  disabled={!embed}
+                  className="relative w-full aspect-video overflow-hidden border hairline text-left disabled:cursor-default"
+                  style={thumb}
+                >
                   {ep.posterUrl && (
-                    <span className="timecode text-ash text-xs block mb-1">{String(ep.number).padStart(2, '0')}</span>
+                    <img src={ep.posterUrl} alt="" className="absolute inset-0 w-full h-full object-cover" />
                   )}
-                  <div className="flex items-baseline gap-2.5 flex-wrap">
-                    <h3 className="text-lg sm:text-xl font-heading font-semibold uppercase text-bone group-hover:text-accent transition-colors">
-                      {ep.title[language]}
-                    </h3>
-                    <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-goldBright">
-                      {ep.role[language]}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                  <span className="timecode absolute top-2.5 left-2.5 text-[11px] text-bone/90">
+                    {String(ep.number).padStart(2, '0')}
+                  </span>
+                  {embed ? (
+                    <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="w-11 h-11 rounded-full bg-accent/90 flex items-center justify-center">
+                        <Play className="w-4 h-4 text-dark ml-0.5" />
+                      </span>
                     </span>
-                  </div>
-                  <p className="text-sm text-ash mt-1 line-clamp-2 max-w-2xl">{ep.description[language]}</p>
+                  ) : (
+                    <span className="badge badge-archival absolute bottom-2.5 right-2.5">{t.episodes.comingSoon}</span>
+                  )}
+                </button>
+
+                <div className="mt-3">
+                  <h3 className="text-base font-heading font-semibold uppercase text-bone group-hover:text-accent transition-colors">
+                    {ep.title[language]}
+                  </h3>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-goldBright block mt-0.5">
+                    {ep.role[language]}
+                  </span>
+                  <p className="text-sm text-ash mt-1.5 line-clamp-2">{ep.description[language]}</p>
                 </div>
-                {embed ? (
-                  <button
-                    onClick={() => setOpenEpisode(ep.number)}
-                    className="btn btn-quiet px-4 py-2 text-xs font-mono uppercase tracking-[0.1em] shrink-0"
-                  >
-                    <Play className="w-3.5 h-3.5" /> {t.episodes.watch}
-                  </button>
-                ) : (
-                  <span className="badge badge-archival shrink-0">{t.episodes.comingSoon}</span>
-                )}
-              </div>
+              </article>
             );
           })}
         </div>

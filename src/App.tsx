@@ -4,7 +4,7 @@ import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { Episodes } from './components/Episodes';
 import { Gallery } from './components/Gallery';
-import { Team } from './components/Team';
+import { Details } from './components/Details';
 import { Footer } from './components/Footer';
 
 // Firebase Auth/Storage and every admin form live in this chunk — visitors
@@ -21,7 +21,7 @@ const Site: React.FC = () => (
         <Hero />
         <Episodes />
         <Gallery />
-        <Team />
+        <Details />
       </main>
       <Footer />
     </div>

@@ -1,18 +1,25 @@
 export type Language = 'ru' | 'en';
 
 export interface TranslationsShape {
-  meta: { eyebrowLeft: string; eyebrowRight: string };
-  nav: { episodes: string; gallery: string; team: string };
-  hero: { title: string; pitch: string; cta: string; subline: string };
+  meta: { eyebrowLeft: string; eyebrowRight: string; year: string; genre: string };
+  nav: { episodes: string; gallery: string; details: string };
+  hero: {
+    title: string;
+    pitch: string;
+    cta: string;
+    subline: string;
+    share: string;
+    shared: string;
+    jumpLabel: string;
+    tabs: { overview: string; episodes: string; gallery: string; details: string };
+  };
   badges: { archival: string; synth: string };
   episodes: { label: string; heading: string; description: string; watch: string; comingSoon: string; season: string };
   gallery: { label: string; heading: string; description: string };
   team: {
-    label: string;
-    heading: string;
-    description: string;
     roles: { host: string; editor: string; aiCreator: string };
   };
+  details: { label: string; heading: string; description: string; castLabel: string; teamLabel: string };
   footer: { tagline: string; rights: string; contact: string };
 }
 
@@ -21,11 +28,13 @@ export const translations: Record<Language, TranslationsShape> = {
     meta: {
       eyebrowLeft: 'Документальный сериал',
       eyebrowRight: 'RU/EN · 1 сезон',
+      year: '2026',
+      genre: 'Документальный',
     },
     nav: {
       episodes: 'Серии',
       gallery: 'Галерея',
-      team: 'Команда',
+      details: 'Детали',
     },
     hero: {
       title: 'Титаник: Корабль легенд',
@@ -33,6 +42,10 @@ export const translations: Record<Language, TranslationsShape> = {
         'Реальная хроника гибели «Титаника» — и то, чего плёнка не сохранила. Часть каждой серии восстановлена нейросетями: лица, каюты, последние минуты, которых не осталось на архивных кадрах.',
       cta: 'Смотреть серии',
       subline: 'архив · реконструкция · память',
+      share: 'Поделиться',
+      shared: 'Ссылка скопирована',
+      jumpLabel: 'Быстрый переход',
+      tabs: { overview: 'Обзор', episodes: 'Серии', gallery: 'Галерея', details: 'Детали' },
     },
     badges: {
       archival: 'Архив',
@@ -54,14 +67,18 @@ export const translations: Record<Language, TranslationsShape> = {
         'Нейросеть достраивает то, что время стёрло: интерьеры, лица, обломки на дне. Каждый кадр подписан — какой серии он принадлежит и что на нём изображено.',
     },
     team: {
-      label: 'Команда',
-      heading: 'Кто это делает',
-      description: 'Три человека и нейросети между ними.',
       roles: {
         host: 'Ведущая',
         editor: 'Монтажёр',
         aiCreator: 'ИИ-креатор',
       },
+    },
+    details: {
+      label: 'Детали',
+      heading: 'Кто есть кто',
+      description: 'Пассажиры, чьи истории рассказаны в сериале, и команда, которая их восстанавливает.',
+      castLabel: 'Пассажиры',
+      teamLabel: 'Команда проекта',
     },
     footer: {
       tagline: 'Документальный сериал о «Титанике»: архив и ИИ-реконструкция.',
@@ -73,11 +90,13 @@ export const translations: Record<Language, TranslationsShape> = {
     meta: {
       eyebrowLeft: 'A documentary series',
       eyebrowRight: 'RU/EN · Season 1',
+      year: '2026',
+      genre: 'Documentary',
     },
     nav: {
       episodes: 'Episodes',
       gallery: 'Gallery',
-      team: 'Team',
+      details: 'Details',
     },
     hero: {
       title: 'Titanic: Ship of Legends',
@@ -85,6 +104,10 @@ export const translations: Record<Language, TranslationsShape> = {
         "The real record of the Titanic's last voyage — and what the film never kept. Part of every episode is rebuilt by AI: faces, cabins, final minutes no archive footage survived to show.",
       cta: 'Watch the episodes',
       subline: 'archive · reconstruction · memory',
+      share: 'Share',
+      shared: 'Link copied',
+      jumpLabel: 'Jump to',
+      tabs: { overview: 'Overview', episodes: 'Episodes', gallery: 'Gallery', details: 'Details' },
     },
     badges: {
       archival: 'Archive',
@@ -106,14 +129,18 @@ export const translations: Record<Language, TranslationsShape> = {
         'AI rebuilds what time erased: interiors, faces, wreckage on the seabed. Every still is captioned with the episode it belongs to and what it shows.',
     },
     team: {
-      label: 'Team',
-      heading: 'Who makes this',
-      description: 'Three people, and the models between them.',
       roles: {
         host: 'Host',
         editor: 'Editor',
         aiCreator: 'AI creator',
       },
+    },
+    details: {
+      label: 'Details',
+      heading: 'Who\'s who',
+      description: 'The passengers whose stories the series tells, and the team rebuilding them.',
+      castLabel: 'Passengers',
+      teamLabel: 'The team',
     },
     footer: {
       tagline: 'A documentary series about the Titanic: archive and AI reconstruction.',
