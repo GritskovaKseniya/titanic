@@ -56,15 +56,17 @@ export const Details: React.FC = () => {
                   <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-ash">
                     {t.team.roles[member.roleKey]}
                   </span>
-                  <h3 className="text-lg font-heading font-semibold text-bone mt-2 mb-3">{member.name}</h3>
-                  <a
-                    href={member.social.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 text-sm text-accent hover:text-bone transition-colors"
-                  >
-                    <Instagram className="w-3.5 h-3.5" /> {member.social.label}
-                  </a>
+                  <h3 className="text-lg font-heading font-semibold text-bone mt-2">{member.name}</h3>
+                  {member.social && (
+                    <a
+                      href={member.social.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm text-accent hover:text-bone transition-colors mt-3"
+                    >
+                      <Instagram className="w-3.5 h-3.5" /> {member.social.label}
+                    </a>
+                  )}
                 </div>
               </div>
             ))}

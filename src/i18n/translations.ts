@@ -17,7 +17,7 @@ export interface TranslationsShape {
   episodes: { label: string; heading: string; description: string; watch: string; comingSoon: string; season: string };
   gallery: { label: string; heading: string; description: string };
   team: {
-    roles: { host: string; editor: string; aiCreator: string };
+    roles: { producer: string; director: string; editor: string; aiFilmmaker: string };
   };
   details: { label: string; heading: string; description: string; castLabel: string; teamLabel: string };
   footer: { tagline: string; rights: string; contact: string };
@@ -68,9 +68,10 @@ export const translations: Record<Language, TranslationsShape> = {
     },
     team: {
       roles: {
-        host: 'Ведущая',
+        producer: 'Исполнительный продюсер',
+        director: 'Режиссёр',
         editor: 'Монтажёр',
-        aiCreator: 'ИИ-креатор',
+        aiFilmmaker: 'ИИ-режиссёр',
       },
     },
     details: {
@@ -130,9 +131,10 @@ export const translations: Record<Language, TranslationsShape> = {
     },
     team: {
       roles: {
-        host: 'Host',
+        producer: 'Executive Producer',
+        director: 'Director',
         editor: 'Editor',
-        aiCreator: 'AI creator',
+        aiFilmmaker: 'AI Filmmaker',
       },
     },
     details: {

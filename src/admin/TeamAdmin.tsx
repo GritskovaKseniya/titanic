@@ -5,9 +5,10 @@ import { uploadImage } from './storage';
 import { AdminButton, Card, Field, ImageField } from './ui';
 
 const ROLE_LABEL: Record<TeamMember['roleKey'], string> = {
-  host: 'Ведущая',
+  producer: 'Исполнительный продюсер',
+  director: 'Режиссёр',
   editor: 'Монтажёр',
-  aiCreator: 'ИИ-креатор',
+  aiFilmmaker: 'ИИ-режиссёр',
 };
 
 const TeamMemberForm: React.FC<{ member: TeamMember }> = ({ member }) => {
@@ -44,15 +45,15 @@ const TeamMemberForm: React.FC<{ member: TeamMember }> = ({ member }) => {
         <Field label="Имя" value={draft.name} onChange={(v) => set('name', v)} />
         <div className="grid sm:grid-cols-2 gap-4">
           <Field
-            label="Соцсеть — подпись"
-            value={draft.social.label}
-            onChange={(v) => set('social', { ...draft.social, label: v })}
+            label="Соцсеть — подпись (необязательно)"
+            value={draft.social?.label ?? ''}
+            onChange={(v) => set('social', { label: v, url: draft.social?.url ?? '' })}
             placeholder="@instagram"
           />
           <Field
             label="Соцсеть — ссылка"
-            value={draft.social.url}
-            onChange={(v) => set('social', { ...draft.social, url: v })}
+            value={draft.social?.url ?? ''}
+            onChange={(v) => set('social', { label: draft.social?.label ?? '', url: v })}
             placeholder="https://instagram.com/..."
           />
         </div>
