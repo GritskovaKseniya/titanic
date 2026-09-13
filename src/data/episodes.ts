@@ -1,4 +1,5 @@
 import { saveDoc, seedCollection, useLiveCollection } from './liveCollection';
+import posterMargaretBrown from '../assets/posters/06-margaret-brown.jpg';
 
 export interface Episode {
   number: number;
@@ -86,7 +87,7 @@ export const defaultEpisodes: Episode[] = [
       en: 'Wife of a miner who struck it rich in silver, never quite accepted by Denver society. She boarded at Cherbourg, on her way home from a trip through Europe.',
     },
     vimeoId: '',
-    posterUrl: '',
+    posterUrl: posterMargaretBrown,
   },
   {
     number: 7,
