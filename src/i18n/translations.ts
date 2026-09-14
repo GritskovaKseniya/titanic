@@ -1,7 +1,7 @@
 export type Language = 'ru' | 'en';
 
 export interface TranslationsShape {
-  meta: { eyebrowLeft: string; eyebrowRight: string; year: string; genre: string };
+  meta: { eyebrowLeft: string; eyebrowRight: string; year: string; genre: string; runtime: string };
   nav: { episodes: string; gallery: string; details: string };
   hero: {
     title: string;
@@ -30,6 +30,7 @@ export const translations: Record<Language, TranslationsShape> = {
       eyebrowRight: 'RU/EN · 1 сезон',
       year: '2026',
       genre: 'Документальный',
+      runtime: '25–30 мин',
     },
     nav: {
       episodes: 'Серии',
@@ -93,6 +94,7 @@ export const translations: Record<Language, TranslationsShape> = {
       eyebrowRight: 'RU/EN · Season 1',
       year: '2026',
       genre: 'Documentary',
+      runtime: '25–30 min',
     },
     nav: {
       episodes: 'Episodes',

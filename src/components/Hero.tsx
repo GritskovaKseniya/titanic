@@ -59,6 +59,8 @@ export const Hero: React.FC = () => {
             <span className="timecode text-xs text-ash">{t.meta.year}</span>
             <span className="timecode text-xs text-ash">·</span>
             <span className="timecode text-xs text-ash">{t.episodes.season}</span>
+            <span className="timecode text-xs text-ash">·</span>
+            <span className="timecode text-xs text-ash">{t.meta.runtime}</span>
           </div>
 
           <p className="max-w-2xl text-base md:text-lg text-ash leading-relaxed animate-fade-up">{t.hero.pitch}</p>
