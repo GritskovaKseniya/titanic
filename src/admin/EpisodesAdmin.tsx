@@ -52,6 +52,31 @@ const EpisodeForm: React.FC<{ episode: Episode }> = ({ episode }) => {
         />
         <ImageField label="Постер" currentUrl={draft.posterUrl || undefined} uploading={uploading} onFile={handlePoster} />
       </div>
+      {draft.posterUrl && (
+        <div className="grid sm:grid-cols-2 gap-4 items-start">
+          <div>
+            <span className="block text-[11px] font-mono uppercase tracking-[0.08em] text-ash mb-1.5">
+              Обрезка превью (карточка серии) — {draft.posterFocusY ?? 25}% сверху
+            </span>
+            <input
+              type="range"
+              min={0}
+              max={100}
+              value={draft.posterFocusY ?? 25}
+              onChange={(e) => set('posterFocusY', Number(e.target.value))}
+              className="w-full accent-accent"
+            />
+          </div>
+          <div className="relative w-full aspect-video overflow-hidden border hairline">
+            <img
+              src={draft.posterUrl}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ objectPosition: `50% ${draft.posterFocusY ?? 25}%` }}
+            />
+          </div>
+        </div>
+      )}
       <div className="flex items-center gap-3">
         <AdminButton onClick={handleSave}>
           <Save className="w-3.5 h-3.5" /> Сохранить

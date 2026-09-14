@@ -16,6 +16,13 @@ export interface Episode {
    * plain timecode numeral instead of a broken image.
    */
   posterUrl: string;
+  /**
+   * Vertical crop anchor (0–100, % from top) for the 16:9 thumbnail — posters
+   * are portrait with the face above center, and each artist places it a bit
+   * differently, so this is tunable per episode instead of one global guess.
+   * Defaults to 25 (fits both current posters) when unset.
+   */
+  posterFocusY?: number;
 }
 
 // The season's real roster. The synopsis only sets up who they were and how

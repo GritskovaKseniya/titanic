@@ -46,13 +46,14 @@ export const Episodes: React.FC = () => {
                   {ep.posterUrl && (
                     // Posters are portrait key art: title card, then the
                     // sitter's face, then the ship lower down. A 16:9 box only
-                    // ever shows a ~38% vertical slice of one of these — this
-                    // offset targets the face, skipping the title text (it's
-                    // repeated as plain text right below anyway).
+                    // ever shows a slice of one of these — posterFocusY (see
+                    // Episode type) targets the face and skips the title text
+                    // (it's repeated as plain text right below anyway).
                     <img
                       src={ep.posterUrl}
                       alt=""
-                      className="absolute inset-0 w-full h-full object-cover object-[50%_22%]"
+                      className="absolute inset-0 w-full h-full object-cover"
+                      style={{ objectPosition: `50% ${ep.posterFocusY ?? 25}%` }}
                     />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
