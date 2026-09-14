@@ -1,5 +1,6 @@
 import { saveDoc, seedCollection, useLiveCollection } from './liveCollection';
 import posterMargaretBrown from '../assets/posters/06-margaret-brown.jpg';
+import posterWilliamStead from '../assets/posters/02-william-thomas-stead.jpg';
 
 export interface Episode {
   number: number;
@@ -43,7 +44,7 @@ export const defaultEpisodes: Episode[] = [
       en: "One of Britain's best-known journalists, a pioneer of investigative \"New Journalism\" and social reform. He was sailing to New York at President Taft's personal invitation, to speak at a peace congress in Carnegie Hall.",
     },
     vimeoId: '',
-    posterUrl: '',
+    posterUrl: posterWilliamStead,
   },
   {
     number: 3,
