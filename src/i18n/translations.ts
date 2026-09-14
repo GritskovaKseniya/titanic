@@ -28,7 +28,7 @@ export interface TranslationsShape {
   team: {
     roles: { producer: string; director: string; editor: string; aiFilmmaker: string };
   };
-  details: { label: string; heading: string; description: string; castLabel: string; teamLabel: string };
+  details: { label: string; heading: string; description: string };
   footer: { tagline: string; rights: string; contact: string };
 }
 
@@ -88,10 +88,8 @@ export const translations: Record<Language, TranslationsShape> = {
     },
     details: {
       label: 'Детали',
-      heading: 'Кто есть кто',
-      description: 'Пассажиры, чьи истории рассказаны в сериале, и команда, которая их восстанавливает.',
-      castLabel: 'Пассажиры',
-      teamLabel: 'Команда проекта',
+      heading: 'Команда проекта',
+      description: 'Люди, которые восстанавливают истории «Титаника» с помощью архивов и ИИ.',
     },
     footer: {
       tagline: 'Документальный сериал о «Титанике»: архив и ИИ-реконструкция.',
@@ -154,10 +152,8 @@ export const translations: Record<Language, TranslationsShape> = {
     },
     details: {
       label: 'Details',
-      heading: 'Who\'s who',
-      description: 'The passengers whose stories the series tells, and the team rebuilding them.',
-      castLabel: 'Passengers',
-      teamLabel: 'The team',
+      heading: 'The team',
+      description: 'The people rebuilding the Titanic\'s stories through archives and AI.',
     },
     footer: {
       tagline: 'A documentary series about the Titanic: archive and AI reconstruction.',

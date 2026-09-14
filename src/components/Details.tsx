@@ -1,13 +1,11 @@
 import React from 'react';
 import { Instagram } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
-import { useEpisodes } from '../data/episodes';
 import { useTeam } from '../data/team';
 import { resolveImageSrc } from '../utils/publicUrl';
 
 export const Details: React.FC = () => {
-  const { t, language } = useLanguage();
-  const episodes = useEpisodes();
+  const { t } = useLanguage();
   const team = useTeam();
 
   return (
@@ -21,28 +19,7 @@ export const Details: React.FC = () => {
           <p className="text-ash mt-3 max-w-md">{t.details.description}</p>
         </div>
 
-        <div className="mb-14">
-          <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-goldBright block mb-4">
-            {t.details.castLabel}
-          </span>
-          <div className="flex flex-wrap gap-x-6 gap-y-3 border-t hairline pt-5">
-            {episodes.map((ep) => (
-              <a
-                key={ep.number}
-                href={`#episode-${ep.number}`}
-                className="text-sm text-bone hover:text-accent transition-colors"
-              >
-                {ep.title[language]}
-                <span className="text-ash"> — {ep.role[language]}</span>
-              </a>
-            ))}
-          </div>
-        </div>
-
         <div>
-          <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-goldBright block mb-4">
-            {t.details.teamLabel}
-          </span>
           <div className="grid sm:grid-cols-3 gap-4">
             {team.map((member) => (
               <div key={member.id} className="bg-dark border hairline p-6 flex gap-4 items-start">
