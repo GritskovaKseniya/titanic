@@ -7,7 +7,7 @@ export interface GalleryItem {
   episodeNumber: number;
   hue: GalleryHue;
   caption: { ru: string; en: string };
-  /** Public Storage URL of the real still, once uploaded via /admin. Falls back to a `hue` gradient tile until then. */
+  /** Path under public/gallery/ (or a full URL), once set via /admin. Falls back to a `hue` gradient tile until then. */
   imageUrl?: string;
 }
 

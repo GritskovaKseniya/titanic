@@ -1,6 +1,4 @@
 import { saveDoc, seedCollection, useLiveCollection } from './liveCollection';
-import posterMargaretBrown from '../assets/posters/06-margaret-brown.jpg';
-import posterWilliamStead from '../assets/posters/02-william-thomas-stead.jpg';
 
 export interface Episode {
   number: number;
@@ -11,9 +9,10 @@ export interface Episode {
   /** Vimeo video id or private-hash URL. Empty until the episode is published. */
   vimeoId: string;
   /**
-   * Public URL of this episode's poster (Firebase Storage, once uploaded via
-   * /admin). Empty until supplied — the episode row then falls back to a
-   * plain timecode numeral instead of a broken image.
+   * This episode's poster: a path relative to public/ (e.g.
+   * "posters/06-margaret-brown.jpg" — upload the file via GitHub's web UI)
+   * or a full external URL. Empty until supplied — the episode row then
+   * falls back to a plain timecode numeral instead of a broken image.
    */
   posterUrl: string;
   /**
@@ -51,7 +50,7 @@ export const defaultEpisodes: Episode[] = [
       en: "Born in 1849 in England, one of the founders of British investigative journalism. His 1892 exposé of child prostitution in London made headlines — and briefly put him in jail. He edited the Pall Mall Gazette and the Review of Reviews. In 1912 he sailed to New York to speak at a peace congress; his first-class return ticket was booked on the Titanic.",
     },
     vimeoId: '',
-    posterUrl: posterWilliamStead,
+    posterUrl: 'posters/02-william-thomas-stead.jpg',
   },
   {
     number: 3,
@@ -95,7 +94,7 @@ export const defaultEpisodes: Episode[] = [
       en: 'Born in 1867 in Missouri to Irish immigrant parents, she worked a string of jobs before marrying J.J. Brown, who struck it rich in mining. In 1912 "Molly" Brown was sailing home to America in first class with her daughter, after touring Egypt and Europe.',
     },
     vimeoId: '',
-    posterUrl: posterMargaretBrown,
+    posterUrl: 'posters/06-margaret-brown.jpg',
     posterFocusY: 50,
   },
   {

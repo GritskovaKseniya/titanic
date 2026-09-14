@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, Save } from 'lucide-react';
 import { Episode, saveEpisode, seedEpisodes, useEpisodes } from '../data/episodes';
-import { uploadImage } from './storage';
+import { resolveImageSrc } from '../utils/publicUrl';
 import { AdminButton, Card, Field, ImageField, TextAreaField } from './ui';
 
 const EpisodeForm: React.FC<{ episode: Episode }> = ({ episode }) => {
   const [draft, setDraft] = useState<Episode>(episode);
-  const [uploading, setUploading] = useState(false);
   const [saved, setSaved] = useState(false);
 
   const set = <K extends keyof Episode>(key: K, value: Episode[K]) => {
@@ -19,16 +18,6 @@ const EpisodeForm: React.FC<{ episode: Episode }> = ({ episode }) => {
   const handleSave = async () => {
     await saveEpisode(draft);
     setSaved(true);
-  };
-
-  const handlePoster = async (file: File) => {
-    setUploading(true);
-    try {
-      const url = await uploadImage(`posters/${episode.number}-${file.name}`, file);
-      set('posterUrl', url);
-    } finally {
-      setUploading(false);
-    }
   };
 
   return (
@@ -50,9 +39,14 @@ const EpisodeForm: React.FC<{ episode: Episode }> = ({ episode }) => {
           onChange={(v) => set('vimeoId', v)}
           placeholder="https://vimeo.com/..."
         />
-        <ImageField label="Постер" currentUrl={draft.posterUrl || undefined} uploading={uploading} onFile={handlePoster} />
+        <ImageField
+          label="Постер (путь в public/posters/ или ссылка)"
+          value={draft.posterUrl}
+          onChange={(v) => set('posterUrl', v)}
+          placeholder="posters/06-margaret-brown.jpg"
+        />
       </div>
-      {draft.posterUrl && (
+      {resolveImageSrc(draft.posterUrl) && (
         <div className="grid sm:grid-cols-2 gap-4 items-start">
           <div>
             <span className="block text-[11px] font-mono uppercase tracking-[0.08em] text-ash mb-1.5">
@@ -69,7 +63,7 @@ const EpisodeForm: React.FC<{ episode: Episode }> = ({ episode }) => {
           </div>
           <div className="relative w-full aspect-video overflow-hidden border hairline">
             <img
-              src={draft.posterUrl}
+              src={resolveImageSrc(draft.posterUrl)}
               alt=""
               className="absolute inset-0 w-full h-full object-cover"
               style={{ objectPosition: `50% ${draft.posterFocusY ?? 27}%` }}

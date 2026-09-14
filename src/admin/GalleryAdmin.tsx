@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Plus, Save, Trash2 } from 'lucide-react';
 import { deleteGalleryItem, GalleryItem, saveGalleryItem, seedGallery, useGalleryItems } from '../data/gallery';
-import { uploadImage } from './storage';
 import { AdminButton, Card, Field, ImageField, TextAreaField } from './ui';
 
 const emptyItem = (): GalleryItem => ({
@@ -13,7 +12,6 @@ const emptyItem = (): GalleryItem => ({
 
 const GalleryItemForm: React.FC<{ item: GalleryItem; onDeleted: () => void }> = ({ item, onDeleted }) => {
   const [draft, setDraft] = useState<GalleryItem>(item);
-  const [uploading, setUploading] = useState(false);
   const [saved, setSaved] = useState(false);
 
   const set = <K extends keyof GalleryItem>(key: K, value: GalleryItem[K]) => {
@@ -24,16 +22,6 @@ const GalleryItemForm: React.FC<{ item: GalleryItem; onDeleted: () => void }> = 
   const handleSave = async () => {
     await saveGalleryItem(draft);
     setSaved(true);
-  };
-
-  const handleImage = async (file: File) => {
-    setUploading(true);
-    try {
-      const url = await uploadImage(`gallery/${draft.id}-${file.name}`, file);
-      set('imageUrl', url);
-    } finally {
-      setUploading(false);
-    }
   };
 
   return (
@@ -60,7 +48,12 @@ const GalleryItemForm: React.FC<{ item: GalleryItem; onDeleted: () => void }> = 
             value={String(draft.episodeNumber)}
             onChange={(v) => set('episodeNumber', Number(v) || 1)}
           />
-          <ImageField label="Кадр" currentUrl={draft.imageUrl} uploading={uploading} onFile={handleImage} />
+          <ImageField
+            label="Кадр (путь в public/gallery/ или ссылка)"
+            value={draft.imageUrl ?? ''}
+            onChange={(v) => set('imageUrl', v)}
+            placeholder="gallery/01-example.jpg"
+          />
         </div>
         <div className="flex items-center gap-3">
           <AdminButton onClick={handleSave}>

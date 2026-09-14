@@ -3,6 +3,7 @@ import { Instagram } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useEpisodes } from '../data/episodes';
 import { useTeam } from '../data/team';
+import { resolveImageSrc } from '../utils/publicUrl';
 
 export const Details: React.FC = () => {
   const { t, language } = useLanguage();
@@ -47,7 +48,7 @@ export const Details: React.FC = () => {
               <div key={member.id} className="bg-dark border hairline p-6 flex gap-4 items-start">
                 {member.photoUrl && (
                   <img
-                    src={member.photoUrl}
+                    src={resolveImageSrc(member.photoUrl)}
                     alt=""
                     className="w-14 h-14 rounded-full object-cover border hairline shrink-0"
                   />

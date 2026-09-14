@@ -3,6 +3,7 @@ import { Play, X } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useEpisodes } from '../data/episodes';
 import { buildVimeoEmbed } from '../utils/video';
+import { resolveImageSrc } from '../utils/publicUrl';
 
 const HUE_GRADIENTS = [
   'linear-gradient(150deg, #123240 0%, #c9962f 60%, #071820 100%)',
@@ -58,7 +59,7 @@ export const Episodes: React.FC = () => {
                     // Episode type) targets the face and skips the title text
                     // (it's repeated as plain text right below anyway).
                     <img
-                      src={ep.posterUrl}
+                      src={resolveImageSrc(ep.posterUrl)}
                       alt=""
                       className="absolute inset-0 w-full h-full object-cover"
                       style={{ objectPosition: `50% ${ep.posterFocusY ?? 27}%` }}

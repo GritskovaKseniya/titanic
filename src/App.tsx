@@ -7,8 +7,8 @@ import { Gallery } from './components/Gallery';
 import { Details } from './components/Details';
 import { Footer } from './components/Footer';
 
-// Firebase Auth/Storage and every admin form live in this chunk — visitors
-// to the public site (the vast majority) never fetch it.
+// Firebase Auth and every admin form live in this chunk — visitors to the
+// public site (the vast majority) never fetch it.
 const AdminApp = lazy(() => import('./admin/AdminApp').then((m) => ({ default: m.AdminApp })));
 
 const isAdminRoute = typeof window !== 'undefined' && window.location.pathname.replace(/\/$/, '').endsWith('/admin');

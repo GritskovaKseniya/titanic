@@ -8,7 +8,7 @@ export interface TeamMember {
   name: string;
   /** Omitted until a real handle is known — no placeholder social links on real names. */
   social?: { label: string; url: string };
-  /** Public Storage URL of a portrait, once uploaded via /admin. */
+  /** Path under public/team/ (or a full URL) of a portrait, once set via /admin. */
   photoUrl?: string;
 }
 

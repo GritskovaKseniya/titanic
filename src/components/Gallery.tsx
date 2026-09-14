@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useGalleryItems, GalleryHue } from '../data/gallery';
+import { resolveImageSrc } from '../utils/publicUrl';
 
 const HUE_GRADIENT: Record<GalleryHue, string> = {
   coral: 'linear-gradient(150deg, #8b2c63 0%, #f14fa0 55%, #1a2f38 100%)',
@@ -33,7 +34,7 @@ export const Gallery: React.FC = () => {
               style={item.imageUrl ? undefined : { background: HUE_GRADIENT[item.hue] }}
             >
               {item.imageUrl && (
-                <img src={item.imageUrl} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                <img src={resolveImageSrc(item.imageUrl)} alt="" className="absolute inset-0 w-full h-full object-cover" />
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
               <span className="badge badge-synth absolute top-3 left-3">{t.badges.synth}</span>

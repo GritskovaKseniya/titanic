@@ -1,4 +1,5 @@
 import React from 'react';
+import { resolveImageSrc } from '../utils/publicUrl';
 
 export const Field: React.FC<{
   label: string;
@@ -38,37 +39,39 @@ export const TextAreaField: React.FC<{
   </label>
 );
 
+// Images live as plain files in public/ — upload them via GitHub's web UI
+// (Add file → Upload files) into public/posters, public/gallery or
+// public/team, then paste the path here. No Firebase Storage, no billing
+// plan needed for something this small.
 export const ImageField: React.FC<{
   label: string;
-  currentUrl?: string;
-  uploading?: boolean;
-  onFile: (file: File) => void;
-}> = ({ label, currentUrl, uploading, onFile }) => (
-  <label className="block">
-    <span className="block text-[11px] font-mono uppercase tracking-[0.08em] text-ash mb-1.5">{label}</span>
-    <div className="flex items-center gap-3">
-      {currentUrl ? (
-        <img src={currentUrl} alt="" className="w-16 h-16 object-cover border hairline shrink-0" />
-      ) : (
-        <div className="w-16 h-16 border hairline shrink-0 flex items-center justify-center text-ash text-[10px] text-center">
-          нет файла
-        </div>
-      )}
-      <input
-        type="file"
-        accept="image/*"
-        disabled={uploading}
-        onChange={(e) => {
-          const file = e.target.files?.[0];
-          if (file) onFile(file);
-          e.target.value = '';
-        }}
-        className="text-xs text-ash file:mr-3 file:btn file:btn-quiet file:px-3 file:py-1.5 file:text-xs disabled:opacity-50"
-      />
-      {uploading && <span className="text-xs text-accent">Загрузка…</span>}
-    </div>
-  </label>
-);
+  value: string;
+  onChange: (v: string) => void;
+  placeholder?: string;
+}> = ({ label, value, onChange, placeholder }) => {
+  const preview = resolveImageSrc(value);
+  return (
+    <label className="block">
+      <span className="block text-[11px] font-mono uppercase tracking-[0.08em] text-ash mb-1.5">{label}</span>
+      <div className="flex items-center gap-3">
+        {preview ? (
+          <img src={preview} alt="" className="w-16 h-16 object-cover border hairline shrink-0" />
+        ) : (
+          <div className="w-16 h-16 border hairline shrink-0 flex items-center justify-center text-ash text-[9px] text-center leading-tight p-1">
+            нет файла
+          </div>
+        )}
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder ?? 'posters/имя-файла.jpg'}
+          className="flex-1 bg-dark border hairline px-3 py-2 text-sm text-bone placeholder:text-ash/60 focus:outline-none focus:border-accent transition-colors"
+        />
+      </div>
+    </label>
+  );
+};
 
 export const AdminButton: React.FC<
   React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: 'cta' | 'quiet' }

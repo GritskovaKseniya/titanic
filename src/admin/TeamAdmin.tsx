@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Save } from 'lucide-react';
 import { saveTeamMember, seedTeam, TeamMember, useTeam } from '../data/team';
-import { uploadImage } from './storage';
 import { AdminButton, Card, Field, ImageField } from './ui';
 
 const ROLE_LABEL: Record<TeamMember['roleKey'], string> = {
@@ -13,7 +12,6 @@ const ROLE_LABEL: Record<TeamMember['roleKey'], string> = {
 
 const TeamMemberForm: React.FC<{ member: TeamMember }> = ({ member }) => {
   const [draft, setDraft] = useState<TeamMember>(member);
-  const [uploading, setUploading] = useState(false);
   const [saved, setSaved] = useState(false);
 
   const set = <K extends keyof TeamMember>(key: K, value: TeamMember[K]) => {
@@ -24,16 +22,6 @@ const TeamMemberForm: React.FC<{ member: TeamMember }> = ({ member }) => {
   const handleSave = async () => {
     await saveTeamMember(draft);
     setSaved(true);
-  };
-
-  const handlePhoto = async (file: File) => {
-    setUploading(true);
-    try {
-      const url = await uploadImage(`team/${draft.id}-${file.name}`, file);
-      set('photoUrl', url);
-    } finally {
-      setUploading(false);
-    }
   };
 
   return (
@@ -57,7 +45,12 @@ const TeamMemberForm: React.FC<{ member: TeamMember }> = ({ member }) => {
             placeholder="https://instagram.com/..."
           />
         </div>
-        <ImageField label="Фото" currentUrl={draft.photoUrl} uploading={uploading} onFile={handlePhoto} />
+        <ImageField
+          label="Фото (путь в public/team/ или ссылка)"
+          value={draft.photoUrl ?? ''}
+          onChange={(v) => set('photoUrl', v)}
+          placeholder="team/имя.jpg"
+        />
         <div className="flex items-center gap-3">
           <AdminButton onClick={handleSave}>
             <Save className="w-3.5 h-3.5" /> Сохранить
