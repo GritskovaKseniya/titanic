@@ -40,10 +40,13 @@ export const Episodes: React.FC = () => {
                 <button
                   onClick={() => embed && setOpenEpisode(ep.number)}
                   disabled={!embed}
-                  className="relative w-full aspect-video overflow-hidden border hairline text-left disabled:cursor-default"
+                  className="relative w-full aspect-[2/3] overflow-hidden border hairline text-left disabled:cursor-default"
                   style={thumb}
                 >
                   {ep.posterUrl && (
+                    // Posters are portrait key art (faces sit above center), not
+                    // landscape video stills — a 2:3 box shows the whole poster
+                    // instead of center-cropping into the sitter's chin.
                     <img src={ep.posterUrl} alt="" className="absolute inset-0 w-full h-full object-cover" />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
