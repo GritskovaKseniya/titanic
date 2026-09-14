@@ -14,7 +14,16 @@ export interface TranslationsShape {
     tabs: { overview: string; episodes: string; gallery: string; details: string };
   };
   badges: { archival: string; synth: string };
-  episodes: { label: string; heading: string; description: string; watch: string; comingSoon: string; season: string };
+  episodes: {
+    label: string;
+    heading: string;
+    description: string;
+    watch: string;
+    comingSoon: string;
+    season: string;
+    readMore: string;
+    readLess: string;
+  };
   gallery: { label: string; heading: string; description: string };
   team: {
     roles: { producer: string; director: string; editor: string; aiFilmmaker: string };
@@ -60,6 +69,8 @@ export const translations: Record<Language, TranslationsShape> = {
       watch: 'Смотреть',
       comingSoon: 'Скоро на Vimeo',
       season: 'Сезон 1',
+      readMore: 'Читать дальше',
+      readLess: 'Свернуть',
     },
     gallery: {
       label: 'Галерея',
@@ -124,6 +135,8 @@ export const translations: Record<Language, TranslationsShape> = {
       watch: 'Watch',
       comingSoon: 'Coming soon on Vimeo',
       season: 'Season 1',
+      readMore: 'Read more',
+      readLess: 'Show less',
     },
     gallery: {
       label: 'Gallery',

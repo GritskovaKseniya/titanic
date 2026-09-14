@@ -14,6 +14,14 @@ export const Episodes: React.FC = () => {
   const { t, language } = useLanguage();
   const episodes = useEpisodes();
   const [openEpisode, setOpenEpisode] = useState<number | null>(null);
+  const [expanded, setExpanded] = useState<Set<number>>(new Set());
+
+  const toggleExpanded = (number: number) =>
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      next.has(number) ? next.delete(number) : next.add(number);
+      return next;
+    });
 
   const active = episodes.find((e) => e.number === openEpisode);
   const activeEmbed = active ? buildVimeoEmbed(active.vimeoId) : null;
@@ -53,7 +61,7 @@ export const Episodes: React.FC = () => {
                       src={ep.posterUrl}
                       alt=""
                       className="absolute inset-0 w-full h-full object-cover"
-                      style={{ objectPosition: `50% ${ep.posterFocusY ?? 25}%` }}
+                      style={{ objectPosition: `50% ${ep.posterFocusY ?? 27}%` }}
                     />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
@@ -78,7 +86,15 @@ export const Episodes: React.FC = () => {
                   <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-goldBright block mt-0.5">
                     {ep.role[language]}
                   </span>
-                  <p className="text-sm text-ash mt-1.5 line-clamp-2">{ep.description[language]}</p>
+                  <p className={`text-sm text-ash mt-1.5 ${expanded.has(ep.number) ? '' : 'line-clamp-2'}`}>
+                    {ep.description[language]}
+                  </p>
+                  <button
+                    onClick={() => toggleExpanded(ep.number)}
+                    className="font-mono text-[10px] uppercase tracking-[0.08em] text-accent hover:text-bone transition-colors mt-1"
+                  >
+                    {expanded.has(ep.number) ? t.episodes.readLess : t.episodes.readMore}
+                  </button>
                 </div>
               </article>
             );
