@@ -96,6 +96,7 @@ export const defaultEpisodes: Episode[] = [
     },
     vimeoId: '',
     posterUrl: posterMargaretBrown,
+    posterFocusY: 50,
   },
   {
     number: 7,
