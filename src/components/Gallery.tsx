@@ -14,7 +14,7 @@ export const Gallery: React.FC = () => {
   const galleryItems = useGalleryItems();
 
   return (
-    <section id="gallery" className="py-20 sm:py-28 bg-darkSec border-y hairline">
+    <section id="gallery" className="py-14 sm:py-20 lg:py-28 bg-darkSec border-y hairline">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="grid md:grid-cols-12 gap-6 mb-12">
           <div className="md:col-span-7">

@@ -9,7 +9,7 @@ export const Details: React.FC = () => {
   const team = useTeam();
 
   return (
-    <section id="details" className="py-20 sm:py-28 bg-darkSec border-y hairline">
+    <section id="details" className="py-14 sm:py-20 lg:py-28 bg-darkSec border-y hairline">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="mb-12">
           <span className="slate-label">{t.details.label}</span>

@@ -28,7 +28,7 @@ export const Episodes: React.FC = () => {
   const activeEmbed = active ? buildVimeoEmbed(active.vimeoId) : null;
 
   return (
-    <section id="episodes" className="py-20 sm:py-28 bg-dark">
+    <section id="episodes" className="py-14 sm:py-20 lg:py-28 bg-dark">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="grid md:grid-cols-12 gap-6 mb-12">
           <div className="md:col-span-7">
