@@ -45,7 +45,7 @@ export interface TranslationsShape {
 export const translations: Record<Language, TranslationsShape> = {
   en: {
     meta: {
-      eyebrowLeft: 'A documentary series',
+      eyebrowLeft: 'Documentary TV series in the AI era',
       eyebrowRight: 'Season 1',
       year: '2026',
       genre: 'Documentary',
@@ -109,7 +109,7 @@ export const translations: Record<Language, TranslationsShape> = {
   },
   ru: {
     meta: {
-      eyebrowLeft: 'Документальный сериал',
+      eyebrowLeft: 'Документальный сериал в эпоху ИИ',
       eyebrowRight: '1 сезон',
       year: '2026',
       genre: 'Документальный',
@@ -173,7 +173,7 @@ export const translations: Record<Language, TranslationsShape> = {
   },
   fr: {
     meta: {
-      eyebrowLeft: 'Une série documentaire',
+      eyebrowLeft: "Série documentaire à l'ère de l'IA",
       eyebrowRight: 'Saison 1',
       year: '2026',
       genre: 'Documentaire',
@@ -237,7 +237,7 @@ export const translations: Record<Language, TranslationsShape> = {
   },
   es: {
     meta: {
-      eyebrowLeft: 'Una serie documental',
+      eyebrowLeft: 'Serie documental en la era de la IA',
       eyebrowRight: 'Temporada 1',
       year: '2026',
       genre: 'Documental',
@@ -301,7 +301,7 @@ export const translations: Record<Language, TranslationsShape> = {
   },
   de: {
     meta: {
-      eyebrowLeft: 'Eine Dokumentarserie',
+      eyebrowLeft: 'Dokuserie im Zeitalter der KI',
       eyebrowRight: 'Staffel 1',
       year: '2026',
       genre: 'Dokumentation',
@@ -365,7 +365,7 @@ export const translations: Record<Language, TranslationsShape> = {
   },
   it: {
     meta: {
-      eyebrowLeft: 'Una serie documentaria',
+      eyebrowLeft: "Serie documentaria nell'era dell'IA",
       eyebrowRight: 'Stagione 1',
       year: '2026',
       genre: 'Documentario',
