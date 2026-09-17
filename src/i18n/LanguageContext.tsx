@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import { Language, TranslationsShape, translations } from './translations';
+import { Language, LANGUAGES, TranslationsShape, translations } from './translations';
 
 interface LanguageContextValue {
   language: Language;
-  toggleLanguage: () => void;
+  setLanguage: (lang: Language) => void;
   t: TranslationsShape;
 }
 
@@ -11,11 +11,14 @@ const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 const STORAGE_KEY = 'titanic-site-language';
 
+const isLanguage = (value: string | null): value is Language =>
+  LANGUAGES.some((l) => l.code === value);
+
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>(() => {
-    if (typeof window === 'undefined') return 'ru';
+  const [language, setLanguageState] = useState<Language>(() => {
+    if (typeof window === 'undefined') return 'en';
     const stored = window.localStorage.getItem(STORAGE_KEY);
-    return stored === 'en' || stored === 'ru' ? stored : 'ru';
+    return isLanguage(stored) ? stored : 'en';
   });
 
   useEffect(() => {
@@ -26,7 +29,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const value = useMemo<LanguageContextValue>(
     () => ({
       language,
-      toggleLanguage: () => setLanguage((prev) => (prev === 'ru' ? 'en' : 'ru')),
+      setLanguage: setLanguageState,
       t: translations[language],
     }),
     [language],

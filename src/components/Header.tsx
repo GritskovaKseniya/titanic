@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Anchor, Globe, Menu, X } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { LANGUAGES } from '../i18n/translations';
 
 export const Header: React.FC = () => {
-  const { t, language, toggleLanguage } = useLanguage();
+  const { t, language, setLanguage } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinks = [
@@ -33,14 +34,21 @@ export const Header: React.FC = () => {
                 {link.label}
               </a>
             ))}
-            <button
-              onClick={toggleLanguage}
-              className="flex items-center gap-1.5 text-ash hover:text-bone transition-colors"
-              title="Switch language / Сменить язык"
-            >
+            <label className="flex items-center gap-1.5 text-ash hover:text-bone transition-colors cursor-pointer">
               <Globe className="w-4 h-4" />
-              <span className="text-xs font-bold uppercase">{language}</span>
-            </button>
+              <select
+                value={language}
+                onChange={(e) => setLanguage(e.target.value as typeof language)}
+                className="bg-transparent text-xs font-bold uppercase cursor-pointer focus:outline-none [&>option]:bg-dark [&>option]:text-bone"
+                aria-label="Switch language"
+              >
+                {LANGUAGES.map((l) => (
+                  <option key={l.code} value={l.code}>
+                    {l.code.toUpperCase()}
+                  </option>
+                ))}
+              </select>
+            </label>
           </nav>
 
           <button
@@ -65,13 +73,20 @@ export const Header: React.FC = () => {
               {link.label}
             </a>
           ))}
-          <button
-            onClick={toggleLanguage}
-            className="flex items-center gap-1.5 text-ash hover:text-bone transition-colors pt-1"
-          >
-            <Globe className="w-4 h-4" />
-            <span className="text-xs font-bold uppercase">{language === 'ru' ? 'English' : 'Русский'}</span>
-          </button>
+          <div className="flex flex-wrap items-center gap-2 pt-1">
+            <Globe className="w-4 h-4 text-ash" />
+            {LANGUAGES.map((l) => (
+              <button
+                key={l.code}
+                onClick={() => setLanguage(l.code)}
+                className={`text-xs font-bold uppercase px-2 py-1 border hairline transition-colors ${
+                  language === l.code ? 'text-accent border-accent' : 'text-ash hover:text-bone'
+                }`}
+              >
+                {l.code.toUpperCase()}
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </header>

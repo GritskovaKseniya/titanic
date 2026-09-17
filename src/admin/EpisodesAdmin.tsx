@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, Save } from 'lucide-react';
 import { Episode, saveEpisode, seedEpisodes, useEpisodes } from '../data/episodes';
+import { Language, LANGUAGES } from '../i18n/translations';
 import { resolveImageSrc } from '../utils/publicUrl';
 import { AdminButton, Card, Field, ImageField, TextAreaField } from './ui';
 
 const EpisodeForm: React.FC<{ episode: Episode }> = ({ episode }) => {
   const [draft, setDraft] = useState<Episode>(episode);
   const [saved, setSaved] = useState(false);
+  const [editLang, setEditLang] = useState<Language>('en');
 
   const set = <K extends keyof Episode>(key: K, value: Episode[K]) => {
     setDraft((d) => ({ ...d, [key]: value }));
     setSaved(false);
   };
-  const setLang = (key: 'title' | 'role' | 'description', lang: 'ru' | 'en', value: string) =>
+  const setLang = (key: 'title' | 'role' | 'description', lang: Language, value: string) =>
     set(key, { ...draft[key], [lang]: value });
 
   const handleSave = async () => {
@@ -22,16 +24,37 @@ const EpisodeForm: React.FC<{ episode: Episode }> = ({ episode }) => {
 
   return (
     <div className="grid gap-4">
-      <div className="grid sm:grid-cols-2 gap-4">
-        <Field label="Имя (RU)" value={draft.title.ru} onChange={(v) => setLang('title', 'ru', v)} />
-        <Field label="Имя (EN)" value={draft.title.en} onChange={(v) => setLang('title', 'en', v)} />
-        <Field label="Класс/роль (RU)" value={draft.role.ru} onChange={(v) => setLang('role', 'ru', v)} />
-        <Field label="Класс/роль (EN)" value={draft.role.en} onChange={(v) => setLang('role', 'en', v)} />
+      <div className="flex flex-wrap gap-1.5">
+        {LANGUAGES.map((l) => (
+          <button
+            key={l.code}
+            type="button"
+            onClick={() => setEditLang(l.code)}
+            className={`text-[11px] font-mono uppercase tracking-[0.08em] px-2.5 py-1 border hairline transition-colors ${
+              editLang === l.code ? 'text-accent border-accent' : 'text-ash hover:text-bone'
+            }`}
+          >
+            {l.code}
+          </button>
+        ))}
       </div>
       <div className="grid sm:grid-cols-2 gap-4">
-        <TextAreaField label="Синопсис (RU)" value={draft.description.ru} onChange={(v) => setLang('description', 'ru', v)} />
-        <TextAreaField label="Синопсис (EN)" value={draft.description.en} onChange={(v) => setLang('description', 'en', v)} />
+        <Field
+          label={`Имя (${editLang})`}
+          value={draft.title[editLang]}
+          onChange={(v) => setLang('title', editLang, v)}
+        />
+        <Field
+          label={`Класс/роль (${editLang})`}
+          value={draft.role[editLang]}
+          onChange={(v) => setLang('role', editLang, v)}
+        />
       </div>
+      <TextAreaField
+        label={`Синопсис (${editLang})`}
+        value={draft.description[editLang]}
+        onChange={(v) => setLang('description', editLang, v)}
+      />
       <div className="grid sm:grid-cols-2 gap-4 items-start">
         <Field
           label="Vimeo (ссылка или id)"
@@ -117,7 +140,7 @@ export const EpisodesAdmin: React.FC = () => {
               >
                 <span className="flex items-center gap-3 min-w-0">
                   <span className="timecode text-ash text-sm">{String(ep.number).padStart(2, '0')}</span>
-                  <span className="font-heading uppercase text-bone truncate">{ep.title.ru || '(без имени)'}</span>
+                  <span className="font-heading uppercase text-bone truncate">{ep.title.en || '(без имени)'}</span>
                 </span>
                 {open ? <ChevronUp className="w-4 h-4 text-ash shrink-0" /> : <ChevronDown className="w-4 h-4 text-ash shrink-0" />}
               </button>

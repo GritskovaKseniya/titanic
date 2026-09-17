@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { Plus, Save, Trash2 } from 'lucide-react';
 import { deleteGalleryItem, GalleryItem, saveGalleryItem, seedGallery, useGalleryItems } from '../data/gallery';
+import { Language, LANGUAGES } from '../i18n/translations';
 import { AdminButton, Card, Field, ImageField, TextAreaField } from './ui';
+
+const emptyCaption = (): Record<Language, string> =>
+  Object.fromEntries(LANGUAGES.map((l) => [l.code, ''])) as Record<Language, string>;
 
 const emptyItem = (): GalleryItem => ({
   id: `gallery-${Date.now()}`,
   episodeNumber: 1,
   hue: 'navy',
-  caption: { ru: '', en: '' },
+  caption: emptyCaption(),
 });
 
 const GalleryItemForm: React.FC<{ item: GalleryItem; onDeleted: () => void }> = ({ item, onDeleted }) => {
   const [draft, setDraft] = useState<GalleryItem>(item);
   const [saved, setSaved] = useState(false);
+  const [editLang, setEditLang] = useState<Language>('en');
 
   const set = <K extends keyof GalleryItem>(key: K, value: GalleryItem[K]) => {
     setDraft((d) => ({ ...d, [key]: value }));
@@ -27,20 +32,26 @@ const GalleryItemForm: React.FC<{ item: GalleryItem; onDeleted: () => void }> = 
   return (
     <Card>
       <div className="grid gap-4">
-        <div className="grid sm:grid-cols-2 gap-4">
-          <TextAreaField
-            label="Подпись (RU)"
-            rows={2}
-            value={draft.caption.ru}
-            onChange={(v) => set('caption', { ...draft.caption, ru: v })}
-          />
-          <TextAreaField
-            label="Подпись (EN)"
-            rows={2}
-            value={draft.caption.en}
-            onChange={(v) => set('caption', { ...draft.caption, en: v })}
-          />
+        <div className="flex flex-wrap gap-1.5">
+          {LANGUAGES.map((l) => (
+            <button
+              key={l.code}
+              type="button"
+              onClick={() => setEditLang(l.code)}
+              className={`text-[11px] font-mono uppercase tracking-[0.08em] px-2.5 py-1 border hairline transition-colors ${
+                editLang === l.code ? 'text-accent border-accent' : 'text-ash hover:text-bone'
+              }`}
+            >
+              {l.code}
+            </button>
+          ))}
         </div>
+        <TextAreaField
+          label={`Подпись (${editLang})`}
+          rows={2}
+          value={draft.caption[editLang]}
+          onChange={(v) => set('caption', { ...draft.caption, [editLang]: v })}
+        />
         <div className="grid sm:grid-cols-2 gap-4 items-start">
           <Field
             label="Номер серии"
