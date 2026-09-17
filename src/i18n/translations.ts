@@ -93,7 +93,7 @@ export const translations: Record<Language, TranslationsShape> = {
         producer: 'Executive Producer',
         director: 'Director',
         editor: 'Editor',
-        aiFilmmaker: 'AI Filmmaker',
+        aiFilmmaker: 'Associate Producer & AI Filmmaker',
       },
     },
     details: {
@@ -157,7 +157,7 @@ export const translations: Record<Language, TranslationsShape> = {
         producer: 'Исполнительный продюсер',
         director: 'Режиссёр',
         editor: 'Монтажёр',
-        aiFilmmaker: 'ИИ-режиссёр',
+        aiFilmmaker: 'Ассоциированный продюсер и ИИ-режиссёр',
       },
     },
     details: {
@@ -221,7 +221,7 @@ export const translations: Record<Language, TranslationsShape> = {
         producer: 'Producteur exécutif',
         director: 'Réalisateur',
         editor: 'Monteur',
-        aiFilmmaker: 'Réalisateur IA',
+        aiFilmmaker: 'Producteur associé et réalisateur IA',
       },
     },
     details: {
@@ -285,7 +285,7 @@ export const translations: Record<Language, TranslationsShape> = {
         producer: 'Productor ejecutivo',
         director: 'Director',
         editor: 'Editor',
-        aiFilmmaker: 'Cineasta de IA',
+        aiFilmmaker: 'Productor asociado y cineasta de IA',
       },
     },
     details: {
@@ -349,7 +349,7 @@ export const translations: Record<Language, TranslationsShape> = {
         producer: 'Ausführender Produzent',
         director: 'Regisseur',
         editor: 'Cutter',
-        aiFilmmaker: 'KI-Regisseur',
+        aiFilmmaker: 'Assoziierter Produzent und KI-Regisseur',
       },
     },
     details: {
@@ -413,7 +413,7 @@ export const translations: Record<Language, TranslationsShape> = {
         producer: 'Produttore esecutivo',
         director: 'Regista',
         editor: 'Montatore',
-        aiFilmmaker: 'Regista IA',
+        aiFilmmaker: 'Produttore associato e regista IA',
       },
     },
     details: {
