@@ -18,14 +18,14 @@ export interface TeamMember {
 // AI filmmakers are kept alphabetical by last name.
 export const defaultTeam: TeamMember[] = [
   { id: 'producer', roleKey: 'producer', name: 'Tata Feodoridi', order: 0 },
-  { id: 'director', roleKey: 'director', name: 'Konstantin Frolov', order: 1 },
+  { id: 'director', roleKey: 'director', name: 'Konstantin Frolov', order: 1, photoUrl: 'team/konstantin-frolov.webp' },
   { id: 'editor', roleKey: 'editor', name: 'Anastasia Arsentieva', order: 2 },
-  { id: 'ai-filmmaker-1', roleKey: 'aiFilmmaker', name: 'Volha Chyzh', order: 3 },
+  { id: 'ai-filmmaker-1', roleKey: 'aiFilmmaker', name: 'Volha Chyzh', order: 3, photoUrl: 'team/volha-chyzh.webp' },
   { id: 'ai-filmmaker-2', roleKey: 'aiFilmmaker', name: 'Maria Ermolina', order: 4 },
-  { id: 'ai-filmmaker-3', roleKey: 'aiFilmmaker', name: 'Elena Frolova', order: 5 },
+  { id: 'ai-filmmaker-3', roleKey: 'aiFilmmaker', name: 'Elena Frolova', order: 5, photoUrl: 'team/elena-frolova.webp' },
   { id: 'ai-filmmaker-4', roleKey: 'aiFilmmaker', name: 'Kseniia Hrytskova', order: 6 },
-  { id: 'ai-filmmaker-5', roleKey: 'aiFilmmaker', name: 'Larisa Mocan', order: 7 },
-  { id: 'ai-filmmaker-6', roleKey: 'aiFilmmaker', name: 'Aleksandra Novikova', order: 8 },
+  { id: 'ai-filmmaker-5', roleKey: 'aiFilmmaker', name: 'Larisa Mocan', order: 7, photoUrl: 'team/larisa-mocan.webp' },
+  { id: 'ai-filmmaker-6', roleKey: 'aiFilmmaker', name: 'Aleksandra Novikova', order: 8, photoUrl: 'team/aleksandra-novikova.webp' },
 ];
 
 export const useTeam = (): TeamMember[] => useLiveCollection<TeamMember>('team', defaultTeam, 'order');
