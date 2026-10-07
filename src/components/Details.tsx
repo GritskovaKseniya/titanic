@@ -22,15 +22,15 @@ export const Details: React.FC = () => {
         <div>
           <div className="grid sm:grid-cols-3 gap-4">
             {team.map((member) => (
-              <div key={member.id} className="bg-dark border hairline p-6 flex flex-col gap-4">
+              <div key={member.id} className="bg-dark border hairline flex flex-col">
                 {member.photoUrl && (
                   <img
                     src={resolveImageSrc(member.photoUrl)}
                     alt=""
-                    className="w-24 h-24 rounded-full object-cover border hairline shrink-0"
+                    className="w-full aspect-square object-cover border-b hairline"
                   />
                 )}
-                <div className="min-w-0">
+                <div className="min-w-0 p-6">
                   <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-ash">
                     {t.team.roles[member.roleKey]}
                   </span>
