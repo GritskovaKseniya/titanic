@@ -20,7 +20,7 @@ export const Details: React.FC = () => {
         </div>
 
         <div>
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {team.map((member) => (
               <div key={member.id} className="bg-dark border hairline flex flex-col">
                 {member.photoUrl && (

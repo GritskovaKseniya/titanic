@@ -40,7 +40,7 @@ export const Episodes: React.FC = () => {
           <p className="md:col-span-5 text-ash self-end md:justify-self-end max-w-md">{t.episodes.description}</p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {episodes.map((ep) => {
             const embed = buildVimeoEmbed(ep.vimeoId);
             const thumb = ep.posterUrl ? undefined : { background: HUE_GRADIENTS[ep.number % HUE_GRADIENTS.length] };
