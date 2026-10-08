@@ -24,6 +24,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   useEffect(() => {
     window.localStorage.setItem(STORAGE_KEY, language);
     document.documentElement.lang = language;
+    document.title = translations[language].hero.title;
   }, [language]);
 
   const value = useMemo<LanguageContextValue>(
