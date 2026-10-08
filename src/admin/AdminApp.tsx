@@ -4,15 +4,13 @@ import { LogOut } from 'lucide-react';
 import { auth, useAuthUser } from './useAuthUser';
 import { Login } from './Login';
 import { EpisodesAdmin } from './EpisodesAdmin';
-import { GalleryAdmin } from './GalleryAdmin';
 import { TeamAdmin } from './TeamAdmin';
 import { SettingsAdmin } from './SettingsAdmin';
 
-type Tab = 'episodes' | 'gallery' | 'team' | 'settings';
+type Tab = 'episodes' | 'team' | 'settings';
 
 const TABS: { key: Tab; label: string }[] = [
   { key: 'episodes', label: 'Серии' },
-  { key: 'gallery', label: 'Галерея' },
   { key: 'team', label: 'Команда' },
   { key: 'settings', label: 'Соцсети и контакты' },
 ];
@@ -59,7 +57,6 @@ export const AdminApp: React.FC = () => {
 
       <main className="max-w-6xl mx-auto px-5 sm:px-8 py-10">
         {tab === 'episodes' && <EpisodesAdmin />}
-        {tab === 'gallery' && <GalleryAdmin />}
         {tab === 'team' && <TeamAdmin />}
         {tab === 'settings' && <SettingsAdmin />}
       </main>

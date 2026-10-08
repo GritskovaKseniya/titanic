@@ -6,7 +6,6 @@ import { useEpisodes } from '../data/episodes';
 const HERO_TABS = [
   { key: 'overview', href: '#top' },
   { key: 'episodes', href: '#episodes' },
-  { key: 'gallery', href: '#gallery' },
   { key: 'details', href: '#details' },
 ] as const;
 
@@ -32,8 +31,8 @@ export const Hero: React.FC = () => {
 
   return (
     <section id="top" className="grain letterbox relative min-h-[88vh] flex flex-col overflow-hidden bg-dark">
-      {/* Deep-sea gradient stands in for a hero still — swap for a real frame
-          from the AI gallery once one is chosen (e.g. the dusk bow shot). */}
+      {/* Deep-sea gradient stands in for a hero still — swap for a real
+          AI-reconstructed frame once one is chosen (e.g. the dusk bow shot). */}
       <div
         className="absolute inset-0 z-0"
         style={{

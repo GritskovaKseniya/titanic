@@ -3,7 +3,6 @@ import { LanguageProvider } from './i18n/LanguageContext';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { Episodes } from './components/Episodes';
-import { Gallery } from './components/Gallery';
 import { Details } from './components/Details';
 import { Footer } from './components/Footer';
 
@@ -20,7 +19,6 @@ const Site: React.FC = () => (
       <main className="flex-grow">
         <Hero />
         <Episodes />
-        <Gallery />
         <Details />
       </main>
       <Footer />

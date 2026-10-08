@@ -40,9 +40,9 @@ export const TextAreaField: React.FC<{
 );
 
 // Images live as plain files in public/ — upload them via GitHub's web UI
-// (Add file → Upload files) into public/posters, public/gallery or
-// public/team, then paste the path here. No Firebase Storage, no billing
-// plan needed for something this small.
+// (Add file → Upload files) into public/posters or public/team, then paste
+// the path here. No Firebase Storage, no billing plan needed for something
+// this small.
 export const ImageField: React.FC<{
   label: string;
   value: string;

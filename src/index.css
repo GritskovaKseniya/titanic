@@ -153,10 +153,6 @@ html {
   background: rgba(201, 150, 47, 0.14);
   color: #e4b85a;
 }
-.badge-synth {
-  background: rgba(241, 79, 160, 0.14);
-  color: #f78cc0;
-}
 
 .btn {
   display: inline-flex;

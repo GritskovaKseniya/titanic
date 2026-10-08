@@ -12,7 +12,7 @@ export const LANGUAGES: { code: Language; label: string }[] = [
 
 export interface TranslationsShape {
   meta: { eyebrowLeft: string; eyebrowRight: string; year: string; genre: string; runtime: string };
-  nav: { episodes: string; gallery: string; details: string };
+  nav: { episodes: string; details: string };
   hero: {
     title: string;
     pitch: string;
@@ -21,9 +21,8 @@ export interface TranslationsShape {
     share: string;
     shared: string;
     jumpLabel: string;
-    tabs: { overview: string; episodes: string; gallery: string; details: string };
+    tabs: { overview: string; episodes: string; details: string };
   };
-  badges: { archival: string; synth: string };
   episodes: {
     label: string;
     heading: string;
@@ -34,7 +33,6 @@ export interface TranslationsShape {
     readMore: string;
     readLess: string;
   };
-  gallery: { label: string; heading: string; description: string };
   team: {
     roles: { producer: string; director: string; editor: string; aiFilmmaker: string };
   };
@@ -53,7 +51,6 @@ export const translations: Record<Language, TranslationsShape> = {
     },
     nav: {
       episodes: 'Episodes',
-      gallery: 'Gallery',
       details: 'Details',
     },
     hero: {
@@ -65,11 +62,7 @@ export const translations: Record<Language, TranslationsShape> = {
       share: 'Share',
       shared: 'Link copied',
       jumpLabel: 'Jump to',
-      tabs: { overview: 'Overview', episodes: 'Episodes', gallery: 'Gallery', details: 'Details' },
-    },
-    badges: {
-      archival: 'Archive',
-      synth: 'AI reconstruction',
+      tabs: { overview: 'Overview', episodes: 'Episodes', details: 'Details' },
     },
     episodes: {
       label: 'Episodes',
@@ -81,12 +74,6 @@ export const translations: Record<Language, TranslationsShape> = {
       season: 'Season 1',
       readMore: 'Read more',
       readLess: 'Show less',
-    },
-    gallery: {
-      label: 'Gallery',
-      heading: 'Frames that never existed',
-      description:
-        'AI rebuilds what time erased: interiors, faces, wreckage on the seabed. Every still is captioned with the episode it belongs to and what it shows.',
     },
     team: {
       roles: {
@@ -117,7 +104,6 @@ export const translations: Record<Language, TranslationsShape> = {
     },
     nav: {
       episodes: 'Серии',
-      gallery: 'Галерея',
       details: 'Детали',
     },
     hero: {
@@ -129,11 +115,7 @@ export const translations: Record<Language, TranslationsShape> = {
       share: 'Поделиться',
       shared: 'Ссылка скопирована',
       jumpLabel: 'Быстрый переход',
-      tabs: { overview: 'Обзор', episodes: 'Серии', gallery: 'Галерея', details: 'Детали' },
-    },
-    badges: {
-      archival: 'Архив',
-      synth: 'ИИ-реконструкция',
+      tabs: { overview: 'Обзор', episodes: 'Серии', details: 'Детали' },
     },
     episodes: {
       label: 'Серии',
@@ -145,12 +127,6 @@ export const translations: Record<Language, TranslationsShape> = {
       season: 'Сезон 1',
       readMore: 'Читать дальше',
       readLess: 'Свернуть',
-    },
-    gallery: {
-      label: 'Галерея',
-      heading: 'Кадры, которых не было',
-      description:
-        'Нейросеть достраивает то, что время стёрло: интерьеры, лица, обломки на дне. Каждый кадр подписан — какой серии он принадлежит и что на нём изображено.',
     },
     team: {
       roles: {
@@ -181,7 +157,6 @@ export const translations: Record<Language, TranslationsShape> = {
     },
     nav: {
       episodes: 'Épisodes',
-      gallery: 'Galerie',
       details: 'Détails',
     },
     hero: {
@@ -193,11 +168,7 @@ export const translations: Record<Language, TranslationsShape> = {
       share: 'Partager',
       shared: 'Lien copié',
       jumpLabel: 'Aller à',
-      tabs: { overview: 'Aperçu', episodes: 'Épisodes', gallery: 'Galerie', details: 'Détails' },
-    },
-    badges: {
-      archival: 'Archives',
-      synth: 'Reconstitution IA',
+      tabs: { overview: 'Aperçu', episodes: 'Épisodes', details: 'Détails' },
     },
     episodes: {
       label: 'Épisodes',
@@ -209,12 +180,6 @@ export const translations: Record<Language, TranslationsShape> = {
       season: 'Saison 1',
       readMore: 'Lire la suite',
       readLess: 'Réduire',
-    },
-    gallery: {
-      label: 'Galerie',
-      heading: "Des images qui n'ont jamais existé",
-      description:
-        "L'IA reconstitue ce que le temps a effacé : intérieurs, visages, épave au fond de l'océan. Chaque image est légendée avec l'épisode auquel elle appartient et ce qu'elle montre.",
     },
     team: {
       roles: {
@@ -245,7 +210,6 @@ export const translations: Record<Language, TranslationsShape> = {
     },
     nav: {
       episodes: 'Episodios',
-      gallery: 'Galería',
       details: 'Detalles',
     },
     hero: {
@@ -257,11 +221,7 @@ export const translations: Record<Language, TranslationsShape> = {
       share: 'Compartir',
       shared: 'Enlace copiado',
       jumpLabel: 'Ir a',
-      tabs: { overview: 'Resumen', episodes: 'Episodios', gallery: 'Galería', details: 'Detalles' },
-    },
-    badges: {
-      archival: 'Archivo',
-      synth: 'Reconstrucción con IA',
+      tabs: { overview: 'Resumen', episodes: 'Episodios', details: 'Detalles' },
     },
     episodes: {
       label: 'Episodios',
@@ -273,12 +233,6 @@ export const translations: Record<Language, TranslationsShape> = {
       season: 'Temporada 1',
       readMore: 'Leer más',
       readLess: 'Mostrar menos',
-    },
-    gallery: {
-      label: 'Galería',
-      heading: 'Imágenes que nunca existieron',
-      description:
-        'La IA reconstruye lo que el tiempo borró: interiores, rostros, restos en el fondo del mar. Cada imagen indica el episodio al que pertenece y lo que muestra.',
     },
     team: {
       roles: {
@@ -309,7 +263,6 @@ export const translations: Record<Language, TranslationsShape> = {
     },
     nav: {
       episodes: 'Folgen',
-      gallery: 'Galerie',
       details: 'Details',
     },
     hero: {
@@ -321,11 +274,7 @@ export const translations: Record<Language, TranslationsShape> = {
       share: 'Teilen',
       shared: 'Link kopiert',
       jumpLabel: 'Springe zu',
-      tabs: { overview: 'Überblick', episodes: 'Folgen', gallery: 'Galerie', details: 'Details' },
-    },
-    badges: {
-      archival: 'Archiv',
-      synth: 'KI-Rekonstruktion',
+      tabs: { overview: 'Überblick', episodes: 'Folgen', details: 'Details' },
     },
     episodes: {
       label: 'Folgen',
@@ -337,12 +286,6 @@ export const translations: Record<Language, TranslationsShape> = {
       season: 'Staffel 1',
       readMore: 'Weiterlesen',
       readLess: 'Weniger anzeigen',
-    },
-    gallery: {
-      label: 'Galerie',
-      heading: 'Bilder, die es nie gab',
-      description:
-        'KI rekonstruiert, was die Zeit ausgelöscht hat: Innenräume, Gesichter, Wrackteile auf dem Meeresgrund. Jedes Bild ist mit der zugehörigen Folge und seinem Motiv beschriftet.',
     },
     team: {
       roles: {
@@ -373,7 +316,6 @@ export const translations: Record<Language, TranslationsShape> = {
     },
     nav: {
       episodes: 'Episodi',
-      gallery: 'Galleria',
       details: 'Dettagli',
     },
     hero: {
@@ -385,11 +327,7 @@ export const translations: Record<Language, TranslationsShape> = {
       share: 'Condividi',
       shared: 'Link copiato',
       jumpLabel: 'Vai a',
-      tabs: { overview: 'Panoramica', episodes: 'Episodi', gallery: 'Galleria', details: 'Dettagli' },
-    },
-    badges: {
-      archival: 'Archivio',
-      synth: 'Ricostruzione IA',
+      tabs: { overview: 'Panoramica', episodes: 'Episodi', details: 'Dettagli' },
     },
     episodes: {
       label: 'Episodi',
@@ -401,12 +339,6 @@ export const translations: Record<Language, TranslationsShape> = {
       season: 'Stagione 1',
       readMore: 'Continua a leggere',
       readLess: 'Mostra meno',
-    },
-    gallery: {
-      label: 'Galleria',
-      heading: 'Immagini che non sono mai esistite',
-      description:
-        "L'IA ricostruisce ciò che il tempo ha cancellato: interni, volti, relitti sul fondale marino. Ogni immagine è didascalizzata con l'episodio a cui appartiene e ciò che mostra.",
     },
     team: {
       roles: {
