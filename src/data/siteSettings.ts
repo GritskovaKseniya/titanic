@@ -15,7 +15,7 @@ export interface SiteSettings {
 
 export const defaultSiteSettings: SiteSettings = {
   contactEmail: 'hello@example.com',
-  socialLinks: [{ id: 'instagram', label: 'Instagram', url: 'https://instagram.com/' }],
+  socialLinks: [{ id: 'instagram', label: 'Instagram', url: 'https://www.instagram.com/titanictvseries' }],
 };
 
 const SETTINGS_DOC = ['site', 'settings'] as const;
