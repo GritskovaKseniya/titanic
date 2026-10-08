@@ -23,7 +23,7 @@ export const defaultTeam: TeamMember[] = [
   { id: 'ai-filmmaker-1', roleKey: 'aiFilmmaker', name: 'Volha Chyzh', order: 3, photoUrl: 'team/volha-chyzh.webp' },
   { id: 'ai-filmmaker-2', roleKey: 'aiFilmmaker', name: 'Maria Ermolina', order: 4 },
   { id: 'ai-filmmaker-3', roleKey: 'aiFilmmaker', name: 'Elena Frolova', order: 5, photoUrl: 'team/elena-frolova.webp' },
-  { id: 'ai-filmmaker-4', roleKey: 'aiFilmmaker', name: 'Kseniia Hrytskova', order: 6, photoUrl: 'team/kseniia-hrytskova.webp' },
+  { id: 'ai-filmmaker-4', roleKey: 'aiFilmmaker', name: 'Kseniia Hrytskova', order: 6 },
   { id: 'ai-filmmaker-5', roleKey: 'aiFilmmaker', name: 'Larisa Mocan', order: 7, photoUrl: 'team/larisa-mocan.webp' },
   { id: 'ai-filmmaker-6', roleKey: 'aiFilmmaker', name: 'Aleksandra Novikova', order: 8, photoUrl: 'team/aleksandra-novikova.webp' },
 ];
