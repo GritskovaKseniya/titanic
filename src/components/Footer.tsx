@@ -1,7 +1,12 @@
 import React from 'react';
-import { Anchor, Instagram, Mail } from 'lucide-react';
+import { Anchor, Instagram, Mail, X } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useSiteSettings } from '../data/siteSettings';
+
+const SOCIAL_ICON: Record<string, React.ElementType> = {
+  instagram: Instagram,
+  x: X,
+};
 
 export const Footer: React.FC = () => {
   const { t } = useLanguage();
@@ -20,18 +25,21 @@ export const Footer: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            {socialLinks.map((link) => (
-              <a
-                key={link.id}
-                href={link.url}
-                target="_blank"
-                rel="noreferrer"
-                title={link.label}
-                className="text-ash hover:text-accent transition-colors"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-            ))}
+            {socialLinks.map((link) => {
+              const Icon = SOCIAL_ICON[link.id] ?? Instagram;
+              return (
+                <a
+                  key={link.id}
+                  href={link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  title={link.label}
+                  className="text-ash hover:text-accent transition-colors"
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              );
+            })}
             {contactEmail && (
               <a href={`mailto:${contactEmail}`} title={t.footer.contact} className="text-ash hover:text-accent transition-colors">
                 <Mail className="w-5 h-5" />
