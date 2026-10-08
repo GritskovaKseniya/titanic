@@ -1,11 +1,12 @@
 import React from 'react';
-import { Anchor, Instagram, Mail, X } from 'lucide-react';
+import { Anchor, Instagram, Mail, MessageCircle, X } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useSiteSettings } from '../data/siteSettings';
 
 const SOCIAL_ICON: Record<string, React.ElementType> = {
   instagram: Instagram,
   x: X,
+  threads: MessageCircle,
 };
 
 export const Footer: React.FC = () => {

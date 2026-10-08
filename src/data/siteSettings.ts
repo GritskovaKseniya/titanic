@@ -18,6 +18,7 @@ export const defaultSiteSettings: SiteSettings = {
   socialLinks: [
     { id: 'instagram', label: 'Instagram', url: 'https://www.instagram.com/titanictvseries' },
     { id: 'x', label: 'X', url: 'https://x.com/TitanicTvseries' },
+    { id: 'threads', label: 'Threads', url: 'https://www.threads.com/@titanictvseries' },
   ],
 };
 
