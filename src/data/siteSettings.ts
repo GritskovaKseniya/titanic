@@ -14,7 +14,7 @@ export interface SiteSettings {
 }
 
 export const defaultSiteSettings: SiteSettings = {
-  contactEmail: 'hello@example.com',
+  contactEmail: 'marmelaicorp@gmail.com',
   socialLinks: [
     { id: 'instagram', label: 'Instagram', url: 'https://www.instagram.com/titanictvseries' },
     { id: 'x', label: 'X', url: 'https://x.com/TitanicTvseries' },
