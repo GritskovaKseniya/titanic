@@ -1,5 +1,5 @@
 import React from 'react';
-import { Anchor, AtSign, Mail } from 'lucide-react';
+import { Anchor, Instagram, Mail } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useSiteSettings } from '../data/siteSettings';
 
@@ -29,7 +29,7 @@ export const Footer: React.FC = () => {
                 title={link.label}
                 className="text-ash hover:text-accent transition-colors"
               >
-                <AtSign className="w-5 h-5" />
+                <Instagram className="w-5 h-5" />
               </a>
             ))}
             {contactEmail && (
