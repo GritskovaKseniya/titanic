@@ -6,9 +6,9 @@ import { buildVimeoEmbed } from '../utils/video';
 import { resolveImageSrc } from '../utils/publicUrl';
 
 const HUE_GRADIENTS = [
-  'linear-gradient(150deg, #18232a 0%, #c9962f 60%, #0a1014 100%)',
-  'linear-gradient(150deg, #8b2c63 0%, #f14fa0 55%, #141b1f 100%)',
-  'linear-gradient(150deg, #05080a 0%, #18232a 55%, #8b2c63 130%)',
+  'linear-gradient(150deg, #123240 0%, #c9962f 60%, #071820 100%)',
+  'linear-gradient(150deg, #8b2c63 0%, #f14fa0 55%, #1a2f38 100%)',
+  'linear-gradient(150deg, #050f15 0%, #123240 55%, #8b2c63 130%)',
 ];
 
 export const Episodes: React.FC = () => {

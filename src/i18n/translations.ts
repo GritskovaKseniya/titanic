@@ -84,11 +84,11 @@ export const translations: Record<Language, TranslationsShape> = {
     },
     about: {
       label: 'About',
-      heading: "How it's made",
+      heading: 'One ship, ten lives',
       paragraph1:
-        "Titanic: Ship of Legends pairs documentary research with AI reconstruction: each episode follows one real passenger, built from archival records and rebuilt in image and sound wherever the camera wasn't there to capture it.",
+        'On the night of 14–15 April 1912, ten very different lives converged aboard the same ship — a shipbuilder, a journalist, a stewardess, a child among them. Titanic: Ship of Legends follows each of them back to where their story really began, long before the iceberg.',
       paragraph2:
-        'Produced by Tata Feodoridi and directed by Konstantin Frolov, the season is cut by editor Anastasia Arsentieva, with a team of AI filmmakers reconstructing the faces, rooms, and final hours no footage survived to show.',
+        "Archival research carries every episode as far as the record allows — and where it runs out, AI reconstruction picks up the thread, rebuilding the faces, the rooms, and the final hours no camera was there to capture.",
     },
     details: {
       label: 'Details',
@@ -144,11 +144,11 @@ export const translations: Record<Language, TranslationsShape> = {
     },
     about: {
       label: 'О проекте',
-      heading: 'Как это сделано',
+      heading: 'Один корабль, десять судеб',
       paragraph1:
-        '«Титаник: Корабль легенд» соединяет документальное исследование с ИИ-реконструкцией: каждая серия рассказывает об одном реальном пассажире — на основе архивных данных и восстановленная в кадре и звуке там, где камеры не было.',
+        'В ночь на 15 апреля 1912 года на борту одного корабля сошлись десять совсем разных судеб — кораблестроитель, журналист, стюардесса, ребёнок. «Титаник: Корабль легенд» возвращается к каждому из них туда, где их история началась по-настоящему, — задолго до айсберга.',
       paragraph2:
-        'Продюсер проекта — Тата Феодориди, режиссёр — Константин Фролов, монтаж — Анастасия Арсентьева. Команда ИИ-режиссёров восстанавливает лица, каюты и последние часы, которые не сохранила ни одна плёнка.',
+        'Архивные свидетельства ведут каждую серию до тех пор, пока хватает записей, — а там, где они обрываются, в дело вступает ИИ-реконструкция, восстанавливая лица, каюты и последние часы, которых не сохранила ни одна камера.',
     },
     details: {
       label: 'Детали',
@@ -204,11 +204,11 @@ export const translations: Record<Language, TranslationsShape> = {
     },
     about: {
       label: 'À propos',
-      heading: "Comment c'est fait",
+      heading: 'Un navire, dix destins',
       paragraph1:
-        "« Titanic : Le Navire des légendes » associe une recherche documentaire à une reconstitution par IA : chaque épisode suit un vrai passager, reconstitué à partir d'archives et recréé en image et en son là où aucune caméra n'était présente.",
+        "Dans la nuit du 14 au 15 avril 1912, dix destins bien différents se sont croisés à bord du même navire — un architecte naval, un journaliste, une hôtesse de bord, une enfant parmi eux. « Titanic : Le Navire des légendes » remonte le fil de chacune de ces vies, bien avant l'iceberg.",
       paragraph2:
-        "La productrice du projet est Tata Feodoridi, le réalisateur Konstantin Frolov, le montage est signé Anastasia Arsentieva. Une équipe de réalisateurs IA reconstitue les visages, les cabines et les dernières heures qu'aucune pellicule n'a conservés.",
+        "La recherche d'archives porte chaque épisode aussi loin que les documents le permettent — et là où ils s'arrêtent, la reconstitution par IA prend le relais, recréant les visages, les cabines et les dernières heures qu'aucune caméra n'a pu saisir.",
     },
     details: {
       label: 'Détails',
@@ -264,11 +264,11 @@ export const translations: Record<Language, TranslationsShape> = {
     },
     about: {
       label: 'Acerca de',
-      heading: 'Cómo está hecho',
+      heading: 'Un barco, diez destinos',
       paragraph1:
-        'Titanic: El barco de las leyendas combina investigación documental con reconstrucción por IA: cada episodio sigue a un pasajero real, reconstruido a partir de archivos y recreado en imagen y sonido allí donde ninguna cámara estuvo presente.',
+        'En la noche del 14 al 15 de abril de 1912, diez vidas muy distintas confluyeron a bordo del mismo barco — un arquitecto naval, un periodista, una camarera, una niña entre ellos. Titanic: El barco de las leyendas vuelve a cada una de esas historias mucho antes del iceberg.',
       paragraph2:
-        'La productora del proyecto es Tata Feodoridi, el director es Konstantin Frolov, y la edición corre a cargo de Anastasia Arsentieva. Un equipo de cineastas de IA reconstruye los rostros, los camarotes y las últimas horas que ningún archivo logró conservar.',
+        'La investigación de archivo sostiene cada episodio hasta donde alcanzan los documentos — y donde se agotan, la reconstrucción con IA toma el relevo, recreando los rostros, los camarotes y las últimas horas que ninguna cámara pudo captar.',
     },
     details: {
       label: 'Detalles',
@@ -324,11 +324,11 @@ export const translations: Record<Language, TranslationsShape> = {
     },
     about: {
       label: 'Über das Projekt',
-      heading: 'So entsteht die Serie',
+      heading: 'Ein Schiff, zehn Schicksale',
       paragraph1:
-        'Titanic: Schiff der Legenden verbindet dokumentarische Recherche mit KI-Rekonstruktion: Jede Folge begleitet einen realen Passagier, rekonstruiert aus Archivmaterial und neu erschaffen in Bild und Ton, wo keine Kamera zugegen war.',
+        'In der Nacht vom 14. auf den 15. April 1912 trafen an Bord desselben Schiffs zehn ganz unterschiedliche Leben aufeinander — ein Schiffsarchitekt, ein Journalist, eine Stewardess, ein Kind unter ihnen. Titanic: Schiff der Legenden erzählt jede dieser Geschichten von Anfang an, lange vor dem Eisberg.',
       paragraph2:
-        'Produzentin des Projekts ist Tata Feodoridi, Regie führt Konstantin Frolov, geschnitten von Anastasia Arsentieva. Ein Team von KI-Regisseuren rekonstruiert die Gesichter, Kabinen und letzten Stunden, die kein Filmmaterial festgehalten hat.',
+        'Archivrecherche trägt jede Folge so weit, wie die Aufzeichnungen reichen — und wo sie enden, übernimmt die KI-Rekonstruktion: Sie erschafft die Gesichter, Kabinen und letzten Stunden neu, die keine Kamera festhalten konnte.',
     },
     details: {
       label: 'Details',
@@ -384,11 +384,11 @@ export const translations: Record<Language, TranslationsShape> = {
     },
     about: {
       label: 'Chi siamo',
-      heading: 'Come viene realizzata',
+      heading: 'Una nave, dieci destini',
       paragraph1:
-        "Titanic: La nave delle leggende unisce la ricerca documentaria alla ricostruzione con l'IA: ogni episodio segue un vero passeggero, ricostruito a partire da documenti d'archivio e ricreato in immagini e suono laddove nessuna cinepresa era presente.",
+        'Nella notte tra il 14 e il 15 aprile 1912, dieci vite molto diverse si incrociarono a bordo della stessa nave — un architetto navale, un giornalista, una assistente di bordo, una bambina tra loro. Titanic: La nave delle leggende ripercorre ciascuna di queste storie da molto prima dell\'iceberg.',
       paragraph2:
-        'La produttrice del progetto è Tata Feodoridi, il regista è Konstantin Frolov, il montaggio è di Anastasia Arsentieva. Un team di registi IA ricostruisce i volti, le cabine e le ultime ore che nessuna pellicola è riuscita a conservare.',
+        "La ricerca d'archivio accompagna ogni episodio fin dove arrivano i documenti — e dove si fermano, subentra la ricostruzione con l'IA, che ricrea i volti, le cabine e le ultime ore che nessuna cinepresa ha potuto catturare.",
     },
     details: {
       label: 'Dettagli',

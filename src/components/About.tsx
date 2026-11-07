@@ -1,11 +1,13 @@
 import React from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { WaveDivider } from './WaveDivider';
 
 export const About: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <section id="about" className="py-12 sm:py-16 lg:py-20 bg-dark border-t hairline">
+    <section id="about" className="relative py-12 sm:py-16 lg:py-20 bg-dark">
+      <WaveDivider className="absolute top-0 left-0 w-full h-4 text-accent/25" />
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="max-w-2xl">
           <span className="slate-label">{t.about.label}</span>
