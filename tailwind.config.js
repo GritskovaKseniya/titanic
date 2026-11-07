@@ -5,10 +5,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Deep-sea navy ground — the water in the reference stills, not a neutral studio dark.
-        dark: '#071820',
-        darkSec: '#0D2530',
-        darkTertiary: '#123240',
+        // Restrained near-black ground — less saturated than the old deep-sea
+        // navy, closer to a neutral studio dark, still with a whisper of blue.
+        dark: '#0A1014',
+        darkSec: '#10181C',
+        darkTertiary: '#18232A',
         // Bioluminescent coral: the anemone glow in the reference gallery.
         primary: '#8B2C63',
         primaryHover: '#711F50',
@@ -17,7 +18,7 @@ export default {
         gold: '#C9962F',
         goldBright: '#E4B85A',
         bone: '#E7EFEE',
-        ash: '#7E97A0',
+        ash: '#8A969C',
         leader: '#E23B2E',
       },
       fontFamily: {

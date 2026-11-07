@@ -6,9 +6,9 @@ import { buildVimeoEmbed } from '../utils/video';
 import { resolveImageSrc } from '../utils/publicUrl';
 
 const HUE_GRADIENTS = [
-  'linear-gradient(150deg, #123240 0%, #c9962f 60%, #071820 100%)',
-  'linear-gradient(150deg, #8b2c63 0%, #f14fa0 55%, #1a2f38 100%)',
-  'linear-gradient(150deg, #050f15 0%, #123240 55%, #8b2c63 130%)',
+  'linear-gradient(150deg, #18232a 0%, #c9962f 60%, #0a1014 100%)',
+  'linear-gradient(150deg, #8b2c63 0%, #f14fa0 55%, #141b1f 100%)',
+  'linear-gradient(150deg, #05080a 0%, #18232a 55%, #8b2c63 130%)',
 ];
 
 export const Episodes: React.FC = () => {
@@ -28,7 +28,7 @@ export const Episodes: React.FC = () => {
   const activeEmbed = active ? buildVimeoEmbed(active.vimeoId) : null;
 
   return (
-    <section id="episodes" className="py-14 sm:py-20 lg:py-28 bg-dark">
+    <section id="episodes" className="py-12 sm:py-16 lg:py-20 bg-dark">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="grid md:grid-cols-12 gap-6 mb-12">
           <div className="md:col-span-7">

@@ -21,7 +21,6 @@ export interface TranslationsShape {
     share: string;
     shared: string;
     jumpLabel: string;
-    tabs: { overview: string; episodes: string; details: string };
   };
   episodes: {
     label: string;
@@ -36,6 +35,7 @@ export interface TranslationsShape {
   team: {
     roles: { producer: string; director: string; editor: string; aiFilmmaker: string };
   };
+  about: { label: string; heading: string; paragraph1: string; paragraph2: string };
   details: { label: string; heading: string; description: string };
   footer: { tagline: string; rights: string; contact: string };
 }
@@ -62,7 +62,6 @@ export const translations: Record<Language, TranslationsShape> = {
       share: 'Share',
       shared: 'Link copied',
       jumpLabel: 'Jump to',
-      tabs: { overview: 'Overview', episodes: 'Episodes', details: 'Details' },
     },
     episodes: {
       label: 'Episodes',
@@ -82,6 +81,14 @@ export const translations: Record<Language, TranslationsShape> = {
         editor: 'Editor',
         aiFilmmaker: 'Associate Producer & AI Filmmaker',
       },
+    },
+    about: {
+      label: 'About',
+      heading: "How it's made",
+      paragraph1:
+        "Titanic: Ship of Legends pairs documentary research with AI reconstruction: each episode follows one real passenger, built from archival records and rebuilt in image and sound wherever the camera wasn't there to capture it.",
+      paragraph2:
+        'Produced by Tata Feodoridi and directed by Konstantin Frolov, the season is cut by editor Anastasia Arsentieva, with a team of AI filmmakers reconstructing the faces, rooms, and final hours no footage survived to show.',
     },
     details: {
       label: 'Details',
@@ -115,7 +122,6 @@ export const translations: Record<Language, TranslationsShape> = {
       share: 'Поделиться',
       shared: 'Ссылка скопирована',
       jumpLabel: 'Быстрый переход',
-      tabs: { overview: 'Обзор', episodes: 'Серии', details: 'Детали' },
     },
     episodes: {
       label: 'Серии',
@@ -135,6 +141,14 @@ export const translations: Record<Language, TranslationsShape> = {
         editor: 'Монтажёр',
         aiFilmmaker: 'Ассоциированный продюсер и ИИ-режиссёр',
       },
+    },
+    about: {
+      label: 'О проекте',
+      heading: 'Как это сделано',
+      paragraph1:
+        '«Титаник: Корабль легенд» соединяет документальное исследование с ИИ-реконструкцией: каждая серия рассказывает об одном реальном пассажире — на основе архивных данных и восстановленная в кадре и звуке там, где камеры не было.',
+      paragraph2:
+        'Продюсер проекта — Тата Феодориди, режиссёр — Константин Фролов, монтаж — Анастасия Арсентьева. Команда ИИ-режиссёров восстанавливает лица, каюты и последние часы, которые не сохранила ни одна плёнка.',
     },
     details: {
       label: 'Детали',
@@ -168,7 +182,6 @@ export const translations: Record<Language, TranslationsShape> = {
       share: 'Partager',
       shared: 'Lien copié',
       jumpLabel: 'Aller à',
-      tabs: { overview: 'Aperçu', episodes: 'Épisodes', details: 'Détails' },
     },
     episodes: {
       label: 'Épisodes',
@@ -188,6 +201,14 @@ export const translations: Record<Language, TranslationsShape> = {
         editor: 'Monteur',
         aiFilmmaker: 'Producteur associé et réalisateur IA',
       },
+    },
+    about: {
+      label: 'À propos',
+      heading: "Comment c'est fait",
+      paragraph1:
+        "« Titanic : Le Navire des légendes » associe une recherche documentaire à une reconstitution par IA : chaque épisode suit un vrai passager, reconstitué à partir d'archives et recréé en image et en son là où aucune caméra n'était présente.",
+      paragraph2:
+        "La productrice du projet est Tata Feodoridi, le réalisateur Konstantin Frolov, le montage est signé Anastasia Arsentieva. Une équipe de réalisateurs IA reconstitue les visages, les cabines et les dernières heures qu'aucune pellicule n'a conservés.",
     },
     details: {
       label: 'Détails',
@@ -221,7 +242,6 @@ export const translations: Record<Language, TranslationsShape> = {
       share: 'Compartir',
       shared: 'Enlace copiado',
       jumpLabel: 'Ir a',
-      tabs: { overview: 'Resumen', episodes: 'Episodios', details: 'Detalles' },
     },
     episodes: {
       label: 'Episodios',
@@ -241,6 +261,14 @@ export const translations: Record<Language, TranslationsShape> = {
         editor: 'Editor',
         aiFilmmaker: 'Productor asociado y cineasta de IA',
       },
+    },
+    about: {
+      label: 'Acerca de',
+      heading: 'Cómo está hecho',
+      paragraph1:
+        'Titanic: El barco de las leyendas combina investigación documental con reconstrucción por IA: cada episodio sigue a un pasajero real, reconstruido a partir de archivos y recreado en imagen y sonido allí donde ninguna cámara estuvo presente.',
+      paragraph2:
+        'La productora del proyecto es Tata Feodoridi, el director es Konstantin Frolov, y la edición corre a cargo de Anastasia Arsentieva. Un equipo de cineastas de IA reconstruye los rostros, los camarotes y las últimas horas que ningún archivo logró conservar.',
     },
     details: {
       label: 'Detalles',
@@ -274,7 +302,6 @@ export const translations: Record<Language, TranslationsShape> = {
       share: 'Teilen',
       shared: 'Link kopiert',
       jumpLabel: 'Springe zu',
-      tabs: { overview: 'Überblick', episodes: 'Folgen', details: 'Details' },
     },
     episodes: {
       label: 'Folgen',
@@ -294,6 +321,14 @@ export const translations: Record<Language, TranslationsShape> = {
         editor: 'Cutter',
         aiFilmmaker: 'Assoziierter Produzent und KI-Regisseur',
       },
+    },
+    about: {
+      label: 'Über das Projekt',
+      heading: 'So entsteht die Serie',
+      paragraph1:
+        'Titanic: Schiff der Legenden verbindet dokumentarische Recherche mit KI-Rekonstruktion: Jede Folge begleitet einen realen Passagier, rekonstruiert aus Archivmaterial und neu erschaffen in Bild und Ton, wo keine Kamera zugegen war.',
+      paragraph2:
+        'Produzentin des Projekts ist Tata Feodoridi, Regie führt Konstantin Frolov, geschnitten von Anastasia Arsentieva. Ein Team von KI-Regisseuren rekonstruiert die Gesichter, Kabinen und letzten Stunden, die kein Filmmaterial festgehalten hat.',
     },
     details: {
       label: 'Details',
@@ -327,7 +362,6 @@ export const translations: Record<Language, TranslationsShape> = {
       share: 'Condividi',
       shared: 'Link copiato',
       jumpLabel: 'Vai a',
-      tabs: { overview: 'Panoramica', episodes: 'Episodi', details: 'Dettagli' },
     },
     episodes: {
       label: 'Episodi',
@@ -347,6 +381,14 @@ export const translations: Record<Language, TranslationsShape> = {
         editor: 'Montatore',
         aiFilmmaker: 'Produttore associato e regista IA',
       },
+    },
+    about: {
+      label: 'Chi siamo',
+      heading: 'Come viene realizzata',
+      paragraph1:
+        "Titanic: La nave delle leggende unisce la ricerca documentaria alla ricostruzione con l'IA: ogni episodio segue un vero passeggero, ricostruito a partire da documenti d'archivio e ricreato in immagini e suono laddove nessuna cinepresa era presente.",
+      paragraph2:
+        'La produttrice del progetto è Tata Feodoridi, il regista è Konstantin Frolov, il montaggio è di Anastasia Arsentieva. Un team di registi IA ricostruisce i volti, le cabine e le ultime ore che nessuna pellicola è riuscita a conservare.',
     },
     details: {
       label: 'Dettagli',
