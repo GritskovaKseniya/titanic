@@ -30,6 +30,16 @@
   --color-ash: 154 160 166;
 }
 
+[data-theme='blue'] {
+  --color-dark: 11 10 15;
+  --color-dark-sec: 10 28 46;
+  --color-dark-tertiary: 15 42 66;
+  --color-primary: 12 80 128;
+  --color-accent: 134 196 216;
+  --color-accent-soft: 170 214 224;
+  --color-ash: 151 176 188;
+}
+
 [data-theme='brightgreen'] {
   --color-dark: 10 10 10;
   --color-dark-sec: 20 20 20;
