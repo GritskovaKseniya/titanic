@@ -28,7 +28,7 @@ export const EpisodeCard: React.FC<{
       <button
         onClick={onOpen}
         disabled={!hasEmbed}
-        className="relative w-full aspect-video overflow-hidden border hairline text-left disabled:cursor-default transition-colors group-hover:border-accent/50"
+        className="relative w-full aspect-video overflow-hidden rounded-2xl border hairline text-left disabled:cursor-default transition-colors group-hover:border-accent/50"
         style={thumbStyle}
       >
         {ep.posterUrl && (

@@ -14,7 +14,7 @@ export const TeamCard: React.FC<{
   return (
     <div
       ref={ref}
-      className={`group bg-dark border hairline flex flex-col transition-colors hover:border-accent/50 reveal ${
+      className={`group bg-dark border hairline rounded-2xl overflow-hidden flex flex-col transition-colors hover:border-accent/50 reveal ${
         visible ? 'reveal-visible' : ''
       }`}
       style={{ transitionDelay: visible ? `${delayMs}ms` : '0ms' }}
