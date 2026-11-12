@@ -48,7 +48,7 @@ export const Footer: React.FC = () => {
             )}
           </div>
         </div>
-        <div className="border-t hairline mt-8 pt-6 timecode text-[11px] text-ash">
+        <div className="border-t hairline mt-8 pt-6 text-[11px] text-ash">
           © {year} {t.hero.title} — {t.footer.rights}
         </div>
       </div>
