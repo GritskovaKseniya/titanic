@@ -3,11 +3,14 @@ import { ArrowRight, Share2 } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useEpisodes } from '../data/episodes';
 import { resolveImageSrc } from '../utils/publicUrl';
+import { splitLastWord } from '../utils/splitAccent';
 
 export const Hero: React.FC = () => {
   const { t } = useLanguage();
   const episodes = useEpisodes();
   const [copied, setCopied] = useState(false);
+
+  const [titleLead, titleLast] = splitLastWord(t.hero.title);
 
   const handleShare = async () => {
     const url = window.location.href.split('#')[0];
@@ -50,7 +53,7 @@ export const Hero: React.FC = () => {
 
         <div className="flex flex-col gap-4 sm:gap-5 pt-7 sm:pt-8">
           <h1 className="font-heading font-semibold uppercase text-bone leading-[1.05] tracking-tight animate-fade-up text-3xl sm:text-4xl lg:text-5xl">
-            {t.hero.title}
+            {titleLead} <span className="text-accent">{titleLast}</span>
           </h1>
 
           <div className="flex flex-wrap items-center gap-2.5 animate-fade-up">

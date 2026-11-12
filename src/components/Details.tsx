@@ -3,10 +3,12 @@ import { Instagram } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useTeam } from '../data/team';
 import { resolveImageSrc } from '../utils/publicUrl';
+import { splitLastWord } from '../utils/splitAccent';
 
 export const Details: React.FC = () => {
   const { t } = useLanguage();
   const team = useTeam();
+  const [headingLead, headingLast] = splitLastWord(t.details.heading);
 
   return (
     <section id="details" className="py-12 sm:py-16 lg:py-20 bg-darkSec border-y hairline">
@@ -14,7 +16,7 @@ export const Details: React.FC = () => {
         <div className="mb-12">
           <span className="slate-label">{t.details.label}</span>
           <h2 className="mt-2 text-3xl sm:text-4xl font-heading font-semibold uppercase text-bone leading-[1.05]">
-            {t.details.heading}
+            {headingLead} <span className="text-accent">{headingLast}</span>
           </h2>
           <p className="text-ash mt-3 max-w-md">{t.details.description}</p>
         </div>

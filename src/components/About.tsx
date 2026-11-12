@@ -1,9 +1,11 @@
 import React from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { WaveDivider } from './WaveDivider';
+import { splitLastWord } from '../utils/splitAccent';
 
 export const About: React.FC = () => {
   const { t } = useLanguage();
+  const [headingLead, headingLast] = splitLastWord(t.about.heading);
 
   return (
     <section id="about" className="relative py-12 sm:py-16 lg:py-20 bg-dark">
@@ -12,7 +14,7 @@ export const About: React.FC = () => {
         <div className="max-w-2xl">
           <span className="slate-label">{t.about.label}</span>
           <h2 className="mt-2 text-3xl sm:text-4xl font-heading font-semibold uppercase text-bone leading-[1.05]">
-            {t.about.heading}
+            {headingLead} <span className="text-accent">{headingLast}</span>
           </h2>
           <p className="text-ash mt-4 leading-relaxed">{t.about.paragraph1}</p>
           <p className="text-ash mt-4 leading-relaxed">{t.about.paragraph2}</p>

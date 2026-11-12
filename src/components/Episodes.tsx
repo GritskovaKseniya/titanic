@@ -4,6 +4,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { useEpisodes } from '../data/episodes';
 import { buildVimeoEmbed } from '../utils/video';
 import { resolveImageSrc } from '../utils/publicUrl';
+import { splitLastWord } from '../utils/splitAccent';
 
 const HUE_GRADIENTS = [
   'linear-gradient(150deg, #123240 0%, #c9962f 60%, #071820 100%)',
@@ -14,6 +15,7 @@ const HUE_GRADIENTS = [
 export const Episodes: React.FC = () => {
   const { t, language } = useLanguage();
   const episodes = useEpisodes();
+  const [headingLead, headingLast] = splitLastWord(t.episodes.heading);
   const [openEpisode, setOpenEpisode] = useState<number | null>(null);
   const [expanded, setExpanded] = useState<Set<number>>(new Set());
 
@@ -34,7 +36,7 @@ export const Episodes: React.FC = () => {
           <div className="md:col-span-7">
             <span className="slate-label">{t.episodes.season}</span>
             <h2 className="mt-2 text-3xl sm:text-4xl font-heading font-semibold uppercase text-bone leading-[1.05]">
-              {t.episodes.heading}
+              {headingLead} <span className="text-accent">{headingLast}</span>
             </h2>
           </div>
           <p className="md:col-span-5 text-ash self-end md:justify-self-end max-w-md">{t.episodes.description}</p>
