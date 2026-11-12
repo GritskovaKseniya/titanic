@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Anchor, Globe, Menu, X } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { LANGUAGES } from '../i18n/translations';
@@ -7,16 +7,6 @@ import { LanguageSwitcher } from './LanguageSwitcher';
 export const Header: React.FC = () => {
   const { t, language, setLanguage } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
-  // Fully see-through over the hero still; once scrolled past it, a glassy
-  // backing fades in so the nav stays legible over the sections beneath.
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   const navLinks = [
     { href: '#episodes', label: t.nav.episodes },
@@ -24,11 +14,7 @@ export const Header: React.FC = () => {
   ];
 
   return (
-    <header
-      className={`sticky top-0 z-40 transition-colors duration-300 ${
-        scrolled ? 'bg-dark/50 backdrop-blur-md border-b border-white/5' : 'bg-transparent border-b border-transparent'
-      }`}
-    >
+    <header className="sticky top-0 z-40 bg-dark/35 backdrop-blur-md border-b border-white/5">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="flex items-center justify-between h-14">
           <a href="#top" className="flex items-center gap-2 group">
