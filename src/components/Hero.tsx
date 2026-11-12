@@ -50,7 +50,7 @@ export const Hero: React.FC = () => {
         className="absolute inset-0 z-0"
         style={{
           background:
-            'linear-gradient(100deg, rgba(5,15,21,0.96) 0%, rgba(5,15,21,0.82) 30%, rgba(5,15,21,0.45) 60%, rgba(5,15,21,0.2) 100%), linear-gradient(180deg, rgba(5,15,21,0.1) 0%, transparent 25%, rgba(5,15,21,0.7) 100%)',
+            'linear-gradient(100deg, rgba(4,16,14,0.96) 0%, rgba(4,16,14,0.82) 30%, rgba(4,16,14,0.45) 60%, rgba(4,16,14,0.2) 100%), linear-gradient(180deg, rgba(4,16,14,0.1) 0%, transparent 25%, rgba(4,16,14,0.7) 100%)',
         }}
         aria-hidden="true"
       />

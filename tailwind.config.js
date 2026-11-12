@@ -5,19 +5,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Deep-sea navy ground — the water in the reference stills, not a neutral studio dark.
-        dark: '#071820',
-        darkSec: '#0D2530',
-        darkTertiary: '#123240',
-        // Bioluminescent coral: the anemone glow in the reference gallery.
-        primary: '#8B2C63',
-        primaryHover: '#711F50',
-        accent: '#F14FA0',
+        // Deep sea-green ground, almost black — the cinema-dark palette.
+        dark: '#04100E',
+        darkSec: '#0A211D',
+        darkTertiary: '#102A24',
+        // Muted forest green — the filled-surface companion to the bright accent.
+        primary: '#0B3E28',
+        primaryHover: '#0F4F33',
+        accent: '#3EB386',
         // Brass / treasure gold: the ship's fittings, the teapot, the dusk sky.
         gold: '#C9962F',
         goldBright: '#E4B85A',
         bone: '#E7EFEE',
-        ash: '#7E97A0',
+        ash: '#8FA39B',
         leader: '#E23B2E',
       },
       fontFamily: {
