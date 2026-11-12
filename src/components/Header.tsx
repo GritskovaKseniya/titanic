@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Anchor, Globe, Menu, X } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { LANGUAGES } from '../i18n/translations';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 export const Header: React.FC = () => {
   const { t, language, setLanguage } = useLanguage();
@@ -33,21 +34,7 @@ export const Header: React.FC = () => {
                 {link.label}
               </a>
             ))}
-            <label className="flex items-center gap-1.5 text-ash hover:text-bone transition-colors cursor-pointer">
-              <Globe className="w-4 h-4" />
-              <select
-                value={language}
-                onChange={(e) => setLanguage(e.target.value as typeof language)}
-                className="bg-transparent text-xs font-bold uppercase cursor-pointer focus:outline-none [&>option]:bg-dark [&>option]:text-bone"
-                aria-label="Switch language"
-              >
-                {LANGUAGES.map((l) => (
-                  <option key={l.code} value={l.code}>
-                    {l.code.toUpperCase()}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <LanguageSwitcher language={language} onChange={setLanguage} />
           </nav>
 
           <button
@@ -78,7 +65,7 @@ export const Header: React.FC = () => {
               <button
                 key={l.code}
                 onClick={() => setLanguage(l.code)}
-                className={`text-xs font-bold uppercase px-2 py-1 border hairline transition-colors ${
+                className={`text-xs font-bold uppercase px-3 py-1.5 rounded-full border hairline transition-colors ${
                   language === l.code ? 'text-accent border-accent' : 'text-ash hover:text-bone'
                 }`}
               >
