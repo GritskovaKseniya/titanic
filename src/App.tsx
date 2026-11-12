@@ -15,7 +15,7 @@ const isAdminRoute = typeof window !== 'undefined' && window.location.pathname.r
 
 const Site: React.FC = () => (
   <LanguageProvider>
-    <div className="flex flex-col min-h-screen bg-dark text-bone font-sans overflow-x-hidden">
+    <div className="flex flex-col min-h-screen bg-dark text-bone font-sans overflow-clip">
       <Header />
       <main className="flex-grow">
         <Hero />
