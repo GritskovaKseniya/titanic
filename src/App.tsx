@@ -6,6 +6,7 @@ import { Episodes } from './components/Episodes';
 import { About } from './components/About';
 import { Details } from './components/Details';
 import { Footer } from './components/Footer';
+import { ThemeSwitcher } from './components/ThemeSwitcher';
 
 // Firebase Auth and every admin form live in this chunk — visitors to the
 // public site (the vast majority) never fetch it.
@@ -24,6 +25,7 @@ const Site: React.FC = () => (
         <Details />
       </main>
       <Footer />
+      <ThemeSwitcher />
     </div>
   </LanguageProvider>
 );
