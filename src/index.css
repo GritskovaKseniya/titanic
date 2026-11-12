@@ -173,14 +173,17 @@ html {
 }
 
 .btn-cta {
-  background: #f14fa0;
-  color: #071820;
-  box-shadow: 0 12px 34px -14px rgba(241, 79, 160, 0.7);
+  background: rgba(241, 79, 160, 0.18);
+  color: #f78cc0;
+  border: 1px solid rgba(241, 79, 160, 0.6);
+  box-shadow: 0 12px 34px -18px rgba(241, 79, 160, 0.7);
 }
 .btn-cta:hover {
-  background: #f78cc0;
+  background: rgba(241, 79, 160, 0.3);
+  border-color: #f78cc0;
+  color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 18px 42px -14px rgba(241, 79, 160, 0.85);
+  box-shadow: 0 18px 42px -16px rgba(241, 79, 160, 0.85);
 }
 
 .btn-quiet {
