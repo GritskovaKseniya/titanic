@@ -44,7 +44,7 @@ export const Hero: React.FC = () => {
         src={resolveImageSrc('hero/dusk-bow.jpg')}
         alt=""
         className="absolute inset-0 z-0 w-full h-full object-cover"
-        style={{ transform: `translateY(${parallaxY}px) scale(1.1)` }}
+        style={{ transform: `translateY(${parallaxY}px) scale(1.1)`, objectPosition: '75% 45%' }}
       />
       <div
         className="absolute inset-0 z-0"
@@ -55,7 +55,7 @@ export const Hero: React.FC = () => {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-8 pt-8 pb-10 sm:pb-12">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-8 pt-20 sm:pt-24 pb-10 sm:pb-12">
         <div className="flex items-baseline justify-between border-b hairline pb-4 timecode text-[10px] sm:text-[11px] text-ash uppercase">
           <span>{t.meta.eyebrowLeft}</span>
           <span className="hidden sm:block">{t.meta.eyebrowRight}</span>

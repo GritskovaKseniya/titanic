@@ -14,7 +14,7 @@ export const Header: React.FC = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-dark/35 backdrop-blur-md border-b border-white/5">
+    <header className="fixed top-0 inset-x-0 z-40 bg-dark/35 backdrop-blur-md border-b border-white/5">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="flex items-center justify-between h-14">
           <a href="#top" className="flex items-center gap-2 group">
