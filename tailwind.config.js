@@ -1,4 +1,15 @@
 /** @type {import('tailwindcss').Config} */
+
+// Lets a color track a CSS custom property (set per `data-theme` in index.css)
+// instead of a fixed hex, so the palette-switcher can swap it at runtime
+// while still supporting Tailwind's opacity modifiers (bg-accent/50 etc).
+function themable(variableName) {
+  return ({ opacityValue }) =>
+    opacityValue === undefined
+      ? `rgb(var(${variableName}))`
+      : `rgb(var(${variableName}) / ${opacityValue})`;
+}
+
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   darkMode: 'class',
@@ -6,18 +17,19 @@ export default {
     extend: {
       colors: {
         // Deep sea-green ground, almost black — the cinema-dark palette.
-        dark: '#04100E',
-        darkSec: '#0A211D',
-        darkTertiary: '#102A24',
+        // Themable: see the `data-theme` blocks in src/index.css.
+        dark: themable('--color-dark'),
+        darkSec: themable('--color-dark-sec'),
+        darkTertiary: themable('--color-dark-tertiary'),
         // Muted forest green — the filled-surface companion to the bright accent.
-        primary: '#0B3E28',
+        primary: themable('--color-primary'),
         primaryHover: '#0F4F33',
-        accent: '#3EB386',
+        accent: themable('--color-accent'),
         // Brass / treasure gold: the ship's fittings, the teapot, the dusk sky.
         gold: '#C9962F',
         goldBright: '#E4B85A',
         bone: '#E7EFEE',
-        ash: '#8FA39B',
+        ash: themable('--color-ash'),
         leader: '#E23B2E',
       },
       fontFamily: {

@@ -6,6 +6,40 @@
    pseudo-elements, and the small "cinema chrome" vocabulary shared across
    the section components. */
 
+/* Palette tokens as "R G B" triples, so Tailwind's themable() colors and the
+   raw rgb(var(...)) uses below can both apply opacity. Swapped at runtime by
+   ThemeSwitcher via the <html data-theme> attribute — temporary, for picking
+   a final palette; drop the [data-theme] blocks and ThemeSwitcher once one wins. */
+:root {
+  --color-dark: 4 16 14;
+  --color-dark-sec: 10 33 29;
+  --color-dark-tertiary: 16 42 36;
+  --color-primary: 11 62 40;
+  --color-accent: 62 179 134;
+  --color-accent-soft: 139 209 182;
+  --color-ash: 143 163 155;
+}
+
+[data-theme='red'] {
+  --color-dark: 10 10 10;
+  --color-dark-sec: 20 20 20;
+  --color-dark-tertiary: 31 31 31;
+  --color-primary: 138 7 16;
+  --color-accent: 229 9 20;
+  --color-accent-soft: 239 107 114;
+  --color-ash: 154 160 166;
+}
+
+[data-theme='brightgreen'] {
+  --color-dark: 10 10 10;
+  --color-dark-sec: 20 20 20;
+  --color-dark-tertiary: 31 31 31;
+  --color-primary: 14 92 55;
+  --color-accent: 28 231 131;
+  --color-accent-soft: 96 238 168;
+  --color-ash: 154 160 166;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -15,22 +49,22 @@ html {
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a211d;
+  background: rgb(var(--color-dark-sec));
 }
 ::-webkit-scrollbar-thumb {
-  background: #0b3e28;
+  background: rgb(var(--color-primary));
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3eb386;
+  background: rgb(var(--color-accent));
 }
 
 ::selection {
-  background: rgba(62, 179, 134, 0.3);
+  background: rgb(var(--color-accent) / 0.3);
 }
 
 :focus-visible {
-  outline: 2px solid #3eb386;
+  outline: 2px solid rgb(var(--color-accent));
   outline-offset: 2px;
 }
 
@@ -69,7 +103,7 @@ html {
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #3eb386;
+  color: rgb(var(--color-accent));
 }
 .timecode {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
@@ -78,7 +112,7 @@ html {
 }
 
 .hairline {
-  border-color: rgba(143, 163, 155, 0.22);
+  border-color: rgb(var(--color-ash) / 0.22);
 }
 
 /* Hero curtain-reveal: two black leaves draw up/down like a projector gate. */
@@ -109,7 +143,7 @@ html {
   left: 0;
   right: 0;
   height: 16%;
-  background: #020b09;
+  background: rgb(var(--color-dark));
   z-index: 30;
   pointer-events: none;
 }
@@ -192,25 +226,25 @@ html {
 }
 
 .btn-cta {
-  background: rgba(62, 179, 134, 0.18);
-  color: #8bd1b6;
-  border: 1px solid rgba(62, 179, 134, 0.6);
-  box-shadow: 0 12px 34px -18px rgba(62, 179, 134, 0.7);
+  background: rgb(var(--color-accent) / 0.18);
+  color: rgb(var(--color-accent-soft));
+  border: 1px solid rgb(var(--color-accent) / 0.6);
+  box-shadow: 0 12px 34px -18px rgb(var(--color-accent) / 0.7);
 }
 .btn-cta:hover {
-  background: rgba(62, 179, 134, 0.3);
-  border-color: #8bd1b6;
+  background: rgb(var(--color-accent) / 0.3);
+  border-color: rgb(var(--color-accent-soft));
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 18px 42px -16px rgba(62, 179, 134, 0.85);
+  box-shadow: 0 18px 42px -16px rgb(var(--color-accent) / 0.85);
 }
 
 .btn-quiet {
   background: transparent;
   color: #e7efee;
-  border: 1px solid rgba(143, 163, 155, 0.3);
+  border: 1px solid rgb(var(--color-ash) / 0.3);
 }
 .btn-quiet:hover {
-  border-color: rgba(62, 179, 134, 0.6);
+  border-color: rgb(var(--color-accent) / 0.6);
   color: #ffffff;
 }
