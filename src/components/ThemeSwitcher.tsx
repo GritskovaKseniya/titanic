@@ -5,7 +5,12 @@ import { Palette } from 'lucide-react';
 // alternatives on the real site instead of asking for a new build each time.
 // Remove this component (and the [data-theme] blocks in index.css) once one wins.
 const THEMES: { id: string; label: string; swatch: string }[] = [
-  { id: 'blue', label: 'Ледяной бирюзово-синий (текущий)', swatch: '#0EA5E9' },
+  { id: 'green', label: 'Зелёный', swatch: '#3EB386' },
+  { id: 'red', label: 'Красный (Netflix)', swatch: '#E50914' },
+  { id: 'brightgreen', label: 'Ярко-зелёный (Hulu)', swatch: '#1CE783' },
+  { id: 'blue', label: 'Ледяной бирюзово-синий', swatch: '#0EA5E9' },
+  { id: 'blue-sapphire', label: 'Сапфировый (строгий)', swatch: '#60A5FA' },
+  { id: 'blue-steel', label: 'Холодный стальной', swatch: '#5B9BD5' },
   { id: 'wine-ruby', label: 'Рубиново-винный', swatch: '#E11D48' },
   { id: 'wine-bordeaux', label: 'Королевский бордо', swatch: '#C81E51' },
   { id: 'wine-steel', label: 'Винный + холодный стальной', swatch: '#BE123C' },

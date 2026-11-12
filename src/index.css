@@ -22,6 +22,66 @@
   --color-gold-bright: 217 119 6;
 }
 
+[data-theme='green'] {
+  --color-dark: 4 16 14;
+  --color-dark-sec: 10 33 29;
+  --color-dark-tertiary: 16 42 36;
+  --color-primary: 11 62 40;
+  --color-accent: 62 179 134;
+  --color-accent-soft: 139 209 182;
+  --color-ash: 143 163 155;
+  --color-gold: 201 150 47;
+  --color-gold-bright: 228 184 90;
+}
+
+[data-theme='red'] {
+  --color-dark: 10 10 10;
+  --color-dark-sec: 20 20 20;
+  --color-dark-tertiary: 31 31 31;
+  --color-primary: 138 7 16;
+  --color-accent: 229 9 20;
+  --color-accent-soft: 239 107 114;
+  --color-ash: 154 160 166;
+  --color-gold: 201 150 47;
+  --color-gold-bright: 228 184 90;
+}
+
+[data-theme='brightgreen'] {
+  --color-dark: 10 10 10;
+  --color-dark-sec: 20 20 20;
+  --color-dark-tertiary: 31 31 31;
+  --color-primary: 14 92 55;
+  --color-accent: 28 231 131;
+  --color-accent-soft: 96 238 168;
+  --color-ash: 154 160 166;
+  --color-gold: 201 150 47;
+  --color-gold-bright: 228 184 90;
+}
+
+[data-theme='blue-sapphire'] {
+  --color-dark: 11 10 15;
+  --color-dark-sec: 10 28 46;
+  --color-dark-tertiary: 15 42 66;
+  --color-primary: 29 78 216;
+  --color-accent: 96 165 250;
+  --color-accent-soft: 136 187 251;
+  --color-ash: 100 116 139;
+  --color-gold: 180 83 9;
+  --color-gold-bright: 217 119 6;
+}
+
+[data-theme='blue-steel'] {
+  --color-dark: 11 10 15;
+  --color-dark-sec: 10 28 46;
+  --color-dark-tertiary: 15 42 66;
+  --color-primary: 61 106 140;
+  --color-accent: 91 155 213;
+  --color-accent-soft: 140 185 225;
+  --color-ash: 82 121 150;
+  --color-gold: 180 83 9;
+  --color-gold-bright: 217 119 6;
+}
+
 [data-theme='wine-ruby'] {
   --color-dark: 10 10 10;
   --color-dark-sec: 20 20 20;
