@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ArrowRight, Share2 } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useEpisodes } from '../data/episodes';
-import { ShipSilhouette } from './ShipSilhouette';
+import { resolveImageSrc } from '../utils/publicUrl';
 
 export const Hero: React.FC = () => {
   const { t } = useLanguage();
@@ -26,17 +26,21 @@ export const Hero: React.FC = () => {
 
   return (
     <section id="top" className="grain letterbox relative overflow-hidden bg-dark">
-      {/* Deep-sea gradient stands in for a hero still — swap for a real
-          AI-reconstructed frame once one is chosen (e.g. the dusk bow shot). */}
+      {/* The dusk bow shot — real hero still instead of the old gradient
+          placeholder, with a scrim so the text on top stays legible. */}
+      <img
+        src={resolveImageSrc('hero/dusk-bow.jpg')}
+        alt=""
+        className="absolute inset-0 z-0 w-full h-full object-cover"
+      />
       <div
         className="absolute inset-0 z-0"
         style={{
           background:
-            'radial-gradient(ellipse at 20% 100%, rgba(241,79,160,0.18), transparent 55%), radial-gradient(ellipse at 85% 0%, rgba(201,150,47,0.14), transparent 50%), linear-gradient(180deg, #050f15 0%, #071820 60%, #0d2530 100%)',
+            'linear-gradient(100deg, rgba(5,15,21,0.96) 0%, rgba(5,15,21,0.82) 30%, rgba(5,15,21,0.45) 60%, rgba(5,15,21,0.2) 100%), linear-gradient(180deg, rgba(5,15,21,0.1) 0%, transparent 25%, rgba(5,15,21,0.7) 100%)',
         }}
         aria-hidden="true"
       />
-      <ShipSilhouette className="absolute -right-6 bottom-0 z-0 w-[340px] sm:w-[460px] text-bone/[0.07]" />
 
       <div className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-8 pt-8 pb-10 sm:pb-12">
         <div className="flex items-baseline justify-between border-b hairline pb-4 timecode text-[10px] sm:text-[11px] text-ash uppercase">
