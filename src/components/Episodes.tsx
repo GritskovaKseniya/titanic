@@ -7,9 +7,9 @@ import { splitLastWord } from '../utils/splitAccent';
 import { EpisodeCard } from './EpisodeCard';
 
 const HUE_GRADIENTS = [
-  'linear-gradient(150deg, rgb(var(--color-dark-tertiary)) 0%, rgb(var(--color-accent)) 60%, rgb(var(--color-dark)) 100%)',
-  'linear-gradient(150deg, rgb(var(--color-primary)) 0%, rgb(var(--color-accent) / 0.75) 55%, rgb(var(--color-dark-sec)) 100%)',
-  'linear-gradient(150deg, rgb(var(--color-dark)) 0%, rgb(var(--color-dark-tertiary)) 55%, rgb(var(--color-primary)) 130%)',
+  'linear-gradient(150deg, #0F2A42 0%, #0EA5E9 60%, #0B0A0F 100%)',
+  'linear-gradient(150deg, #0C5080 0%, rgba(14,165,233,0.75) 55%, #0A1C2E 100%)',
+  'linear-gradient(150deg, #0B0A0F 0%, #0F2A42 55%, #0C5080 130%)',
 ];
 
 export const Episodes: React.FC = () => {

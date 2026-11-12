@@ -6,75 +6,6 @@
    pseudo-elements, and the small "cinema chrome" vocabulary shared across
    the section components. */
 
-/* Palette tokens as "R G B" triples, so Tailwind's themable() colors and the
-   raw rgb(var(...)) uses below can both apply opacity. Swapped at runtime by
-   ThemeSwitcher via the <html data-theme> attribute — temporary, for picking
-   a final palette; drop the [data-theme] blocks and ThemeSwitcher once one wins. */
-:root {
-  --color-dark: 4 16 14;
-  --color-dark-sec: 10 33 29;
-  --color-dark-tertiary: 16 42 36;
-  --color-primary: 11 62 40;
-  --color-accent: 62 179 134;
-  --color-accent-soft: 139 209 182;
-  --color-ash: 143 163 155;
-  --color-gold: 201 150 47;
-  --color-gold-bright: 228 184 90;
-}
-
-[data-theme='red'] {
-  --color-dark: 10 10 10;
-  --color-dark-sec: 20 20 20;
-  --color-dark-tertiary: 31 31 31;
-  --color-primary: 138 7 16;
-  --color-accent: 229 9 20;
-  --color-accent-soft: 239 107 114;
-  --color-ash: 154 160 166;
-}
-
-[data-theme='blue'] {
-  --color-dark: 11 10 15;
-  --color-dark-sec: 10 28 46;
-  --color-dark-tertiary: 15 42 66;
-  --color-primary: 12 80 128;
-  --color-accent: 14 165 233;
-  --color-accent-soft: 98 197 241;
-  --color-ash: 100 116 139;
-  /* Warmer amber here (not brass) — teal-and-orange against the cool accent. */
-  --color-gold: 180 83 9;
-  --color-gold-bright: 217 119 6;
-}
-
-[data-theme='blue-sapphire'] {
-  --color-dark: 11 10 15;
-  --color-dark-sec: 10 28 46;
-  --color-dark-tertiary: 15 42 66;
-  --color-primary: 29 78 216;
-  --color-accent: 96 165 250;
-  --color-accent-soft: 136 187 251;
-  --color-ash: 100 116 139;
-}
-
-[data-theme='blue-steel'] {
-  --color-dark: 11 10 15;
-  --color-dark-sec: 10 28 46;
-  --color-dark-tertiary: 15 42 66;
-  --color-primary: 61 106 140;
-  --color-accent: 91 155 213;
-  --color-accent-soft: 140 185 225;
-  --color-ash: 82 121 150;
-}
-
-[data-theme='brightgreen'] {
-  --color-dark: 10 10 10;
-  --color-dark-sec: 20 20 20;
-  --color-dark-tertiary: 31 31 31;
-  --color-primary: 14 92 55;
-  --color-accent: 28 231 131;
-  --color-accent-soft: 96 238 168;
-  --color-ash: 154 160 166;
-}
-
 html {
   scroll-behavior: smooth;
 }
@@ -84,22 +15,22 @@ html {
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: rgb(var(--color-dark-sec));
+  background: #0a1c2e;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgb(var(--color-primary));
+  background: #0c5080;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(var(--color-accent));
+  background: #0ea5e9;
 }
 
 ::selection {
-  background: rgb(var(--color-accent) / 0.3);
+  background: rgba(14, 165, 233, 0.3);
 }
 
 :focus-visible {
-  outline: 2px solid rgb(var(--color-accent));
+  outline: 2px solid #0ea5e9;
   outline-offset: 2px;
 }
 
@@ -138,7 +69,7 @@ html {
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgb(var(--color-accent));
+  color: #0ea5e9;
 }
 .timecode {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
@@ -147,7 +78,7 @@ html {
 }
 
 .hairline {
-  border-color: rgb(var(--color-ash) / 0.22);
+  border-color: rgba(100, 116, 139, 0.22);
 }
 
 /* Hero curtain-reveal: two black leaves draw up/down like a projector gate. */
@@ -178,7 +109,7 @@ html {
   left: 0;
   right: 0;
   height: 16%;
-  background: rgb(var(--color-dark));
+  background: #0b0a0f;
   z-index: 30;
   pointer-events: none;
 }
@@ -220,10 +151,10 @@ html {
   }
 }
 
-/* Two content lenses running through every section: Archive (brass/gold —
-   real footage and fact) and AI Reconstruction (coral — generated material).
-   The distinction is the site's whole premise, so it gets its own component
-   rather than a generic "tag" class. */
+/* Two content lenses running through every section: Archive (warm amber —
+   real footage and fact) and AI Reconstruction (cool blue — generated
+   material). The distinction is the site's whole premise, so it gets its
+   own component rather than a generic "tag" class. */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -238,8 +169,8 @@ html {
   white-space: nowrap;
 }
 .badge-archival {
-  background: rgb(var(--color-gold) / 0.14);
-  color: rgb(var(--color-gold-bright));
+  background: rgba(180, 83, 9, 0.14);
+  color: #d97706;
 }
 
 .btn {
@@ -261,25 +192,25 @@ html {
 }
 
 .btn-cta {
-  background: rgb(var(--color-accent) / 0.18);
-  color: rgb(var(--color-accent-soft));
-  border: 1px solid rgb(var(--color-accent) / 0.6);
-  box-shadow: 0 12px 34px -18px rgb(var(--color-accent) / 0.7);
+  background: rgba(14, 165, 233, 0.18);
+  color: #62c5f1;
+  border: 1px solid rgba(14, 165, 233, 0.6);
+  box-shadow: 0 12px 34px -18px rgba(14, 165, 233, 0.7);
 }
 .btn-cta:hover {
-  background: rgb(var(--color-accent) / 0.3);
-  border-color: rgb(var(--color-accent-soft));
+  background: rgba(14, 165, 233, 0.3);
+  border-color: #62c5f1;
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 18px 42px -16px rgb(var(--color-accent) / 0.85);
+  box-shadow: 0 18px 42px -16px rgba(14, 165, 233, 0.85);
 }
 
 .btn-quiet {
   background: transparent;
   color: #e7efee;
-  border: 1px solid rgb(var(--color-ash) / 0.3);
+  border: 1px solid rgba(100, 116, 139, 0.3);
 }
 .btn-quiet:hover {
-  border-color: rgb(var(--color-accent) / 0.6);
+  border-color: rgba(14, 165, 233, 0.6);
   color: #ffffff;
 }

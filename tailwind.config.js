@@ -1,37 +1,22 @@
 /** @type {import('tailwindcss').Config} */
-
-// Lets a color track a CSS custom property (set per `data-theme` in index.css)
-// instead of a fixed hex, so the palette-switcher can swap it at runtime
-// while still supporting Tailwind's opacity modifiers (bg-accent/50 etc).
-function themable(variableName) {
-  return ({ opacityValue }) =>
-    opacityValue === undefined
-      ? `rgb(var(${variableName}))`
-      : `rgb(var(${variableName}) / ${opacityValue})`;
-}
-
 export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        // Deep sea-green ground, almost black — the cinema-dark palette.
-        // Themable: see the `data-theme` blocks in src/index.css.
-        dark: themable('--color-dark'),
-        darkSec: themable('--color-dark-sec'),
-        darkTertiary: themable('--color-dark-tertiary'),
-        // Muted forest green — the filled-surface companion to the bright accent.
-        primary: themable('--color-primary'),
-        primaryHover: '#0F4F33',
-        accent: themable('--color-accent'),
-        // Brass / treasure gold: the ship's fittings, the teapot, the dusk sky.
-        // Themable too — the blue palette shifts this warmer, toward amber,
-        // for a teal-and-orange pairing against its cool accent.
-        gold: themable('--color-gold'),
-        goldBright: themable('--color-gold-bright'),
+        // Night-ocean blue-black ground — the icy, teal-and-orange cinema palette.
+        dark: '#0B0A0F',
+        darkSec: '#0A1C2E',
+        darkTertiary: '#0F2A42',
+        // Deep ocean blue — the filled-surface companion to the bright accent.
+        primary: '#0C5080',
+        accent: '#0EA5E9',
+        // Warm amber — the ship's lights against the cold water, teal-and-orange.
+        gold: '#B45309',
+        goldBright: '#D97706',
         bone: '#E7EFEE',
-        ash: themable('--color-ash'),
+        ash: '#64748B',
         leader: '#E23B2E',
       },
       fontFamily: {
