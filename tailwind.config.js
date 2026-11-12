@@ -26,8 +26,10 @@ export default {
         primaryHover: '#0F4F33',
         accent: themable('--color-accent'),
         // Brass / treasure gold: the ship's fittings, the teapot, the dusk sky.
-        gold: '#C9962F',
-        goldBright: '#E4B85A',
+        // Themable too — the blue palette shifts this warmer, toward amber,
+        // for a teal-and-orange pairing against its cool accent.
+        gold: themable('--color-gold'),
+        goldBright: themable('--color-gold-bright'),
         bone: '#E7EFEE',
         ash: themable('--color-ash'),
         leader: '#E23B2E',

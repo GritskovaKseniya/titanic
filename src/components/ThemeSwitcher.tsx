@@ -8,7 +8,9 @@ const THEMES: { id: string; label: string; swatch: string }[] = [
   { id: 'green', label: 'Зелёный (текущий)', swatch: '#3EB386' },
   { id: 'red', label: 'Красный (Netflix)', swatch: '#E50914' },
   { id: 'brightgreen', label: 'Ярко-зелёный (Hulu)', swatch: '#1CE783' },
-  { id: 'blue', label: 'Сияющий синий (Titanic)', swatch: '#86C4D8' },
+  { id: 'blue', label: 'Ледяной бирюзово-синий', swatch: '#0EA5E9' },
+  { id: 'blue-sapphire', label: 'Сапфировый (строгий)', swatch: '#60A5FA' },
+  { id: 'blue-steel', label: 'Холодный стальной', swatch: '#5B9BD5' },
 ];
 
 const STORAGE_KEY = 'titanic-theme-preview';

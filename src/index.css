@@ -18,6 +18,8 @@
   --color-accent: 62 179 134;
   --color-accent-soft: 139 209 182;
   --color-ash: 143 163 155;
+  --color-gold: 201 150 47;
+  --color-gold-bright: 228 184 90;
 }
 
 [data-theme='red'] {
@@ -35,9 +37,32 @@
   --color-dark-sec: 10 28 46;
   --color-dark-tertiary: 15 42 66;
   --color-primary: 12 80 128;
-  --color-accent: 47 127 219;
-  --color-accent-soft: 120 172 232;
-  --color-ash: 151 176 188;
+  --color-accent: 14 165 233;
+  --color-accent-soft: 98 197 241;
+  --color-ash: 100 116 139;
+  /* Warmer amber here (not brass) — teal-and-orange against the cool accent. */
+  --color-gold: 180 83 9;
+  --color-gold-bright: 217 119 6;
+}
+
+[data-theme='blue-sapphire'] {
+  --color-dark: 11 10 15;
+  --color-dark-sec: 10 28 46;
+  --color-dark-tertiary: 15 42 66;
+  --color-primary: 29 78 216;
+  --color-accent: 96 165 250;
+  --color-accent-soft: 136 187 251;
+  --color-ash: 100 116 139;
+}
+
+[data-theme='blue-steel'] {
+  --color-dark: 11 10 15;
+  --color-dark-sec: 10 28 46;
+  --color-dark-tertiary: 15 42 66;
+  --color-primary: 61 106 140;
+  --color-accent: 91 155 213;
+  --color-accent-soft: 140 185 225;
+  --color-ash: 82 121 150;
 }
 
 [data-theme='brightgreen'] {
@@ -213,8 +238,8 @@ html {
   white-space: nowrap;
 }
 .badge-archival {
-  background: rgba(201, 150, 47, 0.14);
-  color: #e4b85a;
+  background: rgb(var(--color-gold) / 0.14);
+  color: rgb(var(--color-gold-bright));
 }
 
 .btn {
