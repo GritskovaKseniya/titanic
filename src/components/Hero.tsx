@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ArrowRight, Share2 } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useEpisodes } from '../data/episodes';
@@ -9,8 +9,17 @@ export const Hero: React.FC = () => {
   const { t } = useLanguage();
   const episodes = useEpisodes();
   const [copied, setCopied] = useState(false);
+  const [parallaxY, setParallaxY] = useState(0);
 
   const [titleLead, titleLast] = splitLastWord(t.hero.title);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const onScroll = () => setParallaxY(Math.min(window.scrollY, 600) * 0.15);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const handleShare = async () => {
     const url = window.location.href.split('#')[0];
@@ -35,6 +44,7 @@ export const Hero: React.FC = () => {
         src={resolveImageSrc('hero/dusk-bow.jpg')}
         alt=""
         className="absolute inset-0 z-0 w-full h-full object-cover"
+        style={{ transform: `translateY(${parallaxY}px) scale(1.1)` }}
       />
       <div
         className="absolute inset-0 z-0"

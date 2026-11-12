@@ -48,6 +48,20 @@ html {
   animation: ship-fade-up 0.6s ease-out both;
 }
 
+/* Scroll-triggered reveal for below-the-fold grids (episodes, team) — see
+   the useReveal hook. Starts hidden, transitions in once observed. */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* A section's mono eyebrow — reads like a clapperboard slate. */
 .slate-label {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
@@ -126,6 +140,11 @@ html {
   }
   .animate-fade-up {
     animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
   html {
     scroll-behavior: auto;

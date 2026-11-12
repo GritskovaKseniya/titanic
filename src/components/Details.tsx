@@ -1,9 +1,8 @@
 import React from 'react';
-import { Instagram } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useTeam } from '../data/team';
-import { resolveImageSrc } from '../utils/publicUrl';
 import { splitLastWord } from '../utils/splitAccent';
+import { TeamCard } from './TeamCard';
 
 export const Details: React.FC = () => {
   const { t } = useLanguage();
@@ -23,32 +22,8 @@ export const Details: React.FC = () => {
 
         <div>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            {team.map((member) => (
-              <div key={member.id} className="bg-dark border hairline flex flex-col">
-                {member.photoUrl && (
-                  <img
-                    src={resolveImageSrc(member.photoUrl)}
-                    alt=""
-                    className="w-full aspect-square object-cover border-b hairline"
-                  />
-                )}
-                <div className="min-w-0 p-6">
-                  <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-ash">
-                    {t.team.roles[member.roleKey]}
-                  </span>
-                  <h3 className="text-lg font-heading font-semibold text-bone mt-2">{member.name}</h3>
-                  {member.social && (
-                    <a
-                      href={member.social.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 text-sm text-accent hover:text-bone transition-colors mt-3"
-                    >
-                      <Instagram className="w-3.5 h-3.5" /> {member.social.label}
-                    </a>
-                  )}
-                </div>
-              </div>
+            {team.map((member, i) => (
+              <TeamCard key={member.id} member={member} roleLabel={t.team.roles[member.roleKey]} delayMs={(i % 3) * 90} />
             ))}
           </div>
         </div>
