@@ -59,21 +59,84 @@
   letter-spacing: 0.09em;
   font-size: 0.8em;
 }
-:is([data-theme='classic'], [data-theme='blue-serif']) .btn-cta {
-  background: transparent;
-  box-shadow: none;
+/* Polished-silver buttons: a brushed-metal gradient ring (drawn on ::after and
+   masked to a 1px border), a faint silver-tinted glass fill, and a bright
+   sheen (::before) that glints across every few seconds, like sun on metal. */
+[data-theme='classic'] .btn-cta,
+[data-theme='classic'] .btn-quiet {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-color: transparent;
+  background: linear-gradient(180deg, rgb(226 234 246 / 0.16) 0%, rgb(140 156 178 / 0.06) 100%);
+  color: #eef3f9;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 0.35);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.3),
+    inset 0 -1px 0 rgb(0 0 0 / 0.3),
+    0 8px 24px -10px rgb(0 0 0 / 0.7);
 }
-:is([data-theme='classic'], [data-theme='blue-serif']) .btn-cta:hover {
-  background: rgb(var(--color-accent) / 0.08);
-  box-shadow: none;
+[data-theme='classic'] .btn-cta::after,
+[data-theme='classic'] .btn-quiet::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    #f6f9fd 0%,
+    #8f9cae 22%,
+    #e8eef6 40%,
+    #727f92 60%,
+    #dfe6ef 80%,
+    #f6f9fd 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  mask-composite: exclude;
 }
-:is([data-theme='classic'], [data-theme='blue-serif']) .btn-quiet {
-  border-color: rgb(var(--color-ash) / 0.45);
+[data-theme='classic'] .btn-cta::before,
+[data-theme='classic'] .btn-quiet::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1;
+  /* The glint is a background that slides inside a fixed box — nothing moves
+     or gets clipped, so it can't flicker or get stranded mid-button. */
+  background: linear-gradient(100deg, transparent 40%, rgb(255 255 255 / 0.5) 50%, transparent 60%)
+    no-repeat;
+  background-size: 300% 100%;
+  background-position: 100% 0;
+  animation: silver-glint 5.5s ease-in-out infinite;
 }
-:is([data-theme='classic'], [data-theme='blue-serif']) .btn-quiet:hover {
-  border-color: rgb(var(--color-accent-soft));
+[data-theme='classic'] .btn-quiet::before {
+  animation-delay: 1.2s;
+}
+@keyframes silver-glint {
+  0%,
+  55% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0% 0;
+  }
+}
+[data-theme='classic'] .btn-cta:hover,
+[data-theme='classic'] .btn-quiet:hover {
+  background: linear-gradient(180deg, rgb(236 242 251 / 0.26) 0%, rgb(160 176 198 / 0.1) 100%);
   color: #ffffff;
-  background: transparent;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-theme='classic'] .btn-cta::before,
+  [data-theme='classic'] .btn-quiet::before {
+    animation: none;
+    opacity: 0;
+  }
 }
 
 /* The very first palette, before any of the others — navy ground with a
