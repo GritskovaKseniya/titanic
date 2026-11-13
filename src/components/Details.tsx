@@ -33,20 +33,12 @@ export const Details: React.FC = () => {
         className="absolute top-0 -right-16 lg:-right-40 w-[220vw] sm:w-[110vw] max-w-none sm:max-w-[1500px] opacity-10 -translate-y-[28.3%] overflow-visible"
       >
         <div
-          className={`transition-transform duration-[1400ms] ease-out motion-reduce:transition-none ${
-            icebergVisible ? 'translate-x-0' : 'translate-x-full'
+          className={`transition-transform duration-[3200ms] ease-out motion-reduce:transition-none ${
+            icebergVisible ? 'translate-x-[45%]' : 'translate-x-full'
           }`}
         >
           <div className="relative text-accent">
             <IcebergBlueprint className="w-full h-auto" />
-            {/* Same sweep as the seam line, stretched to the iceberg's full height (tip included — this box matches the SVG's own bounds) so it washes over the whole silhouette, not just the 1px waterline. */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <span
-                className={`absolute inset-y-0 w-32 bg-gradient-to-r from-transparent via-accent to-transparent ${
-                  icebergVisible ? 'animate-seam-sweep' : 'opacity-0'
-                }`}
-              />
-            </div>
           </div>
         </div>
       </div>
@@ -60,7 +52,7 @@ export const Details: React.FC = () => {
         </div>
 
         <div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {team.map((member, i) => (
               <TeamCard key={member.id} member={member} roleLabel={t.team.roles[member.roleKey]} delayMs={(i % 3) * 90} />
             ))}
