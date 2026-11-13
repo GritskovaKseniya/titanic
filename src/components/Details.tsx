@@ -21,10 +21,12 @@ export const Details: React.FC = () => {
           down its height) lands exactly on the color boundary via
           -translate-y-[28.3%]. Width is one fluid clamp() — scales
           continuously with viewport width (not a stack of sm:/lg: pixel
-          overrides that only happen to look right at one tested size) —
-          tuned so it reads ~310px on a phone and ~880px on a wide desktop,
-          the two sizes that were separately confirmed to look right. The
-          slide-in is on an INNER div, not this one — this
+          overrides that only happen to look right at one tested size).
+          Floor raised to 560px so it reads big/prominent on a phone too
+          (flush right, so it just bleeds off the left edge there — fine,
+          the root wrapper clips without a scrollbar) instead of shrinking
+          to fit a small confined box; still lands ~880px on a wide desktop.
+          The slide-in is on an INNER div, not this one — this
           outer div is what useReveal's IntersectionObserver watches, and if
           IT also carried the translate-x-full, its observed position would
           sit far off-screen and never intersect the viewport, so `visible`
@@ -34,7 +36,7 @@ export const Details: React.FC = () => {
       <div
         ref={icebergRef}
         aria-hidden="true"
-        className="absolute top-0 right-0 w-[clamp(300px,calc(166px+37vw),900px)] opacity-10 -translate-y-[28.3%] overflow-visible"
+        className="absolute top-0 right-0 w-[clamp(560px,calc(166px+37vw),900px)] opacity-10 -translate-y-[28.3%] overflow-visible"
       >
         <div
           className={`transition-transform duration-[3200ms] ease-out motion-reduce:transition-none ${
