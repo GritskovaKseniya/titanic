@@ -14,14 +14,26 @@ export const Reconstructions: React.FC = () => (
       <div className="max-w-2xl mb-10">
         <span className="slate-label">Archive vs. reconstruction</span>
         <h2 className="mt-2 text-3xl sm:text-4xl font-heading font-semibold uppercase text-bone leading-[1.05]">
-          Faces behind the <span className="text-accent">legend</span>
+          One ship, ten <span className="text-accent">faces</span>
         </h2>
         <p className="text-ash mt-3 max-w-md">
-          Drag the slider — every reconstructed face on this site started from a real photograph.
+          Drag the slider — every reconstruction on this site started from a real record.
         </p>
       </div>
 
-      <div className="max-w-xl">
+      <div className="max-w-3xl">
+        <span className="slate-label block mb-3">The ship</span>
+        <CompareSlider
+          leftSrc="reconstructions/ship-night.jpg"
+          rightSrc="reconstructions/ship-blueprint.jpg"
+          leftLabel="AI Reconstruction"
+          rightLabel="Blueprint"
+          aspectClassName="aspect-[21/9]"
+        />
+      </div>
+
+      <div className="max-w-xl mt-10">
+        <span className="slate-label block mb-3">The people</span>
         <CompareSlider
           leftSrc="reconstructions/sample-reconstruction.jpg"
           rightSrc="reconstructions/sample-archive.jpg"

@@ -14,7 +14,9 @@ export const CompareSlider: React.FC<{
   leftLabel: string;
   rightLabel: string;
   alt?: string;
-}> = ({ leftSrc, rightSrc, leftLabel, rightLabel, alt = '' }) => {
+  /** Tailwind aspect-ratio classes — defaults to a portrait-ish photo crop. */
+  aspectClassName?: string;
+}> = ({ leftSrc, rightSrc, leftLabel, rightLabel, alt = '', aspectClassName = 'aspect-[4/3] sm:aspect-[16/10]' }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [pos, setPos] = useState(50);
   const [dragging, setDragging] = useState(false);
@@ -46,7 +48,7 @@ export const CompareSlider: React.FC<{
   return (
     <div
       ref={containerRef}
-      className="relative w-full aspect-[4/3] sm:aspect-[16/10] overflow-hidden rounded-2xl border hairline select-none touch-none cursor-ew-resize"
+      className={`relative w-full ${aspectClassName} overflow-hidden rounded-2xl border hairline select-none touch-none cursor-ew-resize`}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={stopDragging}
