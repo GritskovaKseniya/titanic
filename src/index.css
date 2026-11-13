@@ -35,6 +35,9 @@
   --color-gold: 92 107 122;
   --color-gold-bright: 154 167 181;
   --font-heading: 'Playfair Display';
+  /* Lighter hero scrim — lets more of the photo show through than the
+     other themes' darker overlay. Multiplies each stop's alpha in Hero.tsx. */
+  --hero-scrim: 0.55;
 }
 
 /* Quick approximation of the reference's look beyond color: a serif display

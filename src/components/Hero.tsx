@@ -41,7 +41,7 @@ export const Hero: React.FC = () => {
       {/* The dusk bow shot — real hero still instead of the old gradient
           placeholder, with a scrim so the text on top stays legible. */}
       <img
-        src={resolveImageSrc('hero/dusk-bow.jpg')}
+        src={resolveImageSrc('hero/night-bow.webp')}
         alt=""
         className="absolute inset-0 z-0 w-full h-full object-cover"
         style={{ transform: `translateY(${parallaxY}px) scale(1.1)`, objectPosition: '75% 45%' }}
@@ -50,7 +50,7 @@ export const Hero: React.FC = () => {
         className="absolute inset-0 z-0"
         style={{
           background:
-            'linear-gradient(100deg, rgb(var(--color-dark) / 0.96) 0%, rgb(var(--color-dark) / 0.82) 30%, rgb(var(--color-dark) / 0.45) 60%, rgb(var(--color-dark) / 0.2) 100%), linear-gradient(180deg, rgb(var(--color-dark) / 0.1) 0%, transparent 25%, rgb(var(--color-dark) / 0.55) 75%, rgb(var(--color-dark)) 100%)',
+            'linear-gradient(100deg, rgb(var(--color-dark) / calc(0.96 * var(--hero-scrim, 1))) 0%, rgb(var(--color-dark) / calc(0.82 * var(--hero-scrim, 1))) 30%, rgb(var(--color-dark) / calc(0.45 * var(--hero-scrim, 1))) 60%, rgb(var(--color-dark) / calc(0.2 * var(--hero-scrim, 1))) 100%), linear-gradient(180deg, rgb(var(--color-dark) / calc(0.1 * var(--hero-scrim, 1))) 0%, transparent 25%, rgb(var(--color-dark) / calc(0.55 * var(--hero-scrim, 1))) 75%, rgb(var(--color-dark)) 100%)',
         }}
         aria-hidden="true"
       />
