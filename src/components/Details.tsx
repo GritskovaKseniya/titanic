@@ -33,7 +33,7 @@ export const Details: React.FC = () => {
       <div
         ref={icebergRef}
         aria-hidden="true"
-        className="absolute top-0 right-0 w-[80vw] sm:w-[46vw] max-w-[700px] opacity-10 -translate-y-[28.3%] overflow-visible"
+        className="absolute top-0 right-0 w-[55vw] sm:w-[30vw] max-w-[480px] opacity-10 -translate-y-[28.3%] overflow-visible"
       >
         <div
           className={`transition-transform duration-[3200ms] ease-out motion-reduce:transition-none ${
