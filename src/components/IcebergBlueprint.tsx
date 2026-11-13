@@ -5,10 +5,14 @@ import React from 'react';
     element (currentColor) so it follows the site's accent like everything
     else, instead of being hardcoded. Waterline sits at y=300 of a 1060-tall
     viewBox (≈28.3% down) — used by Details.tsx to align it to the real
-    About/Details seam via -translate-y-[28.3%]. */
+    About/Details seam via -translate-y-[28.3%].
+    viewBox is cropped to the shape's own footprint (x 480–1320, the full
+    1600-wide original just had empty waterline on both sides) so the
+    container around it can be a normal, modestly-sized box instead of
+    needing huge vw-based widths and large % translates to compensate. */
 export const IcebergBlueprint: React.FC<{ className?: string }> = ({ className }) => (
   <svg
-    viewBox="0 0 1600 1060"
+    viewBox="480 0 840 1060"
     fill="none"
     stroke="currentColor"
     strokeLinecap="round"

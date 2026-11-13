@@ -19,22 +19,25 @@ export const Details: React.FC = () => {
 
       {/* Straddles the About/Details seam: the SVG's own waterline (≈28.3%
           down its height) lands exactly on the color boundary via
-          -translate-y-[28.3%] (a nudge to 31% overshot — too much tip
-          ended up above the seam). The slide-in is on an INNER div, not
-          this one — this outer div is what useReveal's IntersectionObserver
-          watches, and if IT also carried the huge translate-x-full, its
-          observed position would sit far off-screen and never intersect the
-          viewport, so `visible` would never flip true (silently stuck
-          hidden). Keeping this one's position stable for observation, and
-          sliding only the inner wrapper, avoids that. */}
+          -translate-y-[28.3%]. IcebergBlueprint's viewBox is cropped to the
+          shape's own footprint, so this box just needs to be a normal,
+          modestly-sized rectangle flush to the right edge — no more huge
+          vw-based widths or large % translates to compensate for a mostly
+          empty viewBox. The slide-in is on an INNER div, not this one — this
+          outer div is what useReveal's IntersectionObserver watches, and if
+          IT also carried the translate-x-full, its observed position would
+          sit far off-screen and never intersect the viewport, so `visible`
+          would never flip true (silently stuck hidden). Keeping this one's
+          position stable for observation, and sliding only the inner
+          wrapper, avoids that. */}
       <div
         ref={icebergRef}
         aria-hidden="true"
-        className="absolute top-0 -right-16 lg:-right-10 w-[220vw] sm:w-[110vw] max-w-none sm:max-w-[1500px] opacity-10 -translate-y-[28.3%] overflow-visible"
+        className="absolute top-0 right-0 w-[80vw] sm:w-[46vw] max-w-[700px] opacity-10 -translate-y-[28.3%] overflow-visible"
       >
         <div
           className={`transition-transform duration-[3200ms] ease-out motion-reduce:transition-none ${
-            icebergVisible ? 'translate-x-[33%] sm:translate-x-[5%]' : 'translate-x-full'
+            icebergVisible ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
           <div className="relative text-accent">
