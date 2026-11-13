@@ -9,7 +9,7 @@ import { CompareSlider } from './CompareSlider';
  * character this pairing belongs to and translated labels for it.
  */
 export const Reconstructions: React.FC = () => (
-  <section id="reconstructions" className="py-12 sm:py-16 lg:py-20 bg-dark border-t hairline">
+  <section id="reconstructions" className="py-12 sm:py-16 lg:py-20 bg-dark">
     <div className="max-w-6xl mx-auto px-5 sm:px-8">
       <div className="max-w-2xl mb-10">
         <span className="slate-label">Archive vs. reconstruction</span>
