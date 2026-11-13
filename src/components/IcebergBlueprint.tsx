@@ -18,12 +18,11 @@ export const IcebergBlueprint: React.FC<{ className?: string }> = ({ className }
     aria-label="Iceberg cross-section schematic"
   >
     <style>{'path{vector-effect:non-scaling-stroke}'}</style>
-    {/* waterline */}
+    {/* waterline — single line only: a second, fainter companion line 18
+        units below it used to sit here, but it read as a second "sea line"
+        a few px below the real seam, which is what this is aligned to. */}
     <g strokeWidth="1.5" opacity=".7">
       <path d="M0 300 L1600 300" />
-    </g>
-    <g strokeWidth="1" opacity=".3">
-      <path d="M0 318 L1600 318" />
     </g>
 
     <g transform="translate(251 0) scale(0.72 1)">

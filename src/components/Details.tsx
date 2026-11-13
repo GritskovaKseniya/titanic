@@ -18,9 +18,9 @@ export const Details: React.FC = () => {
       <SectionSeam className="absolute top-0 left-0 w-full" />
 
       {/* Straddles the About/Details seam: the SVG's own waterline (≈28.3%
-          down its height) lands exactly on the color boundary via
-          -translate-y-[28.3%], so the tip pokes up into About and the
-          submerged body sits in here. The slide-in is on an INNER div, not
+          down its height) would land exactly on the color boundary at
+          -translate-y-[28.3%] — nudged to 31% so a touch more tip shows
+          above the seam. The slide-in is on an INNER div, not
           this one — this outer div is what useReveal's IntersectionObserver
           watches, and if IT also carried the huge translate-x-full, its
           observed position would sit far off-screen and never intersect the
@@ -30,11 +30,11 @@ export const Details: React.FC = () => {
       <div
         ref={icebergRef}
         aria-hidden="true"
-        className="absolute top-0 -right-16 lg:-right-40 w-[220vw] sm:w-[110vw] max-w-none sm:max-w-[1500px] opacity-10 -translate-y-[28.3%] overflow-visible"
+        className="absolute top-0 -right-16 lg:-right-10 w-[220vw] sm:w-[110vw] max-w-none sm:max-w-[1500px] opacity-10 -translate-y-[31%] overflow-visible"
       >
         <div
           className={`transition-transform duration-[3200ms] ease-out motion-reduce:transition-none ${
-            icebergVisible ? 'translate-x-[15%]' : 'translate-x-full'
+            icebergVisible ? 'translate-x-[33%] sm:translate-x-[5%]' : 'translate-x-full'
           }`}
         >
           <div className="relative text-accent">
