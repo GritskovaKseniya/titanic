@@ -90,11 +90,11 @@ export const CompareSlider: React.FC<{
         aria-valuemin={0}
         aria-valuemax={100}
         onKeyDown={handleKeyDown}
-        className={`group/handle absolute top-1/2 ${dragging ? 'w-9 h-9' : 'w-4 h-4 focus-visible:w-9 focus-visible:h-9'} transition-[width,height] duration-150 ease-out rounded-full bg-dark/90 backdrop-blur-sm border border-accent/70 flex items-center justify-center text-accent shadow-[0_8px_24px_-10px_rgb(var(--color-accent)/0.7)] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent`}
+        className={`group/handle absolute top-1/2 ${dragging ? 'w-9 h-9' : 'w-5 h-5 focus-visible:w-9 focus-visible:h-9'} transition-[width,height] duration-150 ease-out rounded-full bg-dark/90 backdrop-blur-sm border border-accent/70 flex items-center justify-center text-accent shadow-[0_8px_24px_-10px_rgb(var(--color-accent)/0.7)] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent`}
         style={{ left: `${pos}%`, transform: 'translate(-50%, -50%)' }}
       >
         <ChevronsLeftRight
-          className={`transition-opacity duration-150 ${dragging ? 'w-3.5 h-3.5 opacity-100' : 'w-2.5 h-2.5 opacity-0 group-focus-visible/handle:opacity-100 group-focus-visible/handle:w-3.5 group-focus-visible/handle:h-3.5'}`}
+          className={`transition-[width,height] duration-150 ${dragging ? 'w-3.5 h-3.5' : 'w-3 h-3 group-focus-visible/handle:w-3.5 group-focus-visible/handle:h-3.5'}`}
           strokeWidth={2.25}
         />
       </div>
