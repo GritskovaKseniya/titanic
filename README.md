@@ -42,6 +42,17 @@ Firebase-конфиг из шага 5 не секрет — он только н
 Картинка появится на сайте после того, как GitHub Pages пересоберёт сайт
 (автоматически при пуше в `main`, обычно 1–2 минуты).
 
+### Конвертация формата (jpg ↔ webp ↔ png)
+
+Формат файла не принципиален — jpg, png и webp работают одинаково, webp
+просто немного легче по размеру. Конвертируется через ImageMagick:
+
+```
+convert input.jpg output.webp
+convert input.webp output.jpg
+convert input.png output.jpg
+```
+
 ## Сборка и деплой
 
 Сайт публикуется на GitHub Pages из `dist/` через

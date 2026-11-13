@@ -20,6 +20,36 @@
   --color-ash: 100 116 139;
   --color-gold: 180 83 9;
   --color-gold-bright: 217 119 6;
+  --font-heading: 'Oswald';
+}
+
+[data-theme='classic'] {
+  --color-dark: 11 19 29;
+  --color-dark-sec: 19 30 43;
+  --color-dark-tertiary: 28 42 59;
+  --color-primary: 44 66 90;
+  --color-accent: 159 177 196;
+  --color-accent-soft: 197 209 221;
+  --color-ash: 122 136 153;
+  /* Muted pewter instead of warm gold — this palette stays monochrome, no teal-and-orange pairing. */
+  --color-gold: 92 107 122;
+  --color-gold-bright: 154 167 181;
+  --font-heading: 'Playfair Display';
+}
+
+/* Quick approximation of the reference's look beyond color: a serif display
+   face (above) and a plain sharp-cornered outline button, scoped to this
+   theme only — every other option keeps the pill/translucent CTA. */
+[data-theme='classic'] .btn {
+  border-radius: 2px;
+}
+[data-theme='classic'] .btn-cta {
+  background: transparent;
+  box-shadow: none;
+}
+[data-theme='classic'] .btn-cta:hover {
+  background: rgb(var(--color-accent) / 0.08);
+  box-shadow: none;
 }
 
 [data-theme='green'] {
@@ -197,6 +227,27 @@ html {
   border-color: rgb(var(--color-ash) / 0.22);
 }
 
+/* A section seam's one-time light sweep on scroll-into-view — see SectionSeam. */
+@keyframes seam-sweep {
+  0% {
+    left: -20%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    left: 105%;
+    opacity: 0;
+  }
+}
+.animate-seam-sweep {
+  animation: seam-sweep 1.8s ease-out 0.1s both;
+}
+
 /* Hero curtain-reveal: two black leaves draw up/down like a projector gate. */
 @keyframes ship-curtain-top {
   from {
@@ -261,6 +312,10 @@ html {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .animate-seam-sweep {
+    animation: none;
+    opacity: 0.4;
   }
   html {
     scroll-behavior: auto;

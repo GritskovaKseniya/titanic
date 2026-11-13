@@ -35,7 +35,9 @@ export default {
       },
       fontFamily: {
         sans: ['Manrope', 'system-ui', 'sans-serif'],
-        heading: ['Oswald', '"Arial Narrow"', 'system-ui', 'sans-serif'],
+        // var(--font-heading) lets the "classic serif" palette option swap
+        // this to Playfair Display; every other theme leaves it at Oswald.
+        heading: ['var(--font-heading)', 'Oswald', '"Arial Narrow"', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
     },

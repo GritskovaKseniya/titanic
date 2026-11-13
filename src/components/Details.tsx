@@ -3,6 +3,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { useTeam } from '../data/team';
 import { splitLastWord } from '../utils/splitAccent';
 import { TeamCard } from './TeamCard';
+import { SectionSeam } from './SectionSeam';
 
 export const Details: React.FC = () => {
   const { t } = useLanguage();
@@ -10,7 +11,8 @@ export const Details: React.FC = () => {
   const [headingLead, headingLast] = splitLastWord(t.details.heading);
 
   return (
-    <section id="details" className="py-12 sm:py-16 lg:py-20 bg-darkSec border-y hairline">
+    <section id="details" className="relative py-12 sm:py-16 lg:py-20 bg-darkSec border-b hairline">
+      <SectionSeam className="absolute top-0 left-0 w-full" />
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="mb-12">
           <span className="slate-label">{t.details.label}</span>
