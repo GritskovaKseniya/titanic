@@ -4,15 +4,41 @@ import { useTeam } from '../data/team';
 import { splitLastWord } from '../utils/splitAccent';
 import { TeamCard } from './TeamCard';
 import { SectionSeam } from './SectionSeam';
+import { IcebergBlueprint } from './IcebergBlueprint';
+import { useReveal } from '../hooks/useReveal';
 
 export const Details: React.FC = () => {
   const { t } = useLanguage();
   const team = useTeam();
   const [headingLead, headingLast] = splitLastWord(t.details.heading);
+  const [icebergRef, icebergVisible] = useReveal<HTMLDivElement>();
 
   return (
     <section id="details" className="relative py-12 sm:py-16 lg:py-20 bg-darkSec border-b hairline">
       <SectionSeam className="absolute top-0 left-0 w-full" />
+
+      {/* Straddles the About/Details seam: the SVG's own waterline (1/3 down
+          its height) lands exactly on the color boundary via -translate-y-1/3,
+          so the tip pokes up into About and the submerged body sits in here. */}
+      <div
+        ref={icebergRef}
+        aria-hidden="true"
+        className={`absolute top-0 right-0 w-[85vw] max-w-[1100px] opacity-10 -translate-y-1/3 transition-transform duration-[1400ms] ease-out motion-reduce:transition-none ${
+          icebergVisible ? 'translate-x-0' : 'translate-x-24'
+        }`}
+      >
+        <div className="relative text-accent">
+          <IcebergBlueprint className="w-full h-auto" />
+          {/* Same sweep as the seam line, stretched to the iceberg's full height so it washes over the whole silhouette, not just the 1px waterline. */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <span
+              className={`absolute inset-y-0 w-24 bg-gradient-to-r from-transparent via-accent to-transparent ${
+                icebergVisible ? 'animate-seam-sweep' : 'opacity-0'
+              }`}
+            />
+          </div>
+        </div>
+      </div>
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="mb-12">
           <span className="slate-label">{t.details.label}</span>
