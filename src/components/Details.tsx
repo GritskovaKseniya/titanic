@@ -20,23 +20,33 @@ export const Details: React.FC = () => {
       {/* Straddles the About/Details seam: the SVG's own waterline (≈28.3%
           down its height) lands exactly on the color boundary via
           -translate-y-[28.3%], so the tip pokes up into About and the
-          submerged body sits in here. */}
+          submerged body sits in here. The slide-in is on an INNER div, not
+          this one — this outer div is what useReveal's IntersectionObserver
+          watches, and if IT also carried the huge translate-x-full, its
+          observed position would sit far off-screen and never intersect the
+          viewport, so `visible` would never flip true (silently stuck
+          hidden). Keeping this one's position stable for observation, and
+          sliding only the inner wrapper, avoids that. */}
       <div
         ref={icebergRef}
         aria-hidden="true"
-        className={`absolute top-0 -right-8 lg:-right-20 w-[220vw] sm:w-[110vw] max-w-none sm:max-w-[1500px] opacity-10 -translate-y-[28.3%] transition-transform duration-[1400ms] ease-out motion-reduce:transition-none ${
-          icebergVisible ? 'translate-x-0' : 'translate-x-24'
-        }`}
+        className="absolute top-0 -right-16 lg:-right-40 w-[220vw] sm:w-[110vw] max-w-none sm:max-w-[1500px] opacity-10 -translate-y-[28.3%] overflow-visible"
       >
-        <div className="relative text-accent">
-          <IcebergBlueprint className="w-full h-auto" />
-          {/* Same sweep as the seam line, stretched to the iceberg's full height (tip included — this box matches the SVG's own bounds) so it washes over the whole silhouette, not just the 1px waterline. */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <span
-              className={`absolute inset-y-0 w-32 bg-gradient-to-r from-transparent via-accent to-transparent ${
-                icebergVisible ? 'animate-seam-sweep' : 'opacity-0'
-              }`}
-            />
+        <div
+          className={`transition-transform duration-[1400ms] ease-out motion-reduce:transition-none ${
+            icebergVisible ? 'translate-x-0' : 'translate-x-full'
+          }`}
+        >
+          <div className="relative text-accent">
+            <IcebergBlueprint className="w-full h-auto" />
+            {/* Same sweep as the seam line, stretched to the iceberg's full height (tip included — this box matches the SVG's own bounds) so it washes over the whole silhouette, not just the 1px waterline. */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <span
+                className={`absolute inset-y-0 w-32 bg-gradient-to-r from-transparent via-accent to-transparent ${
+                  icebergVisible ? 'animate-seam-sweep' : 'opacity-0'
+                }`}
+              />
+            </div>
           </div>
         </div>
       </div>
