@@ -8,6 +8,24 @@ import { CompareSlider } from './CompareSlider';
  * placeholder, not yet run through the i18n system, pending the real
  * character this pairing belongs to and translated labels for it.
  */
+const PEOPLE = [
+  {
+    name: 'Benjamin Guggenheim',
+    leftSrc: 'reconstructions/sample-reconstruction.jpg',
+    rightSrc: 'reconstructions/sample-archive.jpg',
+  },
+  {
+    name: 'Isidor Straus',
+    leftSrc: 'reconstructions/isidor-reconstruction.jpg',
+    rightSrc: 'reconstructions/isidor-archive.jpg',
+  },
+  {
+    name: 'Ida Straus',
+    leftSrc: 'reconstructions/ida-reconstruction.jpg',
+    rightSrc: 'reconstructions/ida-archive.jpg',
+  },
+];
+
 export const Reconstructions: React.FC = () => (
   <section id="reconstructions" className="relative z-10 -mt-32 sm:-mt-44 lg:-mt-56 pt-0 pb-12 sm:pb-16 lg:pb-20"
     style={{ background: 'linear-gradient(180deg, transparent 0, rgb(var(--color-dark)) 12rem)' }}
@@ -34,15 +52,23 @@ export const Reconstructions: React.FC = () => (
         />
       </div>
 
-      <div className="max-w-xl mt-10">
+      <div className="mt-10">
         <span className="slate-label block mb-3">The people</span>
-        <CompareSlider
-          leftSrc="reconstructions/sample-reconstruction.jpg"
-          rightSrc="reconstructions/sample-archive.jpg"
-          leftLabel="AI Reconstruction"
-          rightLabel="Archive"
-          aspectClassName="aspect-[1264/859]"
-        />
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {PEOPLE.map((p) => (
+            <figure key={p.name}>
+              <CompareSlider
+                leftSrc={p.leftSrc}
+                rightSrc={p.rightSrc}
+                leftLabel="AI Reconstruction"
+                rightLabel="Archive"
+                alt={p.name}
+                aspectClassName="aspect-[1264/859]"
+              />
+              <figcaption className="mt-2 font-heading text-lg uppercase text-bone">{p.name}</figcaption>
+            </figure>
+          ))}
+        </div>
       </div>
     </div>
   </section>
