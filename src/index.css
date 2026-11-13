@@ -40,30 +40,37 @@
   --hero-scrim: 0.55;
 }
 
+/* Ice teal-blue palette (same values as :root) with the classic theme's serif
+   headings and placard-style buttons. */
+[data-theme='blue-serif'] {
+  --font-heading: 'Playfair Display';
+  --hero-scrim: 0.7;
+}
+
 /* Quick approximation of the reference's look beyond color: a serif display
    face (above) and the same rounded/translucent CTA as every other theme,
    but with its label reading as a museum placard (uppercase, tracked,
    medium weight) instead of the bold block-letter CTA the other themes
    use — echoes the site's own .slate-label/.timecode idiom rather than
    introducing serif at this small a size. */
-[data-theme='classic'] .btn {
+:is([data-theme='classic'], [data-theme='blue-serif']) .btn {
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.09em;
   font-size: 0.8em;
 }
-[data-theme='classic'] .btn-cta {
+:is([data-theme='classic'], [data-theme='blue-serif']) .btn-cta {
   background: transparent;
   box-shadow: none;
 }
-[data-theme='classic'] .btn-cta:hover {
+:is([data-theme='classic'], [data-theme='blue-serif']) .btn-cta:hover {
   background: rgb(var(--color-accent) / 0.08);
   box-shadow: none;
 }
-[data-theme='classic'] .btn-quiet {
+:is([data-theme='classic'], [data-theme='blue-serif']) .btn-quiet {
   border-color: rgb(var(--color-ash) / 0.45);
 }
-[data-theme='classic'] .btn-quiet:hover {
+:is([data-theme='classic'], [data-theme='blue-serif']) .btn-quiet:hover {
   border-color: rgb(var(--color-accent-soft));
   color: #ffffff;
   background: transparent;

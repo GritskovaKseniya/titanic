@@ -10,6 +10,7 @@ const THEMES: { id: string; label: string; swatch: string }[] = [
   { id: 'red', label: 'Красный (Netflix)', swatch: '#E50914' },
   { id: 'brightgreen', label: 'Ярко-зелёный (Hulu)', swatch: '#1CE783' },
   { id: 'blue', label: 'Ледяной бирюзово-синий', swatch: '#0EA5E9' },
+  { id: 'blue-serif', label: 'Ледяной бирюзово-синий + сериф', swatch: '#0EA5E9' },
   { id: 'blue-sapphire', label: 'Сапфировый (строгий)', swatch: '#60A5FA' },
   { id: 'blue-steel', label: 'Холодный стальной', swatch: '#5B9BD5' },
   { id: 'wine-ruby', label: 'Рубиново-винный', swatch: '#E11D48' },
