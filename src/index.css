@@ -39,9 +39,17 @@
 
 /* Quick approximation of the reference's look beyond color: a serif display
    face (above) and a plain sharp-cornered outline button, scoped to this
-   theme only — every other option keeps the pill/translucent CTA. */
+   theme only — every other option keeps the pill/translucent CTA. Button
+   label reads as a museum placard (uppercase, tracked, medium weight)
+   instead of the bold block-letter CTA the other themes use, echoing the
+   site's own .slate-label/.timecode idiom rather than introducing serif
+   at this small a size. */
 [data-theme='classic'] .btn {
   border-radius: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  font-size: 0.8em;
 }
 [data-theme='classic'] .btn-cta {
   background: transparent;
@@ -50,6 +58,29 @@
 [data-theme='classic'] .btn-cta:hover {
   background: rgb(var(--color-accent) / 0.08);
   box-shadow: none;
+}
+[data-theme='classic'] .btn-quiet {
+  border-color: rgb(var(--color-ash) / 0.45);
+}
+[data-theme='classic'] .btn-quiet:hover {
+  border-color: rgb(var(--color-accent-soft));
+  color: #ffffff;
+  background: transparent;
+}
+
+/* The very first palette, before any of the others — navy ground with a
+   bioluminescent-coral accent. Re-added to the picker on request, using the
+   exact values from before it was swapped for green (commit e854441). */
+[data-theme='coral'] {
+  --color-dark: 7 24 32;
+  --color-dark-sec: 13 37 48;
+  --color-dark-tertiary: 18 50 64;
+  --color-primary: 139 44 99;
+  --color-accent: 241 79 160;
+  --color-accent-soft: 247 140 192;
+  --color-ash: 126 151 160;
+  --color-gold: 201 150 47;
+  --color-gold-bright: 228 184 90;
 }
 
 [data-theme='green'] {
