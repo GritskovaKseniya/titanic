@@ -65,7 +65,7 @@ export const Hero: React.FC = () => {
         className="absolute inset-0 z-0"
         style={{
           background:
-            'linear-gradient(100deg, rgb(var(--color-dark)) 0%, rgb(var(--color-dark) / 0.97) 14%, rgb(var(--color-dark) / calc(0.9 * var(--hero-scrim, 1) + 0.1)) 22%, rgb(var(--color-dark) / calc(0.82 * var(--hero-scrim, 1))) 30%, rgb(var(--color-dark) / calc(0.45 * var(--hero-scrim, 1))) 60%, rgb(var(--color-dark) / calc(0.2 * var(--hero-scrim, 1))) 100%), linear-gradient(180deg, rgb(var(--color-dark)) 0%, rgb(var(--color-dark) / 0.6) 8%, rgb(var(--color-dark) / 0.2) 16%, transparent 28%, transparent 76%, rgb(var(--color-dark) / 0.04) 82%, rgb(var(--color-dark) / 0.12) 86%, rgb(var(--color-dark) / 0.26) 90%, rgb(var(--color-dark) / 0.47) 94%, rgb(var(--color-dark) / 0.75) 97.5%, rgb(var(--color-dark)) 100%)',
+            'linear-gradient(100deg, rgb(var(--color-dark)) 0%, rgb(var(--color-dark) / 0.97) 14%, rgb(var(--color-dark) / calc(0.9 * var(--hero-scrim, 1) + 0.1)) 22%, rgb(var(--color-dark) / calc(0.82 * var(--hero-scrim, 1))) 30%, rgb(var(--color-dark) / calc(0.45 * var(--hero-scrim, 1))) 60%, rgb(var(--color-dark) / calc(0.2 * var(--hero-scrim, 1))) 100%), linear-gradient(180deg, rgb(var(--color-dark)) 0%, rgb(var(--color-dark) / 0.6) 8%, rgb(var(--color-dark) / 0.2) 16%, transparent 28%, transparent 72%, rgb(var(--color-dark) / 0.04) 77%, rgb(var(--color-dark) / 0.12) 81%, rgb(var(--color-dark) / 0.26) 85%, rgb(var(--color-dark) / 0.47) 88.5%, rgb(var(--color-dark) / 0.75) 91.5%, rgb(var(--color-dark) / 0.95) 93.5%, rgb(var(--color-dark)) 94.5%)',
         }}
         aria-hidden="true"
       />
