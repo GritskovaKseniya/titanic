@@ -24,7 +24,7 @@ export const Details: React.FC = () => {
       <div
         ref={icebergRef}
         aria-hidden="true"
-        className={`absolute top-0 right-0 w-[85vw] max-w-[1100px] opacity-10 -translate-y-[28.3%] transition-transform duration-[1400ms] ease-out motion-reduce:transition-none ${
+        className={`absolute top-0 -right-8 lg:-right-20 w-[160vw] sm:w-[85vw] max-w-none sm:max-w-[1100px] opacity-10 -translate-y-[28.3%] transition-transform duration-[1400ms] ease-out motion-reduce:transition-none ${
           icebergVisible ? 'translate-x-0' : 'translate-x-24'
         }`}
       >
