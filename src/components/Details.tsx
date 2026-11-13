@@ -19,11 +19,12 @@ export const Details: React.FC = () => {
 
       {/* Straddles the About/Details seam: the SVG's own waterline (≈28.3%
           down its height) lands exactly on the color boundary via
-          -translate-y-[28.3%]. IcebergBlueprint's viewBox is cropped to the
-          shape's own footprint, so this box just needs to be a normal,
-          modestly-sized rectangle flush to the right edge — no more huge
-          vw-based widths or large % translates to compensate for a mostly
-          empty viewBox. The slide-in is on an INNER div, not this one — this
+          -translate-y-[28.3%]. Width is one fluid clamp() — scales
+          continuously with viewport width (not a stack of sm:/lg: pixel
+          overrides that only happen to look right at one tested size) —
+          tuned so it reads ~310px on a phone and ~880px on a wide desktop,
+          the two sizes that were separately confirmed to look right. The
+          slide-in is on an INNER div, not this one — this
           outer div is what useReveal's IntersectionObserver watches, and if
           IT also carried the translate-x-full, its observed position would
           sit far off-screen and never intersect the viewport, so `visible`
@@ -33,7 +34,7 @@ export const Details: React.FC = () => {
       <div
         ref={icebergRef}
         aria-hidden="true"
-        className="absolute top-0 right-0 w-[55vw] sm:w-[30vw] max-w-[480px] opacity-10 -translate-y-[28.3%] overflow-visible"
+        className="absolute top-0 right-0 w-[clamp(300px,calc(166px+37vw),900px)] opacity-10 -translate-y-[28.3%] overflow-visible"
       >
         <div
           className={`transition-transform duration-[3200ms] ease-out motion-reduce:transition-none ${
