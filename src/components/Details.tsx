@@ -24,16 +24,16 @@ export const Details: React.FC = () => {
       <div
         ref={icebergRef}
         aria-hidden="true"
-        className={`absolute top-0 -right-8 lg:-right-20 w-[160vw] sm:w-[85vw] max-w-none sm:max-w-[1100px] opacity-10 -translate-y-[28.3%] transition-transform duration-[1400ms] ease-out motion-reduce:transition-none ${
+        className={`absolute top-0 -right-8 lg:-right-20 w-[220vw] sm:w-[110vw] max-w-none sm:max-w-[1500px] opacity-10 -translate-y-[28.3%] transition-transform duration-[1400ms] ease-out motion-reduce:transition-none ${
           icebergVisible ? 'translate-x-0' : 'translate-x-24'
         }`}
       >
         <div className="relative text-accent">
           <IcebergBlueprint className="w-full h-auto" />
-          {/* Same sweep as the seam line, stretched to the iceberg's full height so it washes over the whole silhouette, not just the 1px waterline. */}
+          {/* Same sweep as the seam line, stretched to the iceberg's full height (tip included — this box matches the SVG's own bounds) so it washes over the whole silhouette, not just the 1px waterline. */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <span
-              className={`absolute inset-y-0 w-24 bg-gradient-to-r from-transparent via-accent to-transparent ${
+              className={`absolute inset-y-0 w-32 bg-gradient-to-r from-transparent via-accent to-transparent ${
                 icebergVisible ? 'animate-seam-sweep' : 'opacity-0'
               }`}
             />
