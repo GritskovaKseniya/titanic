@@ -3,10 +3,12 @@ import React from 'react';
 /** Line-art iceberg cross-section, in the same blueprint register as the
     ship schematic in the comparison slider. Color comes from the wrapping
     element (currentColor) so it follows the site's accent like everything
-    else, instead of being hardcoded. */
+    else, instead of being hardcoded. Waterline sits at y=300 of a 1060-tall
+    viewBox (≈28.3% down) — used by Details.tsx to align it to the real
+    About/Details seam via -translate-y-[28.3%]. */
 export const IcebergBlueprint: React.FC<{ className?: string }> = ({ className }) => (
   <svg
-    viewBox="0 0 1600 900"
+    viewBox="0 0 1600 1060"
     fill="none"
     stroke="currentColor"
     strokeLinecap="round"
@@ -18,13 +20,13 @@ export const IcebergBlueprint: React.FC<{ className?: string }> = ({ className }
     <style>{'path{vector-effect:non-scaling-stroke}'}</style>
     {/* waterline */}
     <g strokeWidth="1.5" opacity=".7">
-      <path d="M0 300 Q50 286 100 300 T200 300 T300 300 T400 300 T500 300 T600 300 T700 300 T800 300 T900 300 T1000 300 T1100 300 T1200 300 T1300 300 T1400 300 T1500 300 T1600 300" />
+      <path d="M0 300 L1600 300" />
     </g>
     <g strokeWidth="1" opacity=".3">
-      <path d="M0 318 Q50 306 100 318 T200 318 T300 318 T400 318 T500 318 T600 318 T700 318 T800 318 T900 318 T1000 318 T1100 318 T1200 318 T1300 318 T1400 318 T1500 318 T1600 318" />
+      <path d="M0 318 L1600 318" />
     </g>
 
-    <g transform="translate(197 0) scale(0.78 1)">
+    <g transform="translate(251 0) scale(0.72 1)">
       {/* tip above water: silhouette of the iceberg that sank Titanic (1912 photo) */}
       <path
         strokeWidth="3"
@@ -42,37 +44,28 @@ export const IcebergBlueprint: React.FC<{ className?: string }> = ({ className }
         <path d="M1270 200 L1250 250 L1290 300" />
         <path d="M1320 187 L1340 245 L1330 300" />
       </g>
-
-      {/* body under water: wide at the waterline, tapering to a rounded bottom */}
-      <path
-        strokeWidth="3"
-        d="M400 300 C375 380 400 480 450 570 C520 700 640 810 800 878 C870 900 930 895 1000 862 C1130 800 1220 720 1300 610 C1360 520 1410 400 1390 300"
-      />
-
-      {/* inner ice ridges and arch cavities (dashed) */}
-      <g strokeWidth="1.6" opacity=".6" strokeDasharray="10 9">
-        <path d="M520 330 C470 500 500 700 700 820" />
-        <path d="M640 790 C560 560 580 380 700 360 C800 350 850 450 820 570 C805 650 750 720 640 790" />
-        <path d="M900 335 C950 500 910 700 860 880" />
-        <path d="M1250 340 C1310 520 1210 720 1050 850" />
-        <path d="M1010 370 C1060 480 1050 620 960 735" />
-        <path d="M1150 330 C1190 430 1170 540 1110 620" />
-        <path d="M440 480 C520 470 600 500 640 560" />
-        <path d="M1390 420 C1330 440 1290 470 1260 520" />
-      </g>
     </g>
 
-    {/* scale bracket: above / below the waterline */}
-    <g strokeWidth="1.5" opacity=".8">
-      <path d="M1500 50 L1500 892" />
-      <path d="M1488 50 L1512 50" />
-      <path d="M1488 300 L1512 300" />
-      <path d="M1488 892 L1512 892" />
-      <path d="M1494 175 L1506 175" />
-      <path d="M1494 440 L1506 440" />
-      <path d="M1494 580 L1506 580" />
-      <path d="M1494 720 L1506 720" />
-      <path d="M1494 810 L1506 810" />
+    {/* body under water: wide at the waterline, jagged sides, tapering to a pointed bottom */}
+    <path
+      strokeWidth="3"
+      d="M539 300 L554 398 L541 440 L547 482 L585 530 L613 580 L640 620 L657 656 L693 734 L735 790 L777 860 L850 958 L898 1000
+      L978 958 L1051 860 L1090 800 L1124 734 L1160 670 L1183 608 L1216 496 L1228 450 L1241 398 L1252 300"
+    />
+
+    {/* inner arch cavity, ridges (dashed) */}
+    <g strokeWidth="1.8" opacity=".7" strokeDasharray="10 9">
+      <path d="M736 750 C720 660 702 520 740 430 C770 370 830 360 880 372 C940 386 970 480 978 650 C982 740 975 800 970 832" />
+    </g>
+    <g strokeWidth="1.6" opacity=".55" strokeDasharray="10 9">
+      <path d="M770 760 C760 640 770 520 800 460 C830 420 880 420 900 480 C920 560 925 680 918 780" />
+      <path d="M1070 340 C1110 450 1110 600 1060 740 C1030 820 1000 880 960 940" />
+      <path d="M630 340 C610 440 620 540 680 640 C720 710 760 790 790 850" />
+      <path d="M1180 330 C1190 430 1170 520 1130 600" />
+      <path d="M1000 420 C1030 500 1040 600 1010 700" />
+      <path d="M550 500 L650 525" />
+      <path d="M1228 520 L1150 560" />
+      <path d="M690 700 L760 720" />
     </g>
   </svg>
 );

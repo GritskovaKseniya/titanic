@@ -17,13 +17,14 @@ export const Details: React.FC = () => {
     <section id="details" className="relative py-12 sm:py-16 lg:py-20 bg-darkSec border-b hairline">
       <SectionSeam className="absolute top-0 left-0 w-full" />
 
-      {/* Straddles the About/Details seam: the SVG's own waterline (1/3 down
-          its height) lands exactly on the color boundary via -translate-y-1/3,
-          so the tip pokes up into About and the submerged body sits in here. */}
+      {/* Straddles the About/Details seam: the SVG's own waterline (≈28.3%
+          down its height) lands exactly on the color boundary via
+          -translate-y-[28.3%], so the tip pokes up into About and the
+          submerged body sits in here. */}
       <div
         ref={icebergRef}
         aria-hidden="true"
-        className={`absolute top-0 right-0 w-[85vw] max-w-[1100px] opacity-10 -translate-y-1/3 transition-transform duration-[1400ms] ease-out motion-reduce:transition-none ${
+        className={`absolute top-0 right-0 w-[85vw] max-w-[1100px] opacity-10 -translate-y-[28.3%] transition-transform duration-[1400ms] ease-out motion-reduce:transition-none ${
           icebergVisible ? 'translate-x-0' : 'translate-x-24'
         }`}
       >
