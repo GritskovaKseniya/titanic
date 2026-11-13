@@ -23,7 +23,7 @@ export const Reconstructions: React.FC = () => (
         </p>
       </div>
 
-      <div className="max-w-3xl">
+      <div>
         <span className="slate-label block mb-3">The ship</span>
         <CompareSlider
           leftSrc="reconstructions/ship-night.jpg"
@@ -41,6 +41,7 @@ export const Reconstructions: React.FC = () => (
           rightSrc="reconstructions/sample-archive.jpg"
           leftLabel="AI Reconstruction"
           rightLabel="Archive"
+          aspectClassName="aspect-[1264/859]"
         />
       </div>
     </div>
