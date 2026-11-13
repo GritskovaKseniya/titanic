@@ -34,7 +34,7 @@ export const Details: React.FC = () => {
       >
         <div
           className={`transition-transform duration-[3200ms] ease-out motion-reduce:transition-none ${
-            icebergVisible ? 'translate-x-[45%]' : 'translate-x-full'
+            icebergVisible ? 'translate-x-[15%]' : 'translate-x-full'
           }`}
         >
           <div className="relative text-accent">
