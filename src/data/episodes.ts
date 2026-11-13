@@ -205,7 +205,7 @@ export const defaultEpisodes: Episode[] = [
       it: 'Nata nel 1867 nel Missouri da genitori immigrati irlandesi, svolse diversi lavori prima di sposare J.J. Brown, arricchitosi con l\'attività mineraria. Nel 1912 "Molly" Brown stava tornando in America in prima classe con la figlia, dopo un viaggio in Egitto e in Europa.',
     },
     vimeoId: '',
-    posterUrl: 'posters/06-margaret-brown.jpg',
+    posterUrl: 'posters/06-margaret-brown.png',
     posterFocusY: 50,
   },
   {
