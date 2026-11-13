@@ -90,10 +90,10 @@ export const CompareSlider: React.FC<{
         aria-valuemin={0}
         aria-valuemax={100}
         onKeyDown={handleKeyDown}
-        className="absolute top-1/2 w-10 h-10 rounded-full bg-dark border-2 border-accent flex items-center justify-center text-accent shadow-lg shadow-black/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        className="absolute top-1/2 w-9 h-9 rounded-full bg-dark/90 backdrop-blur-sm border border-accent/70 flex items-center justify-center text-accent shadow-[0_8px_24px_-10px_rgb(var(--color-accent)/0.7)] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         style={{ left: `${pos}%`, transform: 'translate(-50%, -50%)' }}
       >
-        <ChevronsLeftRight className="w-4 h-4" />
+        <ChevronsLeftRight className="w-3.5 h-3.5" strokeWidth={2.25} />
       </div>
     </div>
   );
