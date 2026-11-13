@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 
-/** Triggers a one-time "reveal" transition once the element scrolls into view. */
-export function useReveal<T extends HTMLElement>(): [React.RefObject<T | null>, boolean] {
+/** Triggers a "reveal" transition when the element scrolls into view — once by
+    default (cards fade in and stay), or every time if `once` is false (for
+    something meant to replay on each pass, like SectionSeam's sweep). */
+export function useReveal<T extends HTMLElement>(options?: { once?: boolean }): [React.RefObject<T | null>, boolean] {
+  const once = options?.once ?? true;
   const ref = useRef<T>(null);
   const [visible, setVisible] = useState(false);
 
@@ -16,14 +19,16 @@ export function useReveal<T extends HTMLElement>(): [React.RefObject<T | null>, 
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisible(true);
-          observer.unobserve(el);
+          if (once) observer.unobserve(el);
+        } else if (!once) {
+          setVisible(false);
         }
       },
       { threshold: 0.15, rootMargin: '0px 0px -40px 0px' },
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [once]);
 
   return [ref, visible];
 }

@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { LanguageProvider } from './i18n/LanguageContext';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
+import { Reconstructions } from './components/Reconstructions';
 import { Episodes } from './components/Episodes';
 import { About } from './components/About';
 import { Details } from './components/Details';
@@ -20,6 +21,7 @@ const Site: React.FC = () => (
       <Header />
       <main className="flex-grow">
         <Hero />
+        <Reconstructions />
         <Episodes />
         <About />
         <Details />
