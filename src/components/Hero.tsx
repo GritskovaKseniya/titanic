@@ -94,7 +94,7 @@ export const Hero: React.FC = () => {
                 <a
                   key={ep.number}
                   href={`#episode-${ep.number}`}
-                  className="timecode text-xs text-ash border hairline px-2.5 py-1 hover:text-accent hover:border-accent transition-colors"
+                  className="timecode text-xs text-ash border hairline rounded-full px-2.5 py-1 hover:text-accent hover:border-accent transition-colors"
                 >
                   {String(ep.number).padStart(2, '0')}
                 </a>

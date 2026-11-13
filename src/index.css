@@ -38,14 +38,12 @@
 }
 
 /* Quick approximation of the reference's look beyond color: a serif display
-   face (above) and a plain sharp-cornered outline button, scoped to this
-   theme only — every other option keeps the pill/translucent CTA. Button
-   label reads as a museum placard (uppercase, tracked, medium weight)
-   instead of the bold block-letter CTA the other themes use, echoing the
-   site's own .slate-label/.timecode idiom rather than introducing serif
-   at this small a size. */
+   face (above) and the same rounded/translucent CTA as every other theme,
+   but with its label reading as a museum placard (uppercase, tracked,
+   medium weight) instead of the bold block-letter CTA the other themes
+   use — echoes the site's own .slate-label/.timecode idiom rather than
+   introducing serif at this small a size. */
 [data-theme='classic'] .btn {
-  border-radius: 2px;
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.09em;
