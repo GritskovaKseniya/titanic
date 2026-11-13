@@ -37,7 +37,7 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section id="top" className="grain letterbox relative overflow-hidden bg-dark">
+    <section id="top" className="grain letterbox relative overflow-hidden bg-dark min-h-[640px] sm:min-h-[760px] lg:min-h-[860px]">
       {/* The dusk bow shot — real hero still instead of the old gradient
           placeholder, with a scrim so the text on top stays legible. */}
       <img
