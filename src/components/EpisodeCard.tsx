@@ -66,7 +66,7 @@ export const EpisodeCard: React.FC<{
         <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-goldBright block mt-0.5">
           {ep.role[language]}
         </span>
-        <p className={`text-sm text-ash mt-1.5 ${expanded ? '' : 'line-clamp-2'}`}>{ep.description[language]}</p>
+        <p className={`text-sm text-ash mt-1.5 whitespace-pre-line ${expanded ? '' : 'line-clamp-2'}`}>{ep.description[language]}</p>
         <button
           onClick={onToggleExpanded}
           className="font-mono text-[10px] uppercase tracking-[0.08em] text-accent hover:text-bone transition-colors mt-1"
