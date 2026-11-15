@@ -41,6 +41,21 @@ export const ThemeSwitcher: React.FC = () => {
     } catch {
       // Private browsing or storage disabled — the toggle still works, it just won't persist.
     }
+
+    // The "Add to Home Screen" icon/manifest is otherwise static — it can't
+    // read the page's CSS variables the way in-page colors do. Classic is
+    // monochrome enough that the default cyan-anchor icon would clash, so it
+    // gets its own manifest + icon files, swapped in here. iOS in particular
+    // snapshots these at add-time rather than live-updating, so this only
+    // matters for someone adding to the home screen after switching themes.
+    const isClassic = theme === 'classic';
+    const base = import.meta.env.BASE_URL;
+    const manifestLink = document.querySelector<HTMLLinkElement>('link[rel="manifest"]');
+    if (manifestLink) manifestLink.href = `${base}${isClassic ? 'manifest-classic.webmanifest' : 'manifest.webmanifest'}`;
+    const appleIconLink = document.querySelector<HTMLLinkElement>('link[rel="apple-touch-icon"]');
+    if (appleIconLink) appleIconLink.href = `${base}${isClassic ? 'apple-touch-icon-classic.png' : 'apple-touch-icon.png'}`;
+    const themeColorMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+    if (themeColorMeta) themeColorMeta.content = isClassic ? '#9FB1C4' : '#0EA5E9';
   }, [theme]);
 
   return (
