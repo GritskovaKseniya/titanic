@@ -10,6 +10,19 @@ export const LANGUAGES: { code: Language; label: string }[] = [
   { code: 'it', label: 'Italiano' },
 ];
 
+/** The name offered when adding the site to a phone's home screen — kept
+    short on purpose (it's a proper noun in every one of these languages, so
+    "Titanic" reads fine everywhere except Russian). Matches the per-language
+    manifest files in public/manifests/. */
+export const HOME_SCREEN_NAME: Record<Language, string> = {
+  en: 'Titanic',
+  ru: 'Титаник',
+  fr: 'Titanic',
+  es: 'Titanic',
+  de: 'Titanic',
+  it: 'Titanic',
+};
+
 export interface TranslationsShape {
   meta: { eyebrowLeft: string; eyebrowRight: string; year: string; genre: string; runtime: string };
   nav: { episodes: string; details: string };

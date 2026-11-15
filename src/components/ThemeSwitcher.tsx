@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Palette } from 'lucide-react';
+import { useLanguage } from '../i18n/LanguageContext';
+import { HOME_SCREEN_NAME } from '../i18n/translations';
 
 // Temporary tool for picking a final color palette — lets Kseniia preview
 // alternatives on the real site instead of asking for a new build each time.
@@ -24,6 +26,7 @@ const STORAGE_KEY = 'titanic-theme-preview';
 export const ThemeSwitcher: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState('blue');
+  const { language } = useLanguage();
 
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -42,21 +45,26 @@ export const ThemeSwitcher: React.FC = () => {
       // Private browsing or storage disabled — the toggle still works, it just won't persist.
     }
 
-    // The "Add to Home Screen" icon/manifest is otherwise static — it can't
-    // read the page's CSS variables the way in-page colors do. Classic is
-    // monochrome enough that the default cyan-anchor icon would clash, so it
-    // gets its own manifest + icon files, swapped in here. iOS in particular
-    // snapshots these at add-time rather than live-updating, so this only
-    // matters for someone adding to the home screen after switching themes.
+    // The "Add to Home Screen" icon/manifest/name are otherwise static — they
+    // can't read the page's CSS variables or language state the way in-page
+    // content does. Classic is monochrome enough that the default cyan-anchor
+    // icon would clash, so it gets its own icon set; the manifest's name
+    // follows the site's current language too — there's one pre-built
+    // manifest file per theme × language combo in public/manifests/. iOS in
+    // particular snapshots these at add-time rather than live-updating, so
+    // this only matters for someone adding to the home screen after
+    // switching theme/language.
     const isClassic = theme === 'classic';
     const base = import.meta.env.BASE_URL;
     const manifestLink = document.querySelector<HTMLLinkElement>('link[rel="manifest"]');
-    if (manifestLink) manifestLink.href = `${base}${isClassic ? 'manifest-classic.webmanifest' : 'manifest.webmanifest'}`;
+    if (manifestLink) manifestLink.href = `${base}manifests/${isClassic ? 'classic' : 'default'}-${language}.webmanifest`;
     const appleIconLink = document.querySelector<HTMLLinkElement>('link[rel="apple-touch-icon"]');
     if (appleIconLink) appleIconLink.href = `${base}${isClassic ? 'apple-touch-icon-classic.png' : 'apple-touch-icon.png'}`;
     const themeColorMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
     if (themeColorMeta) themeColorMeta.content = isClassic ? '#9FB1C4' : '#0EA5E9';
-  }, [theme]);
+    const appleTitleMeta = document.querySelector<HTMLMetaElement>('meta[name="apple-mobile-web-app-title"]');
+    if (appleTitleMeta) appleTitleMeta.content = HOME_SCREEN_NAME[language];
+  }, [theme, language]);
 
   return (
     <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-2">
