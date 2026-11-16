@@ -31,8 +31,6 @@ export interface TranslationsShape {
     pitch: string;
     cta: string;
     subline: string;
-    share: string;
-    shared: string;
     jumpLabel: string;
   };
   episodes: {
@@ -71,10 +69,8 @@ export const translations: Record<Language, TranslationsShape> = {
       title: 'Titanic: Ship of Legends',
       pitch:
         "The real record of the Titanic's last voyage — and what the film never kept. Part of every episode is rebuilt by AI: faces, cabins, final minutes no archive footage survived to show.",
-      cta: 'Watch the episodes',
+      cta: 'Watch Trailer',
       subline: 'archive · reconstruction · memory',
-      share: 'Share',
-      shared: 'Link copied',
       jumpLabel: 'Jump to',
     },
     episodes: {
@@ -132,10 +128,8 @@ export const translations: Record<Language, TranslationsShape> = {
       title: 'Титаник: Корабль легенд',
       pitch:
         'Реальная хроника гибели «Титаника» — и то, чего плёнка не сохранила. Часть каждой серии восстановлена нейросетями: лица, каюты, последние минуты, которых не осталось на архивных кадрах.',
-      cta: 'Смотреть серии',
+      cta: 'Смотреть трейлер',
       subline: 'архив · реконструкция · память',
-      share: 'Поделиться',
-      shared: 'Ссылка скопирована',
       jumpLabel: 'Быстрый переход',
     },
     episodes: {
@@ -193,10 +187,8 @@ export const translations: Record<Language, TranslationsShape> = {
       title: 'Titanic : Le Navire des légendes',
       pitch:
         "La véritable histoire du dernier voyage du Titanic — et ce que la pellicule n'a jamais gardé. Une partie de chaque épisode est reconstituée par l'IA : visages, cabines, derniers instants qu'aucune archive n'a pu montrer.",
-      cta: 'Voir les épisodes',
+      cta: 'Voir la bande-annonce',
       subline: 'archives · reconstitution · mémoire',
-      share: 'Partager',
-      shared: 'Lien copié',
       jumpLabel: 'Aller à',
     },
     episodes: {
@@ -254,10 +246,8 @@ export const translations: Record<Language, TranslationsShape> = {
       title: 'Titanic: El barco de las leyendas',
       pitch:
         'La crónica real del último viaje del Titanic — y lo que la película nunca conservó. Parte de cada episodio está reconstruida por IA: rostros, camarotes, los últimos minutos que ningún archivo logró mostrar.',
-      cta: 'Ver los episodios',
+      cta: 'Ver el tráiler',
       subline: 'archivo · reconstrucción · memoria',
-      share: 'Compartir',
-      shared: 'Enlace copiado',
       jumpLabel: 'Ir a',
     },
     episodes: {
@@ -315,10 +305,8 @@ export const translations: Record<Language, TranslationsShape> = {
       title: 'Titanic: Schiff der Legenden',
       pitch:
         'Die wahre Geschichte der letzten Fahrt der Titanic — und das, was der Film nie festgehalten hat. Ein Teil jeder Folge wird von KI rekonstruiert: Gesichter, Kabinen, letzte Minuten, die kein Archivmaterial zeigen konnte.',
-      cta: 'Folgen ansehen',
+      cta: 'Trailer ansehen',
       subline: 'Archiv · Rekonstruktion · Erinnerung',
-      share: 'Teilen',
-      shared: 'Link kopiert',
       jumpLabel: 'Springe zu',
     },
     episodes: {
@@ -376,10 +364,8 @@ export const translations: Record<Language, TranslationsShape> = {
       title: 'Titanic: La nave delle leggende',
       pitch:
         "La cronaca reale dell'ultimo viaggio del Titanic — e ciò che la pellicola non ha mai conservato. Parte di ogni episodio è ricostruita dall'IA: volti, cabine, gli ultimi minuti che nessun archivio è riuscito a mostrare.",
-      cta: 'Guarda gli episodi',
+      cta: 'Guarda il trailer',
       subline: 'archivio · ricostruzione · memoria',
-      share: 'Condividi',
-      shared: 'Link copiato',
       jumpLabel: 'Vai a',
     },
     episodes: {

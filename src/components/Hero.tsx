@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ChevronRight, Share2 } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useEpisodes } from '../data/episodes';
 import { resolveImageSrc } from '../utils/publicUrl';
@@ -8,7 +8,6 @@ import { splitLastWord } from '../utils/splitAccent';
 export const Hero: React.FC = () => {
   const { t } = useLanguage();
   const episodes = useEpisodes();
-  const [copied, setCopied] = useState(false);
   const [parallaxY, setParallaxY] = useState(0);
 
   const [titleLead, titleLast] = splitLastWord(t.hero.title);
@@ -20,21 +19,6 @@ export const Hero: React.FC = () => {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  const handleShare = async () => {
-    const url = window.location.href.split('#')[0];
-    try {
-      if (navigator.share) {
-        await navigator.share({ title: t.hero.title, url });
-        return;
-      }
-      await navigator.clipboard.writeText(url);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      // Share sheet dismissed or clipboard unavailable — no error state worth surfacing.
-    }
-  };
 
   return (
     <section id="top" className="grain relative overflow-hidden bg-dark min-h-[640px] sm:min-h-[760px] lg:min-h-[860px]">
@@ -88,9 +72,6 @@ export const Hero: React.FC = () => {
               {t.hero.cta}
               <ChevronRight className="arrow w-5 h-5 transition-transform duration-150" strokeWidth={3} />
             </a>
-            <button onClick={handleShare} className="btn btn-quiet px-4 py-3 text-sm">
-              <Share2 className="w-4 h-4" /> {copied ? t.hero.shared : t.hero.share}
-            </button>
           </div>
 
           <div className="hero-jump-to animate-fade-up pt-1">

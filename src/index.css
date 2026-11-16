@@ -153,15 +153,13 @@
   --color-gold-bright: 196 160 102;
 }
 
-/* Gold theme's own hero CTA chrome, per exact spec: solid brass primary
-   (sharp-ish 8px corners, no border/glow) and a deliberately quieter
-   translucent secondary — plus press/hover feedback (arrow nudge, scale)
-   distinct from every other theme's pill/lift treatment. */
+/* Gold theme's own hero CTA chrome, per exact spec: solid brass primary,
+   sharp-ish 8px corners, no border/glow, plus press/hover feedback (arrow
+   nudge, scale) distinct from every other theme's pill/lift treatment. */
 [data-theme='gold'] .btn {
   border-radius: 8px;
 }
-[data-theme='gold'] .hero-cta-row .btn-cta,
-[data-theme='gold'] .hero-cta-row .btn-quiet {
+[data-theme='gold'] .hero-cta-row .btn-cta {
   height: 56px;
   box-sizing: border-box;
 }
@@ -193,32 +191,15 @@
 [data-theme='gold'] .btn-cta:hover .arrow {
   transform: translateX(4px);
 }
-[data-theme='gold'] .btn-quiet {
-  background: transparent;
-  color: #f2ede4;
-  border: 1.5px solid rgb(242 237 228 / 0.6);
-}
-[data-theme='gold'] .btn-quiet:hover {
-  background: rgb(242 237 228 / 0.1);
-  border-color: #f2ede4;
-  color: #f2ede4;
-}
-[data-theme='gold'] .btn-quiet:active {
-  background: rgb(242 237 228 / 0.18);
-  transform: scale(0.98);
-}
 
-/* Layout: main CTA left, 16px gap, 32px clear of the paragraph above; Jump
-   to pushed further down so it doesn't compete with the buttons visually.
-   Stacked full-width on phones, side by side from the sm breakpoint up. */
+/* Layout: 32px clear of the paragraph above; Jump to pushed further down so
+   it doesn't compete visually. Full-width on phones, auto width from sm up —
+   there's only the one CTA now that Share is gone. */
 [data-theme='gold'] .hero-cta-row {
-  gap: 16px;
   padding-top: 32px;
-  flex-direction: column;
   align-items: stretch;
 }
-[data-theme='gold'] .hero-cta-row .btn-cta,
-[data-theme='gold'] .hero-cta-row .btn-quiet {
+[data-theme='gold'] .hero-cta-row .btn-cta {
   width: 100%;
   min-height: 52px;
 }
@@ -227,11 +208,9 @@
 }
 @media (min-width: 640px) {
   [data-theme='gold'] .hero-cta-row {
-    flex-direction: row;
     align-items: center;
   }
-  [data-theme='gold'] .hero-cta-row .btn-cta,
-  [data-theme='gold'] .hero-cta-row .btn-quiet {
+  [data-theme='gold'] .hero-cta-row .btn-cta {
     width: auto;
   }
 }
