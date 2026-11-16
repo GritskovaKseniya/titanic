@@ -61,7 +61,7 @@ export const Hero: React.FC = () => {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-8 pt-20 sm:pt-24 pb-40 sm:pb-52 lg:pb-60">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-8 pt-20 sm:pt-24 pb-14 sm:pb-16 lg:pb-20">
         <div className="flex items-baseline justify-between border-b hairline pb-4 timecode text-[10px] sm:text-[11px] text-ash uppercase">
           <span>{t.meta.eyebrowLeft}</span>
           <span className="hidden sm:block">{t.meta.eyebrowRight}</span>
