@@ -139,6 +139,21 @@
   }
 }
 
+/* Warm gold-on-black — sampled from a reference mockup's "Watch trailer"
+   button (#B68E53) and near-black ground. Plain color swap like the other
+   non-classic options below, no font/button-chrome changes. */
+[data-theme='gold'] {
+  --color-dark: 9 10 15;
+  --color-dark-sec: 17 21 27;
+  --color-dark-tertiary: 27 33 41;
+  --color-primary: 90 68 38;
+  --color-accent: 182 142 83;
+  --color-accent-soft: 216 185 138;
+  --color-ash: 148 139 126;
+  --color-gold: 149 115 62;
+  --color-gold-bright: 196 160 102;
+}
+
 /* The very first palette, before any of the others — navy ground with a
    bioluminescent-coral accent. Re-added to the picker on request, using the
    exact values from before it was swapped for green (commit e854441). */

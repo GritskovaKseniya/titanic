@@ -19,6 +19,7 @@ const THEMES: { id: string; label: string; swatch: string }[] = [
   { id: 'wine-bordeaux', label: 'Королевский бордо', swatch: '#C81E51' },
   { id: 'wine-steel', label: 'Винный + холодный стальной', swatch: '#BE123C' },
   { id: 'classic', label: 'Классика (сериф, монохром)', swatch: '#9FB1C4' },
+  { id: 'gold', label: 'Золотой (премиум)', swatch: '#B68E53' },
 ];
 
 const STORAGE_KEY = 'titanic-theme-preview';
