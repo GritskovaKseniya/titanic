@@ -6,19 +6,22 @@ import { HOME_SCREEN_NAME } from '../i18n/translations';
 // Temporary tool for picking a final color palette — lets Kseniia preview
 // alternatives on the real site instead of asking for a new build each time.
 // Remove this component (and the [data-theme] blocks in index.css) once one wins.
-const THEMES: { id: string; label: string; swatch: string }[] = [
-  { id: 'coral', label: 'Коралл (первый вариант)', swatch: '#F14FA0' },
-  { id: 'green', label: 'Зелёный', swatch: '#3EB386' },
-  { id: 'red', label: 'Красный (Netflix)', swatch: '#E50914' },
-  { id: 'brightgreen', label: 'Ярко-зелёный (Hulu)', swatch: '#1CE783' },
+// `hidden: true` keeps a theme's CSS/manifest/etc. in the codebase but drops
+// it from the picker below — for options that have been ruled out without
+// deleting the work, in case one of them comes back into consideration.
+const THEMES: { id: string; label: string; swatch: string; hidden?: boolean }[] = [
+  { id: 'coral', label: 'Коралл (первый вариант)', swatch: '#F14FA0', hidden: true },
+  { id: 'green', label: 'Зелёный', swatch: '#3EB386', hidden: true },
+  { id: 'red', label: 'Красный (Netflix)', swatch: '#E50914', hidden: true },
+  { id: 'brightgreen', label: 'Ярко-зелёный (Hulu)', swatch: '#1CE783', hidden: true },
   { id: 'blue', label: 'Ледяной бирюзово-синий', swatch: '#0EA5E9' },
   { id: 'blue-serif', label: 'Ледяной бирюзово-синий + сериф', swatch: '#0EA5E9' },
-  { id: 'blue-sapphire', label: 'Сапфировый (строгий)', swatch: '#60A5FA' },
-  { id: 'blue-steel', label: 'Холодный стальной', swatch: '#5B9BD5' },
-  { id: 'wine-ruby', label: 'Рубиново-винный', swatch: '#E11D48' },
-  { id: 'wine-bordeaux', label: 'Королевский бордо', swatch: '#C81E51' },
-  { id: 'wine-steel', label: 'Винный + холодный стальной', swatch: '#BE123C' },
-  { id: 'classic', label: 'Классика (сериф, монохром)', swatch: '#9FB1C4' },
+  { id: 'blue-sapphire', label: 'Сапфировый (строгий)', swatch: '#60A5FA', hidden: true },
+  { id: 'blue-steel', label: 'Холодный стальной', swatch: '#5B9BD5', hidden: true },
+  { id: 'wine-ruby', label: 'Рубиново-винный', swatch: '#E11D48', hidden: true },
+  { id: 'wine-bordeaux', label: 'Королевский бордо', swatch: '#C81E51', hidden: true },
+  { id: 'wine-steel', label: 'Винный + холодный стальной', swatch: '#BE123C', hidden: true },
+  { id: 'classic', label: 'Классика (сериф, монохром)', swatch: '#9FB1C4', hidden: true },
   { id: 'gold', label: 'Золотой (премиум)', swatch: '#B68E53' },
 ];
 
@@ -74,7 +77,7 @@ export const ThemeSwitcher: React.FC = () => {
           <span className="block px-2 pb-1.5 pt-1 font-mono text-[10px] uppercase tracking-[0.1em] text-ash">
             Тест палитры
           </span>
-          {THEMES.map((t) => (
+          {THEMES.filter((t) => !t.hidden).map((t) => (
             <button
               key={t.id}
               onClick={() => setTheme(t.id)}
