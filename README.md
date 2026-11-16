@@ -119,6 +119,7 @@ src/
   utils/video.ts    парсинг Vimeo-ссылок в embed-URL
   utils/publicUrl.ts  превращает путь вида "posters/x.jpg" в реальный URL картинки из public/
 public/         статические файлы: posters/, team/ — грузятся напрямую через GitHub
-tools/          ручные утилиты (не часть сборки), напр. генератор иконок тем
+tools/          ручные утилиты (не часть сборки): проверки, скриншоты, замеры,
+                генератор иконок тем — см. tools/README.md
 firestore.rules   правила доступа — вставить в консоль Firebase
 ```

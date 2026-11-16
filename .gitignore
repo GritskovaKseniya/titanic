@@ -5,3 +5,6 @@ dist
 *.local
 .env
 .env.local
+
+# tools/screenshot.mjs output
+screenshots

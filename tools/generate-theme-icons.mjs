@@ -5,19 +5,15 @@
 //   npm run icons -- gold classic    # several
 //   npm run icons -- --all
 //
-// Needs Playwright with Chromium (not a project dependency — this is a
-// manual tool, not part of the build):
-//   npm i --no-save playwright && npx playwright install chromium
-// Set CHROMIUM_PATH to use an already-installed Chromium instead.
+// Needs Playwright — see tools/README.md.
 //
 // To add a theme: add a set below, run the tool for it, then map the theme
 // to the set in ICON_SETS / iconSetFor in src/components/ThemeSwitcher.tsx.
 import { mkdirSync, writeFileSync } from 'node:fs';
-import { createRequire } from 'node:module';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
+import { ROOT, launch } from './lib/browser.mjs';
 
-const PUBLIC = join(dirname(fileURLToPath(import.meta.url)), '..', 'public');
+const PUBLIC = join(ROOT, 'public');
 
 // suffix: '' for the default set (favicon.svg, icons/icon-192.png, …),
 // '-<id>' otherwise. Manifests are always manifests/<id>-<lang>.webmanifest.
@@ -73,17 +69,7 @@ if (!ids.length || unknown.length) {
   process.exit(1);
 }
 
-// require() rather than import(): ESM resolution ignores NODE_PATH, so an
-// import() would miss a Playwright provided that way.
-let chromium;
-try {
-  ({ chromium } = createRequire(import.meta.url)('playwright'));
-} catch {
-  console.error('Playwright not found. Install it: npm i --no-save playwright && npx playwright install chromium');
-  process.exit(1);
-}
-
-const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
+const browser = await launch();
 const renderPng = async (svgText, size, file) => {
   const page = await browser.newPage({ viewport: { width: size, height: size }, deviceScaleFactor: 1 });
   const sized = svgText.replace('width="24" height="24"', `width="${size}" height="${size}"`);
