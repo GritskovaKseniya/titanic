@@ -53,6 +53,23 @@ convert input.webp output.jpg
 convert input.png output.jpg
 ```
 
+## Иконки тем (вкладка браузера, домашний экран)
+
+У каждой темы в переключателе свой набор: иконка вкладки, иконки для
+«На экран Домой» и манифесты на 6 языков. Генерируются одной командой:
+
+```
+npm run icons -- gold          # один набор
+npm run icons -- --all         # все
+```
+
+Нужен Playwright с Chromium (в зависимости проекта не входит):
+`npm i --no-save playwright && npx playwright install chromium`.
+
+Новая тема: добавить набор с цветами в `SETS` в
+`tools/generate-theme-icons.mjs`, запустить команду для него и связать
+тему с набором в `ICON_SETS` / `iconSetFor` в `src/components/ThemeSwitcher.tsx`.
+
 ## Сборка и деплой
 
 Сайт публикуется на GitHub Pages из `dist/` через
@@ -102,5 +119,6 @@ src/
   utils/video.ts    парсинг Vimeo-ссылок в embed-URL
   utils/publicUrl.ts  превращает путь вида "posters/x.jpg" в реальный URL картинки из public/
 public/         статические файлы: posters/, team/ — грузятся напрямую через GitHub
+tools/          ручные утилиты (не часть сборки), напр. генератор иконок тем
 firestore.rules   правила доступа — вставить в консоль Firebase
 ```
