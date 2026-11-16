@@ -46,26 +46,14 @@ export const Hero: React.FC = () => {
         className="absolute inset-0 z-0 w-full h-full object-cover"
         style={{ transform: `translateY(calc(${parallaxY}px - 10%)) scale(1.1)`, objectPosition: '75% 45%' }}
       />
-      {/* Same shot, blurred, revealed only toward the bottom — so the sea
-          softens progressively instead of cutting off. */}
-      <img
-        src={resolveImageSrc('hero/night-bow.webp')}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 z-0 w-full h-full object-cover"
-        style={{
-          transform: `translateY(calc(${parallaxY}px - 10%)) scale(1.1)`,
-          objectPosition: '75% 45%',
-          filter: 'blur(14px)',
-          WebkitMaskImage: 'linear-gradient(180deg, transparent 76%, rgb(0 0 0 / 0.06) 82%, rgb(0 0 0 / 0.16) 87%, rgb(0 0 0 / 0.34) 92%, rgb(0 0 0 / 0.62) 96.5%, #000 100%)',
-          maskImage: 'linear-gradient(180deg, transparent 76%, rgb(0 0 0 / 0.06) 82%, rgb(0 0 0 / 0.16) 87%, rgb(0 0 0 / 0.34) 92%, rgb(0 0 0 / 0.62) 96.5%, #000 100%)',
-        }}
-      />
+      {/* Horizontal scrim only — for text legibility on the left. No
+          vertical fade: the photo stays sharp all the way down, and the
+          section just ends in a clean, visible edge into Episodes below. */}
       <div
         className="absolute inset-0 z-0"
         style={{
           background:
-            'linear-gradient(100deg, rgb(var(--color-dark)) 0%, rgb(var(--color-dark) / 0.97) 14%, rgb(var(--color-dark) / calc(0.9 * var(--hero-scrim, 1) + 0.1)) 22%, rgb(var(--color-dark) / calc(0.82 * var(--hero-scrim, 1))) 30%, rgb(var(--color-dark) / calc(0.45 * var(--hero-scrim, 1))) 60%, rgb(var(--color-dark) / calc(0.2 * var(--hero-scrim, 1))) 100%), linear-gradient(180deg, rgb(var(--color-dark)) 0%, rgb(var(--color-dark) / 0.6) 8%, rgb(var(--color-dark) / 0.2) 16%, transparent 28%, transparent 72%, rgb(var(--color-dark) / 0.04) 77%, rgb(var(--color-dark) / 0.12) 81%, rgb(var(--color-dark) / 0.26) 85%, rgb(var(--color-dark) / 0.47) 88.5%, rgb(var(--color-dark) / 0.75) 91.5%, rgb(var(--color-dark) / 0.95) 93.5%, rgb(var(--color-dark)) 94.5%)',
+            'linear-gradient(100deg, rgb(var(--color-dark) / calc(0.96 * var(--hero-scrim, 1))) 0%, rgb(var(--color-dark) / calc(0.82 * var(--hero-scrim, 1))) 30%, rgb(var(--color-dark) / calc(0.45 * var(--hero-scrim, 1))) 60%, rgb(var(--color-dark) / calc(0.2 * var(--hero-scrim, 1))) 100%)',
         }}
         aria-hidden="true"
       />
