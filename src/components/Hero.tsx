@@ -83,17 +83,17 @@ export const Hero: React.FC = () => {
 
           <p className="max-w-xl text-base text-ash leading-relaxed animate-fade-up">{t.hero.pitch}</p>
 
-          <div className="flex flex-wrap items-center gap-3 pt-1 animate-fade-up">
+          <div className="hero-cta-row flex flex-wrap items-center gap-3 pt-1 animate-fade-up">
             <a href="#episodes" className="btn btn-cta inline-flex items-center gap-2 px-6 py-3 text-sm sm:text-base">
               {t.hero.cta}
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="arrow w-4 h-4 transition-transform duration-150" />
             </a>
             <button onClick={handleShare} className="btn btn-quiet px-4 py-3 text-sm">
               <Share2 className="w-4 h-4" /> {copied ? t.hero.shared : t.hero.share}
             </button>
           </div>
 
-          <div className="animate-fade-up pt-1">
+          <div className="hero-jump-to animate-fade-up pt-1">
             <span className="slate-label block mb-2">{t.hero.jumpLabel}</span>
             <div className="flex flex-wrap gap-2">
               {episodes.map((ep) => (
