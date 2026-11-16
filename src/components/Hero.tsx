@@ -20,8 +20,11 @@ export const Hero: React.FC = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Height tracks width (55vw ≈ the photo's own ~1.8:1 frame), so the ship
+  // keeps the same composition on any screen instead of getting cropped on
+  // wide displays; 640px floor for content on phones/tablets.
   return (
-    <section id="top" className="grain relative overflow-hidden bg-dark min-h-[640px] sm:min-h-[680px] lg:min-h-[700px]">
+    <section id="top" className="grain relative overflow-hidden bg-dark min-h-[clamp(640px,55vw,1400px)]">
       {/* The dusk bow shot — real hero still instead of the old gradient
           placeholder, with a scrim so the text on top stays legible. */}
       <img
