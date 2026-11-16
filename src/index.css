@@ -159,6 +159,10 @@
 [data-theme='gold'] .btn {
   border-radius: 8px;
 }
+/* Jump-to chips match the CTA's corner radius instead of staying pill-shaped. */
+[data-theme='gold'] .jump-chip {
+  border-radius: 8px;
+}
 [data-theme='gold'] .hero-cta-row .btn-cta {
   height: 56px;
   box-sizing: border-box;
