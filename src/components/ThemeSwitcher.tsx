@@ -25,6 +25,18 @@ const THEMES: { id: string; label: string; swatch: string; hidden?: boolean }[] 
   { id: 'gold', label: 'Золотой', swatch: '#B68E53' },
 ];
 
+// Browser-tab icon, home-screen icon/manifest and browser chrome color per
+// theme. Both ice-blue options share one palette, so they share the default
+// set; hidden themes fall back to it too. Files live in public/ — favicon*.svg,
+// apple-touch-icon*.png, icons/icon-<set>-*.png, manifests/<set>-<lang>.webmanifest.
+const ICON_SETS = {
+  default: { suffix: '', themeColor: '#0EA5E9' },
+  classic: { suffix: '-classic', themeColor: '#9FB1C4' },
+  gold: { suffix: '-gold', themeColor: '#C2A064' },
+} as const;
+type IconSet = keyof typeof ICON_SETS;
+const iconSetFor = (theme: string): IconSet => (theme === 'classic' || theme === 'gold' ? theme : 'default');
+
 const STORAGE_KEY = 'titanic-theme-preview';
 
 export const ThemeSwitcher: React.FC = () => {
@@ -49,23 +61,22 @@ export const ThemeSwitcher: React.FC = () => {
       // Private browsing or storage disabled — the toggle still works, it just won't persist.
     }
 
-    // The "Add to Home Screen" icon/manifest/name are otherwise static — they
-    // can't read the page's CSS variables or language state the way in-page
-    // content does. Classic is monochrome enough that the default cyan-anchor
-    // icon would clash, so it gets its own icon set; the manifest's name
-    // follows the site's current language too — there's one pre-built
-    // manifest file per theme × language combo in public/manifests/. iOS in
-    // particular snapshots these at add-time rather than live-updating, so
-    // this only matters for someone adding to the home screen after
-    // switching theme/language.
-    const isClassic = theme === 'classic';
+    // Icons, manifest and chrome color are static files/tags that can't read
+    // the page's CSS variables, so swap them to the current theme's set. The
+    // manifest's name follows the site language too (one pre-built file per
+    // set × language). iOS snapshots the home-screen icon at add-time, so a
+    // theme switch only affects icons added after it.
+    const set = iconSetFor(theme);
+    const { suffix, themeColor } = ICON_SETS[set];
     const base = import.meta.env.BASE_URL;
+    const faviconLink = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
+    if (faviconLink) faviconLink.href = `${base}favicon${suffix}.svg`;
     const manifestLink = document.querySelector<HTMLLinkElement>('link[rel="manifest"]');
-    if (manifestLink) manifestLink.href = `${base}manifests/${isClassic ? 'classic' : 'default'}-${language}.webmanifest`;
+    if (manifestLink) manifestLink.href = `${base}manifests/${set}-${language}.webmanifest`;
     const appleIconLink = document.querySelector<HTMLLinkElement>('link[rel="apple-touch-icon"]');
-    if (appleIconLink) appleIconLink.href = `${base}${isClassic ? 'apple-touch-icon-classic.png' : 'apple-touch-icon.png'}`;
+    if (appleIconLink) appleIconLink.href = `${base}apple-touch-icon${suffix}.png`;
     const themeColorMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
-    if (themeColorMeta) themeColorMeta.content = isClassic ? '#9FB1C4' : '#0EA5E9';
+    if (themeColorMeta) themeColorMeta.content = themeColor;
     const appleTitleMeta = document.querySelector<HTMLMetaElement>('meta[name="apple-mobile-web-app-title"]');
     if (appleTitleMeta) appleTitleMeta.content = HOME_SCREEN_NAME[language];
   }, [theme, language]);
