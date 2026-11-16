@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight, Share2 } from 'lucide-react';
+import { ChevronRight, Share2 } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useEpisodes } from '../data/episodes';
 import { resolveImageSrc } from '../utils/publicUrl';
@@ -86,7 +86,7 @@ export const Hero: React.FC = () => {
           <div className="hero-cta-row flex flex-wrap items-center gap-3 pt-1 animate-fade-up">
             <a href="#episodes" className="btn btn-cta inline-flex items-center gap-2 px-6 py-3 text-sm sm:text-base">
               {t.hero.cta}
-              <ArrowRight className="arrow w-4 h-4 transition-transform duration-150" />
+              <ChevronRight className="arrow w-5 h-5 transition-transform duration-150" strokeWidth={3} />
             </a>
             <button onClick={handleShare} className="btn btn-quiet px-4 py-3 text-sm">
               <Share2 className="w-4 h-4" /> {copied ? t.hero.shared : t.hero.share}
