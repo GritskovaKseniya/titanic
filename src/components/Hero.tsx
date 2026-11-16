@@ -46,14 +46,17 @@ export const Hero: React.FC = () => {
         className="absolute inset-0 z-0 w-full h-full object-cover"
         style={{ transform: `translateY(calc(${parallaxY}px - 10%)) scale(1.1)`, objectPosition: '75% 45%' }}
       />
-      {/* Horizontal scrim only — for text legibility on the left. No
-          vertical fade: the photo stays sharp all the way down, and the
-          section just ends in a clean, visible edge into Episodes below. */}
+      {/* Horizontal scrim for text legibility on the left, plus a vertical
+          fade at the bottom into rgb(var(--color-dark)) — the exact same
+          variable Episodes' bg-dark uses, so the photo blends into the next
+          section's actual color rather than a generic black. One continuous
+          ramp (55% to 100%, no early plateau) so it keeps gradating right up
+          to the edge instead of going flat before the section ends. */}
       <div
         className="absolute inset-0 z-0"
         style={{
           background:
-            'linear-gradient(100deg, rgb(var(--color-dark) / calc(0.96 * var(--hero-scrim, 1))) 0%, rgb(var(--color-dark) / calc(0.82 * var(--hero-scrim, 1))) 30%, rgb(var(--color-dark) / calc(0.45 * var(--hero-scrim, 1))) 60%, rgb(var(--color-dark) / calc(0.2 * var(--hero-scrim, 1))) 100%)',
+            'linear-gradient(100deg, rgb(var(--color-dark) / calc(0.96 * var(--hero-scrim, 1))) 0%, rgb(var(--color-dark) / calc(0.82 * var(--hero-scrim, 1))) 30%, rgb(var(--color-dark) / calc(0.45 * var(--hero-scrim, 1))) 60%, rgb(var(--color-dark) / calc(0.2 * var(--hero-scrim, 1))) 100%), linear-gradient(180deg, transparent 0%, transparent 55%, rgb(var(--color-dark)) 100%)',
         }}
         aria-hidden="true"
       />
