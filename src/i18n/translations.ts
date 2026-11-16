@@ -25,7 +25,7 @@ export const HOME_SCREEN_NAME: Record<Language, string> = {
 
 export interface TranslationsShape {
   meta: { eyebrowLeft: string; eyebrowRight: string; year: string; genre: string; runtime: string };
-  nav: { episodes: string; details: string };
+  nav: { episodes: string; details: string; reconstructions: string };
   hero: {
     title: string;
     pitch: string;
@@ -65,6 +65,7 @@ export const translations: Record<Language, TranslationsShape> = {
     nav: {
       episodes: 'Episodes',
       details: 'Details',
+      reconstructions: 'Reconstructions',
     },
     hero: {
       title: 'Titanic: Ship of Legends',
@@ -125,6 +126,7 @@ export const translations: Record<Language, TranslationsShape> = {
     nav: {
       episodes: 'Серии',
       details: 'Детали',
+      reconstructions: 'Реконструкции',
     },
     hero: {
       title: 'Титаник: Корабль легенд',
@@ -185,6 +187,7 @@ export const translations: Record<Language, TranslationsShape> = {
     nav: {
       episodes: 'Épisodes',
       details: 'Détails',
+      reconstructions: 'Reconstructions',
     },
     hero: {
       title: 'Titanic : Le Navire des légendes',
@@ -245,6 +248,7 @@ export const translations: Record<Language, TranslationsShape> = {
     nav: {
       episodes: 'Episodios',
       details: 'Detalles',
+      reconstructions: 'Reconstrucciones',
     },
     hero: {
       title: 'Titanic: El barco de las leyendas',
@@ -305,6 +309,7 @@ export const translations: Record<Language, TranslationsShape> = {
     nav: {
       episodes: 'Folgen',
       details: 'Details',
+      reconstructions: 'Rekonstruktionen',
     },
     hero: {
       title: 'Titanic: Schiff der Legenden',
@@ -365,6 +370,7 @@ export const translations: Record<Language, TranslationsShape> = {
     nav: {
       episodes: 'Episodi',
       details: 'Dettagli',
+      reconstructions: 'Ricostruzioni',
     },
     hero: {
       title: 'Titanic: La nave delle leggende',

@@ -13,7 +13,12 @@ import { ThemeSwitcher } from './components/ThemeSwitcher';
 // public site (the vast majority) never fetch it.
 const AdminApp = lazy(() => import('./admin/AdminApp').then((m) => ({ default: m.AdminApp })));
 
-const isAdminRoute = typeof window !== 'undefined' && window.location.pathname.replace(/\/$/, '').endsWith('/admin');
+// GitHub Pages serves only files that exist on disk (no server-side rewrite),
+// so both of these need a matching dist/<route>/index.html — see
+// scripts/copy-static-routes.mjs, which copies the built index.html there.
+const routePath = typeof window !== 'undefined' ? window.location.pathname.replace(/\/$/, '') : '';
+const isAdminRoute = routePath.endsWith('/admin');
+const isReconstructionsRoute = routePath.endsWith('/reconstructions');
 
 const Site: React.FC = () => (
   <LanguageProvider>
@@ -21,7 +26,6 @@ const Site: React.FC = () => (
       <Header />
       <main className="flex-grow">
         <Hero />
-        <Reconstructions />
         <Episodes />
         <About />
         <Details />
@@ -32,13 +36,31 @@ const Site: React.FC = () => (
   </LanguageProvider>
 );
 
-const App: React.FC = () =>
-  isAdminRoute ? (
-    <Suspense fallback={<div className="min-h-screen bg-dark" />}>
-      <AdminApp />
-    </Suspense>
-  ) : (
-    <Site />
-  );
+const ReconstructionsPage: React.FC = () => (
+  <LanguageProvider>
+    <div className="flex flex-col min-h-screen bg-dark text-bone font-sans overflow-clip">
+      <Header />
+      {/* pt-20/24 clears the fixed header — on the homepage Hero does this
+          itself, but here Reconstructions is the first thing on the page. */}
+      <main className="flex-grow pt-20 sm:pt-24">
+        <Reconstructions />
+      </main>
+      <Footer />
+      <ThemeSwitcher />
+    </div>
+  </LanguageProvider>
+);
+
+const App: React.FC = () => {
+  if (isAdminRoute) {
+    return (
+      <Suspense fallback={<div className="min-h-screen bg-dark" />}>
+        <AdminApp />
+      </Suspense>
+    );
+  }
+  if (isReconstructionsRoute) return <ReconstructionsPage />;
+  return <Site />;
+};
 
 export default App;

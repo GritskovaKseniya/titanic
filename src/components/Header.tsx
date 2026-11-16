@@ -8,16 +8,23 @@ export const Header: React.FC = () => {
   const { t, language, setLanguage } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Absolute (base-prefixed) rather than bare "#episodes" anchors: this header
+  // is also rendered on the standalone /reconstructions page, where a bare
+  // hash would try to scroll a section that isn't there instead of taking you
+  // back to the homepage. On the homepage itself these still resolve to the
+  // same document, so clicking one is still just an in-page scroll.
+  const base = import.meta.env.BASE_URL;
   const navLinks = [
-    { href: '#episodes', label: t.nav.episodes },
-    { href: '#details', label: t.nav.details },
+    { href: `${base}#episodes`, label: t.nav.episodes },
+    { href: `${base}#details`, label: t.nav.details },
+    { href: `${base}reconstructions`, label: t.nav.reconstructions },
   ];
 
   return (
     <header className="fixed top-0 inset-x-0 z-40 bg-dark/35 backdrop-blur-md border-b border-white/5">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="flex items-center justify-between h-14">
-          <a href="#top" className="flex items-center gap-2 group">
+          <a href={`${base}#top`} className="flex items-center gap-2 group">
             <Anchor className="w-5 h-5 text-accent group-hover:text-goldBright transition-colors" />
             <span className="font-heading font-semibold uppercase tracking-[0.06em] text-bone text-sm sm:text-base">
               {t.hero.title}
