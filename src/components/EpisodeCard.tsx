@@ -4,6 +4,7 @@ import { Episode } from '../data/episodes';
 import { Language, TranslationsShape } from '../i18n/translations';
 import { resolveImageSrc } from '../utils/publicUrl';
 import { useReveal } from '../hooks/useReveal';
+import { useVimeoThumbnail } from '../hooks/useVimeoThumbnail';
 
 export const EpisodeCard: React.FC<{
   ep: Episode;
@@ -17,6 +18,8 @@ export const EpisodeCard: React.FC<{
   delayMs: number;
 }> = ({ ep, language, t, thumbStyle, hasEmbed, expanded, onOpen, onToggleExpanded, delayMs }) => {
   const [ref, visible] = useReveal<HTMLElement>();
+  // No poster yet but the episode is published: show the video's own cover frame.
+  const videoThumb = useVimeoThumbnail(ep.vimeoId, !ep.posterUrl && hasEmbed);
 
   return (
     <article
@@ -42,6 +45,14 @@ export const EpisodeCard: React.FC<{
             alt=""
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
             style={{ objectPosition: `50% ${ep.posterFocusY ?? 27}%` }}
+          />
+        )}
+        {!ep.posterUrl && videoThumb && (
+          // Already a 16:9 frame, so it fits the box as-is.
+          <img
+            src={videoThumb}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
