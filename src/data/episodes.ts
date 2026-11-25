@@ -88,7 +88,7 @@ export const defaultEpisodes: Episode[] = [
       de: 'Geboren 1849 in England, einer der Begründer des britischen investigativen Journalismus. Seine Enthüllung der Kinderprostitution in London im Jahr 1892 sorgte für Schlagzeilen — und brachte ihn kurzzeitig ins Gefängnis. Er war Redakteur der Pall Mall Gazette und der Review of Reviews. 1912 reiste er nach New York, um auf einem Friedenskongress zu sprechen; sein Rückfahrschein erster Klasse war für die Titanic gebucht.',
       it: "Nato nel 1849 in Inghilterra, uno dei fondatori del giornalismo investigativo britannico. La sua inchiesta del 1892 sulla prostituzione minorile a Londra fece scalpore — e lo portò brevemente in prigione. Diresse la Pall Mall Gazette e la Review of Reviews. Nel 1912 salpò per New York per parlare a un congresso per la pace; il suo biglietto di ritorno in prima classe era prenotato sul Titanic.",
     },
-    vimeoId: '',
+    vimeoId: 'https://vimeo.com/1249736799/11e96eca5f',
     posterUrl: 'posters/02-william-thomas-stead.jpg',
   },
   {
