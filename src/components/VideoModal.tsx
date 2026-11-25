@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
 import { buildVimeoEmbed } from '../utils/video';
 
-// iPhone/iPad (incl. iPadOS posing as a Mac): WebKit only lets an embedded
-// player autoplay muted, so there we wait for a tap on play to get sound.
+// iPhone/iPad (incl. iPadOS posing as a Mac). WebKit only lets an embedded
+// player autoplay muted, so there we wait for a tap on play (with sound) and
+// hand the video to the system player, which rotates with the phone.
 const isIOS = () =>
   /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
@@ -13,23 +14,26 @@ const isIOS = () =>
  * user gesture.
  *
  * Phones/tablets ("touch"):
- * - Where the page can go fullscreen (Android, iPad) it does, and Android
- *   also locks landscape; leaving fullscreen closes the player.
- * - Held upright, the player is laid out sideways across the whole screen
- *   (rotated 90°), Netflix-style — iPhone can't fullscreen or rotate a page,
- *   and this also covers Android browsers that refuse the landscape lock.
- *   Turning the phone to landscape drops the rotation.
+ * - iPhone/iPad: a black screen with the player; tapping play opens the
+ *   video in iOS's own fullscreen player (playsinline=0). Closing that
+ *   player (Done / swipe down) closes this overlay as well.
+ * - Android: the page goes fullscreen and locks landscape; leaving
+ *   fullscreen closes the player. If the browser refuses the lock and the
+ *   phone is held upright, the player is laid out sideways (rotated 90°).
  * - The page underneath is frozen while it's open and restored to the same
  *   scroll position on close.
  * Desktop: a centered overlay; Esc, the ✕ or a click outside closes it.
  */
 export const VideoModal: React.FC<{ video: string; title: string; onClose: () => void }> = ({ video, title, onClose }) => {
   const [touch] = useState(() => window.matchMedia('(pointer: coarse)').matches);
-  const [autoplay] = useState(() => !isIOS());
+  const [ios] = useState(isIOS);
   const modalRef = useRef<HTMLDivElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const enteredFullscreen = useRef(false);
-  const embed = buildVimeoEmbed(video, autoplay ? { autoplay: '1' } : {});
+  const embed = buildVimeoEmbed(video, ios ? { playsinline: '0' } : { autoplay: '1' });
 
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
   const close = () => {
     if (enteredFullscreen.current) {
       enteredFullscreen.current = false;
@@ -41,7 +45,7 @@ export const VideoModal: React.FC<{ video: string; title: string; onClose: () =>
 
   useEffect(() => {
     const el = modalRef.current;
-    if (!touch || !el?.requestFullscreen) return;
+    if (!touch || ios || !el?.requestFullscreen) return;
     el.requestFullscreen()
       .then(() => {
         enteredFullscreen.current = true;
@@ -49,7 +53,35 @@ export const VideoModal: React.FC<{ video: string; title: string; onClose: () =>
         (screen.orientation as ScreenOrientation & { lock?: (o: string) => Promise<void> }).lock?.('landscape').catch(() => {});
       })
       .catch(() => {});
-  }, [touch]);
+  }, [touch, ios]);
+
+  // iOS: when the system player is dismissed, go straight back to the page
+  // rather than leaving the visitor on a paused player. Uses Vimeo's
+  // postMessage API (fullscreenchange event); if it never fires, the ✕ works.
+  useEffect(() => {
+    if (!ios) return;
+    let wasFullscreen = false;
+    const onMessage = (e: MessageEvent) => {
+      if (e.origin !== 'https://player.vimeo.com' || e.source !== iframeRef.current?.contentWindow) return;
+      let msg: { event?: string; data?: { fullscreen?: boolean } };
+      try {
+        msg = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+      } catch {
+        return;
+      }
+      if (msg?.event === 'ready') {
+        iframeRef.current?.contentWindow?.postMessage(
+          JSON.stringify({ method: 'addEventListener', value: 'fullscreenchange' }),
+          'https://player.vimeo.com',
+        );
+      } else if (msg?.event === 'fullscreenchange') {
+        if (msg.data?.fullscreen) wasFullscreen = true;
+        else if (wasFullscreen) onCloseRef.current();
+      }
+    };
+    window.addEventListener('message', onMessage);
+    return () => window.removeEventListener('message', onMessage);
+  }, [ios]);
 
   // Freeze the page behind the player (position:fixed is the variant iOS
   // Safari respects) and put it back exactly where it was.
@@ -84,7 +116,7 @@ export const VideoModal: React.FC<{ video: string; title: string; onClose: () =>
 
   const player = (
     <div className="aspect-video bg-black border hairline overflow-hidden">
-      <iframe src={embed} title={title} className="w-full h-full" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen />
+      <iframe ref={iframeRef} src={embed} title={title} className="w-full h-full" allow="autoplay; fullscreen; picture-in-picture" allowFullScreen />
     </div>
   );
   const closeButton = (className: string) => (
@@ -92,6 +124,15 @@ export const VideoModal: React.FC<{ video: string; title: string; onClose: () =>
       <X className="w-6 h-6" />
     </button>
   );
+
+  if (touch && ios) {
+    return (
+      <div ref={modalRef} className="fixed inset-0 z-[100] bg-black overscroll-contain flex items-center justify-center">
+        {closeButton('absolute top-3 right-3 z-10 rounded-full bg-black/60 p-2')}
+        <div className="w-full max-w-[calc(100dvh*16/9)]">{player}</div>
+      </div>
+    );
+  }
 
   if (touch) {
     return (
