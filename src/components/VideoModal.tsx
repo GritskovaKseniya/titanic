@@ -17,6 +17,7 @@ const isIOS = () =>
  * - iPhone/iPad: a black screen with the player; tapping play opens the
  *   video in iOS's own fullscreen player (playsinline=0). Closing that
  *   player (Done / swipe down) closes this overlay as well.
+ * - Everywhere: when the video ends, the player closes by itself.
  * - Android: the page goes fullscreen and locks landscape; leaving
  *   fullscreen closes the player. If the browser refuses the lock and the
  *   phone is held upright, the player is laid out sideways (rotated 90°).
@@ -32,8 +33,6 @@ export const VideoModal: React.FC<{ video: string; title: string; onClose: () =>
   const enteredFullscreen = useRef(false);
   const embed = buildVimeoEmbed(video, ios ? { playsinline: '0' } : { autoplay: '1' });
 
-  const onCloseRef = useRef(onClose);
-  onCloseRef.current = onClose;
   const close = () => {
     if (enteredFullscreen.current) {
       enteredFullscreen.current = false;
@@ -55,11 +54,14 @@ export const VideoModal: React.FC<{ video: string; title: string; onClose: () =>
       .catch(() => {});
   }, [touch, ios]);
 
-  // iOS: when the system player is dismissed, go straight back to the page
-  // rather than leaving the visitor on a paused player. Uses Vimeo's
-  // postMessage API (fullscreenchange event); if it never fires, the ✕ works.
+  // Listen to the Vimeo player (its postMessage API): when the video ends,
+  // close and return to the page instead of showing Vimeo's "More from…"
+  // end screen; on iOS also when the system player is dismissed (Done /
+  // swipe down) rather than leaving a paused player. If the messages never
+  // arrive, the ✕ still closes it.
+  const closeRef = useRef(close);
+  closeRef.current = close;
   useEffect(() => {
-    if (!ios) return;
     let wasFullscreen = false;
     const onMessage = (e: MessageEvent) => {
       if (e.origin !== 'https://player.vimeo.com' || e.source !== iframeRef.current?.contentWindow) return;
@@ -70,13 +72,14 @@ export const VideoModal: React.FC<{ video: string; title: string; onClose: () =>
         return;
       }
       if (msg?.event === 'ready') {
-        iframeRef.current?.contentWindow?.postMessage(
-          JSON.stringify({ method: 'addEventListener', value: 'fullscreenchange' }),
-          'https://player.vimeo.com',
-        );
+        for (const value of ios ? ['ended', 'fullscreenchange'] : ['ended']) {
+          iframeRef.current?.contentWindow?.postMessage(JSON.stringify({ method: 'addEventListener', value }), 'https://player.vimeo.com');
+        }
+      } else if (msg?.event === 'ended') {
+        closeRef.current();
       } else if (msg?.event === 'fullscreenchange') {
         if (msg.data?.fullscreen) wasFullscreen = true;
-        else if (wasFullscreen) onCloseRef.current();
+        else if (wasFullscreen) closeRef.current();
       }
     };
     window.addEventListener('message', onMessage);
