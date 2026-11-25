@@ -4,7 +4,7 @@ import { Episode } from '../data/episodes';
 import { Language, TranslationsShape } from '../i18n/translations';
 import { resolveImageSrc } from '../utils/publicUrl';
 import { useReveal } from '../hooks/useReveal';
-import { useVimeoThumbnail } from '../hooks/useVimeoThumbnail';
+import { useVimeoInfo } from '../hooks/useVimeoInfo';
 
 export const EpisodeCard: React.FC<{
   ep: Episode;
@@ -18,8 +18,11 @@ export const EpisodeCard: React.FC<{
   delayMs: number;
 }> = ({ ep, language, t, thumbStyle, hasEmbed, expanded, onOpen, onToggleExpanded, delayMs }) => {
   const [ref, visible] = useReveal<HTMLElement>();
-  // No poster yet but the episode is published: show the video's own cover frame.
-  const videoThumb = useVimeoThumbnail(ep.vimeoId, !ep.posterUrl && hasEmbed);
+  // Published episodes: length for the badge, and the video's own cover
+  // frame when there's no poster yet.
+  const video = useVimeoInfo(ep.vimeoId, hasEmbed);
+  const videoThumb = ep.posterUrl ? null : video?.thumbnailUrl;
+  const minutes = video?.duration ? Math.round(video.duration / 60) : null;
 
   return (
     <article
@@ -31,7 +34,8 @@ export const EpisodeCard: React.FC<{
       <button
         onClick={onOpen}
         disabled={!hasEmbed}
-        className="relative w-full aspect-video overflow-hidden rounded-2xl border hairline text-left disabled:cursor-default transition-colors group-hover:border-accent/50"
+        className="episode-thumb relative w-full aspect-video overflow-hidden rounded-2xl border hairline text-left disabled:cursor-default
+                   transition-[border-color,box-shadow,transform] duration-200 enabled:group-hover:border-accent enabled:active:scale-[0.99]"
         style={thumbStyle}
       >
         {ep.posterUrl && (
@@ -43,7 +47,7 @@ export const EpisodeCard: React.FC<{
           <img
             src={resolveImageSrc(ep.posterUrl)}
             alt=""
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
             style={{ objectPosition: `50% ${ep.posterFocusY ?? 27}%` }}
           />
         )}
@@ -52,31 +56,42 @@ export const EpisodeCard: React.FC<{
           <img
             src={videoThumb}
             alt=""
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-        <span className="timecode absolute top-2.5 left-2.5 text-[11px] text-bone/90">
+        <span className="timecode absolute top-2.5 left-3 text-[14px] text-bone [text-shadow:0_1px_3px_rgb(0_0_0/0.8)]">
           {String(ep.number).padStart(2, '0')}
         </span>
         {hasEmbed ? (
-          <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-            <span className="w-11 h-11 rounded-full bg-accent/90 flex items-center justify-center">
-              <Play className="w-4 h-4 text-dark ml-0.5" />
+          <>
+            <span className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <span className="w-11 h-11 rounded-full bg-accent/90 flex items-center justify-center">
+                <Play className="w-4 h-4 text-dark ml-0.5" />
+              </span>
             </span>
-          </span>
+            {minutes && (
+              <span className="badge badge-archival absolute bottom-2.5 right-2.5">
+                {minutes} {t.episodes.minutes}
+              </span>
+            )}
+          </>
         ) : (
           <span className="badge badge-archival absolute bottom-2.5 right-2.5">{t.episodes.comingSoon}</span>
         )}
       </button>
 
       <div className="mt-3">
-        <h3 className="text-base font-heading font-semibold uppercase text-bone group-hover:text-accent transition-colors">
-          {ep.title[language]}
-        </h3>
-        <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-goldBright block mt-0.5">
-          {ep.role[language]}
-        </span>
+        {/* Name and caption open the player too (the picture above is the
+            keyboard-focusable control for the same action). */}
+        <div onClick={hasEmbed ? onOpen : undefined} className={hasEmbed ? 'cursor-pointer' : undefined}>
+          <h3 className={`text-base font-heading font-semibold uppercase text-bone transition-colors ${hasEmbed ? 'group-hover:text-accent' : ''}`}>
+            {ep.title[language]}
+          </h3>
+          <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-goldBright block mt-0.5">
+            {ep.role[language]}
+          </span>
+        </div>
         <p className={`text-sm text-ash mt-1.5 whitespace-pre-line ${expanded ? '' : 'line-clamp-2'}`}>{ep.description[language]}</p>
         <button
           onClick={onToggleExpanded}

@@ -24,7 +24,16 @@ export const HOME_SCREEN_NAME: Record<Language, string> = {
 };
 
 export interface TranslationsShape {
-  meta: { eyebrowLeft: string; eyebrowRight: string; year: string; genre: string; runtime: string };
+  meta: {
+    eyebrowLeft: string;
+    eyebrowRight: string;
+    year: string;
+    genre: string;
+    /** Length of one episode, phrased per episode ("25–30 min each"). */
+    runtime: string;
+    /** "episode" in each plural form the language needs (Intl.PluralRules categories; `other` is the fallback). */
+    episodeWord: Partial<Record<Intl.LDMLPluralRule, string>> & { other: string };
+  };
   nav: { episodes: string; details: string; reconstructions: string };
   hero: {
     title: string;
@@ -39,6 +48,8 @@ export interface TranslationsShape {
     description: string;
     watch: string;
     comingSoon: string;
+    /** Unit for an episode's length on its card ("27 min"). */
+    minutes: string;
     season: string;
     readMore: string;
     readLess: string;
@@ -58,7 +69,8 @@ export const translations: Record<Language, TranslationsShape> = {
       eyebrowRight: 'Season 1',
       year: '2026',
       genre: 'Documentary',
-      runtime: '25–30 min',
+      runtime: '25–30 min each',
+      episodeWord: { one: 'episode', other: 'episodes' },
     },
     nav: {
       episodes: 'Episodes',
@@ -71,7 +83,7 @@ export const translations: Record<Language, TranslationsShape> = {
         "The real record of the Titanic's last voyage — and what the film never kept. Part of every episode is rebuilt by AI: faces, cabins, final minutes no archive footage survived to show.",
       cta: 'Watch Trailer',
       subline: 'archive · reconstruction · memory',
-      jumpLabel: 'Jump to',
+      jumpLabel: 'Choose an episode',
     },
     episodes: {
       label: 'Episodes',
@@ -80,6 +92,7 @@ export const translations: Record<Language, TranslationsShape> = {
         'Every episode follows one person aboard: who they were before the Titanic, how they came to be on her, how they acted that night — and whether they survived.',
       watch: 'Watch',
       comingSoon: 'Coming soon on Vimeo',
+      minutes: 'min',
       season: 'Season 1',
       readMore: 'Read more',
       readLess: 'Show less',
@@ -117,7 +130,8 @@ export const translations: Record<Language, TranslationsShape> = {
       eyebrowRight: '1 сезон',
       year: '2026',
       genre: 'Документальный',
-      runtime: '25–30 мин',
+      runtime: 'по 25–30 мин',
+      episodeWord: { one: 'серия', few: 'серии', many: 'серий', other: 'серии' },
     },
     nav: {
       episodes: 'Серии',
@@ -130,7 +144,7 @@ export const translations: Record<Language, TranslationsShape> = {
         'Реальная хроника гибели «Титаника» — и то, чего плёнка не сохранила. Часть каждой серии восстановлена нейросетями: лица, каюты, последние минуты, которых не осталось на архивных кадрах.',
       cta: 'Смотреть трейлер',
       subline: 'архив · реконструкция · память',
-      jumpLabel: 'Быстрый переход',
+      jumpLabel: 'Выберите серию',
     },
     episodes: {
       label: 'Серии',
@@ -139,6 +153,7 @@ export const translations: Record<Language, TranslationsShape> = {
         'Каждая серия — это один человек на борту: кем он был до «Титаника», как оказался на корабле, как повёл себя в ту ночь — и выжил ли.',
       watch: 'Смотреть',
       comingSoon: 'Скоро на Vimeo',
+      minutes: 'мин',
       season: 'Сезон 1',
       readMore: 'Читать дальше',
       readLess: 'Свернуть',
@@ -176,7 +191,8 @@ export const translations: Record<Language, TranslationsShape> = {
       eyebrowRight: 'Saison 1',
       year: '2026',
       genre: 'Documentaire',
-      runtime: '25 à 30 min',
+      runtime: '25 à 30 min chacun',
+      episodeWord: { one: 'épisode', other: 'épisodes' },
     },
     nav: {
       episodes: 'Épisodes',
@@ -189,7 +205,7 @@ export const translations: Record<Language, TranslationsShape> = {
         "La véritable histoire du dernier voyage du Titanic — et ce que la pellicule n'a jamais gardé. Une partie de chaque épisode est reconstituée par l'IA : visages, cabines, derniers instants qu'aucune archive n'a pu montrer.",
       cta: 'Voir la bande-annonce',
       subline: 'archives · reconstitution · mémoire',
-      jumpLabel: 'Aller à',
+      jumpLabel: 'Choisir un épisode',
     },
     episodes: {
       label: 'Épisodes',
@@ -198,6 +214,7 @@ export const translations: Record<Language, TranslationsShape> = {
         "Chaque épisode suit une personne à bord : qui elle était avant le Titanic, comment elle s'est retrouvée à bord, comment elle a agi cette nuit-là — et si elle a survécu.",
       watch: 'Regarder',
       comingSoon: 'Bientôt sur Vimeo',
+      minutes: 'min',
       season: 'Saison 1',
       readMore: 'Lire la suite',
       readLess: 'Réduire',
@@ -235,7 +252,8 @@ export const translations: Record<Language, TranslationsShape> = {
       eyebrowRight: 'Temporada 1',
       year: '2026',
       genre: 'Documental',
-      runtime: '25–30 min',
+      runtime: '25–30 min cada uno',
+      episodeWord: { one: 'episodio', other: 'episodios' },
     },
     nav: {
       episodes: 'Episodios',
@@ -248,7 +266,7 @@ export const translations: Record<Language, TranslationsShape> = {
         'La crónica real del último viaje del Titanic — y lo que la película nunca conservó. Parte de cada episodio está reconstruida por IA: rostros, camarotes, los últimos minutos que ningún archivo logró mostrar.',
       cta: 'Ver el tráiler',
       subline: 'archivo · reconstrucción · memoria',
-      jumpLabel: 'Ir a',
+      jumpLabel: 'Elige un episodio',
     },
     episodes: {
       label: 'Episodios',
@@ -257,6 +275,7 @@ export const translations: Record<Language, TranslationsShape> = {
         'Cada episodio sigue a una persona a bordo: quién era antes del Titanic, cómo llegó a embarcar, cómo actuó esa noche — y si sobrevivió.',
       watch: 'Ver',
       comingSoon: 'Próximamente en Vimeo',
+      minutes: 'min',
       season: 'Temporada 1',
       readMore: 'Leer más',
       readLess: 'Mostrar menos',
@@ -294,7 +313,8 @@ export const translations: Record<Language, TranslationsShape> = {
       eyebrowRight: 'Staffel 1',
       year: '2026',
       genre: 'Dokumentation',
-      runtime: '25–30 Min.',
+      runtime: 'je 25–30 Min.',
+      episodeWord: { one: 'Folge', other: 'Folgen' },
     },
     nav: {
       episodes: 'Folgen',
@@ -307,7 +327,7 @@ export const translations: Record<Language, TranslationsShape> = {
         'Die wahre Geschichte der letzten Fahrt der Titanic — und das, was der Film nie festgehalten hat. Ein Teil jeder Folge wird von KI rekonstruiert: Gesichter, Kabinen, letzte Minuten, die kein Archivmaterial zeigen konnte.',
       cta: 'Trailer ansehen',
       subline: 'Archiv · Rekonstruktion · Erinnerung',
-      jumpLabel: 'Springe zu',
+      jumpLabel: 'Folge wählen',
     },
     episodes: {
       label: 'Folgen',
@@ -316,6 +336,7 @@ export const translations: Record<Language, TranslationsShape> = {
         'Jede Folge begleitet eine Person an Bord: wer sie vor der Titanic war, wie sie an Bord kam, wie sie sich in jener Nacht verhielt — und ob sie überlebte.',
       watch: 'Ansehen',
       comingSoon: 'Demnächst auf Vimeo',
+      minutes: 'Min.',
       season: 'Staffel 1',
       readMore: 'Weiterlesen',
       readLess: 'Weniger anzeigen',
@@ -353,7 +374,8 @@ export const translations: Record<Language, TranslationsShape> = {
       eyebrowRight: 'Stagione 1',
       year: '2026',
       genre: 'Documentario',
-      runtime: '25–30 min',
+      runtime: '25–30 min ciascuno',
+      episodeWord: { one: 'episodio', other: 'episodi' },
     },
     nav: {
       episodes: 'Episodi',
@@ -366,7 +388,7 @@ export const translations: Record<Language, TranslationsShape> = {
         "La cronaca reale dell'ultimo viaggio del Titanic — e ciò che la pellicola non ha mai conservato. Parte di ogni episodio è ricostruita dall'IA: volti, cabine, gli ultimi minuti che nessun archivio è riuscito a mostrare.",
       cta: 'Guarda il trailer',
       subline: 'archivio · ricostruzione · memoria',
-      jumpLabel: 'Vai a',
+      jumpLabel: 'Scegli un episodio',
     },
     episodes: {
       label: 'Episodi',
@@ -375,6 +397,7 @@ export const translations: Record<Language, TranslationsShape> = {
         'Ogni episodio segue una persona a bordo: chi era prima del Titanic, come è arrivata a imbarcarsi, come si è comportata quella notte — e se è sopravvissuta.',
       watch: 'Guarda',
       comingSoon: 'Presto su Vimeo',
+      minutes: 'min',
       season: 'Stagione 1',
       readMore: 'Continua a leggere',
       readLess: 'Mostra meno',

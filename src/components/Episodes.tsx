@@ -6,11 +6,11 @@ import { splitLastWord } from '../utils/splitAccent';
 import { EpisodeCard } from './EpisodeCard';
 import { VideoModal } from './VideoModal';
 
-const HUE_GRADIENTS = [
-  'linear-gradient(150deg, rgb(var(--color-dark-tertiary)) 0%, rgb(var(--color-accent)) 60%, rgb(var(--color-dark)) 100%)',
-  'linear-gradient(150deg, rgb(var(--color-primary)) 0%, rgb(var(--color-accent) / 0.75) 55%, rgb(var(--color-dark-sec)) 100%)',
-  'linear-gradient(150deg, rgb(var(--color-dark)) 0%, rgb(var(--color-dark-tertiary)) 55%, rgb(var(--color-primary)) 130%)',
-];
+// Stand-in until an episode has a picture (and while a video's cover frame
+// loads): a quiet dark panel in the theme's own shades, not a colored fill.
+const PLACEHOLDER = {
+  background: 'linear-gradient(150deg, rgb(var(--color-dark-tertiary)) 0%, rgb(var(--color-dark-sec)) 55%, rgb(var(--color-dark)) 100%)',
+};
 
 export const Episodes: React.FC = () => {
   const { t, language } = useLanguage();
@@ -29,7 +29,7 @@ export const Episodes: React.FC = () => {
   const active = episodes.find((e) => e.number === openEpisode);
 
   return (
-    <section id="episodes" className="py-12 sm:py-16 lg:py-20 bg-dark">
+    <section id="episodes" className="pt-8 pb-12 sm:pb-16 lg:pb-20 bg-dark">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="grid md:grid-cols-12 gap-6 mb-12">
           <div className="md:col-span-7">
@@ -44,7 +44,7 @@ export const Episodes: React.FC = () => {
         <div className="grid sm:grid-cols-2 gap-6 lg:gap-8">
           {episodes.map((ep, i) => {
             const embed = buildVimeoEmbed(ep.vimeoId);
-            const thumb = ep.posterUrl ? undefined : { background: HUE_GRADIENTS[ep.number % HUE_GRADIENTS.length] };
+            const thumb = ep.posterUrl ? undefined : PLACEHOLDER;
             return (
               <EpisodeCard
                 key={ep.number}

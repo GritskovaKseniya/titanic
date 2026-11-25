@@ -9,7 +9,7 @@ import { resolveImageSrc } from '../utils/publicUrl';
 import { splitLastWord } from '../utils/splitAccent';
 
 export const Hero: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { trailerVimeoId } = useSiteSettings();
   const hasTrailer = !!buildVimeoEmbed(trailerVimeoId);
   const [trailerOpen, setTrailerOpen] = useState(false);
@@ -24,6 +24,28 @@ export const Hero: React.FC = () => {
   const [parallaxY, setParallaxY] = useState(0);
 
   const [titleLead, titleLast] = splitLastWord(t.hero.title);
+  const episodeWord = t.meta.episodeWord[new Intl.PluralRules(language).select(episodes.length)] ?? t.meta.episodeWord.other;
+
+  // Episode chips: glide to the card, then outline it for a second so the eye
+  // lands on the right one.
+  const jumpToEpisode = (e: React.MouseEvent, number: number) => {
+    const card = document.getElementById(`episode-${number}`);
+    const thumb = card?.querySelector('.episode-thumb');
+    if (!card || !thumb) return;
+    e.preventDefault();
+    history.replaceState(null, '', `#episode-${number}`);
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    card.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    let started = false;
+    const flash = () => {
+      if (started) return;
+      started = true;
+      thumb.classList.add('episode-flash');
+      setTimeout(() => thumb.classList.remove('episode-flash'), 1000);
+    };
+    window.addEventListener('scrollend', flash, { once: true });
+    setTimeout(flash, 900); // no scrollend (already in place, or older browsers)
+  };
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -35,9 +57,12 @@ export const Hero: React.FC = () => {
 
   // Height tracks width (55vw ≈ the photo's own ~1.8:1 frame), so the ship
   // keeps the same composition on any screen instead of getting cropped on
-  // wide displays; 640px floor for content on phones/tablets.
+  // wide displays; 640px floor for content on phones/tablets. The text sits
+  // at the bottom of that frame (the eyebrow line stays on top), so the
+  // episode chips lead straight into the episodes instead of leaving an
+  // empty band of fade between them.
   return (
-    <section id="top" className="grain relative overflow-hidden bg-dark min-h-[clamp(640px,55vw,1400px)]">
+    <section id="top" className="grain relative overflow-hidden bg-dark min-h-[clamp(640px,55vw,1400px)] flex flex-col">
       {/* The dusk bow shot — real hero still instead of the old gradient
           placeholder, with a scrim so the text on top stays legible. */}
       <img
@@ -62,24 +87,25 @@ export const Hero: React.FC = () => {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-8 pt-20 sm:pt-24 pb-14 sm:pb-16 lg:pb-20">
+      <div className="relative z-10 flex-1 flex flex-col w-full max-w-6xl mx-auto px-5 sm:px-8 pt-20 sm:pt-24 pb-10">
         <div className="flex items-baseline justify-between border-b hairline pb-4 timecode text-[10px] sm:text-[11px] text-ash uppercase">
           <span>{t.meta.eyebrowLeft}</span>
-          <span className="hidden sm:block">{t.meta.eyebrowRight}</span>
         </div>
 
-        <div className="flex flex-col gap-4 sm:gap-5 pt-7 sm:pt-8">
+        <div className="flex flex-col gap-4 sm:gap-5 pt-7 sm:pt-8 mt-auto">
           <h1 className="font-heading font-semibold uppercase text-bone leading-[1.05] tracking-tight animate-fade-up text-3xl sm:text-4xl lg:text-5xl">
             {titleLead} <span className="text-accent">{titleLast}</span>
           </h1>
 
           <div className="flex flex-wrap items-center gap-2.5 animate-fade-up">
             <span className="badge badge-archival">{t.meta.genre}</span>
-            <span className="timecode text-xs text-ash">{t.meta.year}</span>
-            <span className="timecode text-xs text-ash">·</span>
-            <span className="timecode text-xs text-ash">{t.episodes.season}</span>
-            <span className="timecode text-xs text-ash">·</span>
-            <span className="timecode text-xs text-ash">{t.meta.runtime}</span>
+            {/* "10 episodes · 25–30 min each · 2026": says plainly what the
+                minutes refer to. "Season 1" only heads the episodes section. */}
+            {/* One run of text; the no-break space before each dot means a
+                narrow screen wraps after a dot, never in front of one. */}
+            <span className="timecode text-xs text-ash">
+              {[`${episodes.length} ${episodeWord}`, t.meta.runtime, t.meta.year].join('\u00a0· ')}
+            </span>
           </div>
 
           <p className="max-w-xl text-base text-ash leading-relaxed animate-fade-up">{t.hero.pitch}</p>
@@ -98,14 +124,18 @@ export const Hero: React.FC = () => {
             )}
           </div>
 
-          <div className="hero-jump-to animate-fade-up pt-1">
-            <span className="slate-label block mb-2">{t.hero.jumpLabel}</span>
+          {/* 40px below the button (gap + padding). Chips are 44px — a
+              comfortable finger target. */}
+          <div className="hero-jump-to animate-fade-up pt-6 sm:pt-5">
+            <span className="slate-label block mb-2.5">{t.hero.jumpLabel}</span>
             <div className="flex flex-wrap gap-2">
               {episodes.map((ep) => (
                 <a
                   key={ep.number}
                   href={`#episode-${ep.number}`}
-                  className="jump-chip timecode text-xs text-ash border hairline rounded-full px-2.5 py-1 hover:text-accent hover:border-accent transition-colors"
+                  onClick={(e) => jumpToEpisode(e, ep.number)}
+                  className="jump-chip timecode inline-flex items-center justify-center w-11 h-11 text-[15px] text-ash border hairline rounded-full transition-colors
+                             hover:text-accent hover:border-accent active:bg-accent active:border-accent active:text-dark"
                 >
                   {String(ep.number).padStart(2, '0')}
                 </a>

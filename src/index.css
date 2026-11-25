@@ -196,9 +196,8 @@
   transform: translateX(4px);
 }
 
-/* Layout: 32px clear of the paragraph above; Jump to pushed further down so
-   it doesn't compete visually. Full-width on phones, auto width from sm up —
-   there's only the one CTA now that Share is gone. */
+/* Layout: 32px clear of the paragraph above. Full-width on phones, auto width
+   from sm up — there's only the one CTA now that Share is gone. */
 [data-theme='gold'] .hero-cta-row {
   padding-top: 32px;
   align-items: stretch;
@@ -206,9 +205,6 @@
 [data-theme='gold'] .hero-cta-row .btn-cta {
   width: 100%;
   min-height: 52px;
-}
-[data-theme='gold'] .hero-jump-to {
-  padding-top: 48px;
 }
 @media (min-width: 640px) {
   [data-theme='gold'] .hero-cta-row {
@@ -570,4 +566,10 @@ html {
 .btn-quiet:hover {
   border-color: rgb(var(--color-accent) / 0.6);
   color: #ffffff;
+}
+
+/* Episode card outline after jumping to it from the hero's episode chips. */
+.episode-thumb.episode-flash {
+  border-color: rgb(var(--color-accent));
+  box-shadow: 0 0 0 2px rgb(var(--color-accent)), 0 0 24px rgb(var(--color-accent) / 0.35);
 }
