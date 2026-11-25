@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { X } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useEpisodes } from '../data/episodes';
@@ -26,8 +26,53 @@ export const Episodes: React.FC = () => {
       return next;
     });
 
+  // Phones/tablets: open the player straight into fullscreen. Android and iPad
+  // allow fullscreening our modal (requested right after the tap, while the
+  // browser still counts it as user-initiated); iPhone doesn't, so there the
+  // player autoplays with playsinline=0, which hands it to iOS's native
+  // fullscreen video player as soon as playback starts.
+  const [touchPlayer, setTouchPlayer] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const enteredFullscreen = useRef(false);
+
+  const openPlayer = (number: number) => {
+    setTouchPlayer(window.matchMedia('(pointer: coarse)').matches);
+    setOpenEpisode(number);
+  };
+
+  const closePlayer = () => {
+    if (enteredFullscreen.current) {
+      enteredFullscreen.current = false;
+      screen.orientation?.unlock?.();
+      if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+    }
+    setOpenEpisode(null);
+  };
+
   const active = episodes.find((e) => e.number === openEpisode);
-  const activeEmbed = active ? buildVimeoEmbed(active.vimeoId) : null;
+  const activeEmbed = active ? buildVimeoEmbed(active.vimeoId, touchPlayer ? { autoplay: '1', playsinline: '0' } : {}) : null;
+
+  useEffect(() => {
+    const el = modalRef.current;
+    if (!activeEmbed || !touchPlayer || !el?.requestFullscreen) return;
+    el.requestFullscreen()
+      .then(() => {
+        enteredFullscreen.current = true;
+        // Not in lib.dom's types yet; Android Chrome supports it in fullscreen.
+        (screen.orientation as ScreenOrientation & { lock?: (o: string) => Promise<void> }).lock?.('landscape').catch(() => {});
+      })
+      .catch(() => {});
+  }, [activeEmbed, touchPlayer]);
+
+  // Leaving fullscreen (back gesture, system button) closes the player too,
+  // instead of dropping the visitor into a half-screen modal.
+  useEffect(() => {
+    const onChange = () => {
+      if (!document.fullscreenElement && enteredFullscreen.current) closePlayer();
+    };
+    document.addEventListener('fullscreenchange', onChange);
+    return () => document.removeEventListener('fullscreenchange', onChange);
+  });
 
   return (
     <section id="episodes" className="py-12 sm:py-16 lg:py-20 bg-dark">
@@ -55,7 +100,7 @@ export const Episodes: React.FC = () => {
                 thumbStyle={thumb}
                 hasEmbed={!!embed}
                 expanded={expanded.has(ep.number)}
-                onOpen={() => embed && setOpenEpisode(ep.number)}
+                onOpen={() => embed && openPlayer(ep.number)}
                 onToggleExpanded={() => toggleExpanded(ep.number)}
                 delayMs={(i % 2) * 90}
               />
@@ -66,13 +111,22 @@ export const Episodes: React.FC = () => {
 
       {activeEmbed && (
         <div
-          className="fixed inset-0 z-[100] bg-black/85 flex items-center justify-center p-4 sm:p-8"
-          onClick={() => setOpenEpisode(null)}
+          ref={modalRef}
+          className={`fixed inset-0 z-[100] flex items-center justify-center ${touchPlayer ? 'bg-black' : 'bg-black/85 p-4 sm:p-8'}`}
+          onClick={closePlayer}
         >
-          <div className="relative w-full max-w-4xl" onClick={(e) => e.stopPropagation()}>
+          {/* Width also capped by height (16:9), so the video always fits the
+              screen whole. Touch fullscreen gives it the full height and puts
+              the close button over the corner; desktop keeps room above it. */}
+          <div
+            className={`relative w-full ${touchPlayer ? 'max-w-[calc(100dvh*16/9)]' : 'max-w-[min(56rem,calc((100dvh-6rem)*16/9))]'}`}
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
-              onClick={() => setOpenEpisode(null)}
-              className="absolute -top-10 right-0 text-bone hover:text-accent transition-colors"
+              onClick={closePlayer}
+              className={`text-bone hover:text-accent transition-colors ${
+                touchPlayer ? 'fixed top-3 right-3 z-10 rounded-full bg-black/60 p-2' : 'absolute -top-10 right-0'
+              }`}
               aria-label="Close"
             >
               <X className="w-6 h-6" />

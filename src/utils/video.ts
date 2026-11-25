@@ -2,7 +2,7 @@
 // one-two-film-academy's utils/video.ts, trimmed to the one host this site
 // needs. Accepts a bare id, a full vimeo.com URL, or a private-video URL
 // carrying a `/<hash>` or `?h=<hash>` privacy token.
-export const buildVimeoEmbed = (input: string): string | null => {
+export const buildVimeoEmbed = (input: string, extraParams: Record<string, string> = {}): string | null => {
   const s = input.trim();
   if (!s) return null;
 
@@ -21,7 +21,7 @@ export const buildVimeoEmbed = (input: string): string | null => {
   }
   if (!id) return null;
 
-  const params = new URLSearchParams({ dnt: '1', title: '0', byline: '0', portrait: '0' });
+  const params = new URLSearchParams({ dnt: '1', title: '0', byline: '0', portrait: '0', ...extraParams });
   if (hash) params.set('h', hash);
   return `https://player.vimeo.com/video/${id}?${params.toString()}`;
 };
