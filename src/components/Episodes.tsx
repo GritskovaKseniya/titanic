@@ -29,7 +29,7 @@ export const Episodes: React.FC = () => {
   const active = episodes.find((e) => e.number === openEpisode);
 
   return (
-    <section id="episodes" className="pt-8 pb-12 sm:pb-16 lg:pb-20 bg-dark">
+    <section id="episodes" className="pt-6 sm:pt-8 pb-12 sm:pb-16 lg:pb-20 bg-dark">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="grid md:grid-cols-12 gap-6 mb-12">
           <div className="md:col-span-7">

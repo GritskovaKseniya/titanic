@@ -60,7 +60,7 @@ export const EpisodeCard: React.FC<{
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-        <span className="timecode absolute top-2.5 left-3 text-[14px] text-bone [text-shadow:0_1px_3px_rgb(0_0_0/0.8)]">
+        <span className="timecode absolute top-2.5 left-3 text-sm text-bone [text-shadow:0_1px_3px_rgb(0_0_0/0.8)]">
           {String(ep.number).padStart(2, '0')}
         </span>
         {hasEmbed ? (

@@ -87,7 +87,7 @@ export const Hero: React.FC = () => {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 flex-1 flex flex-col w-full max-w-6xl mx-auto px-5 sm:px-8 pt-20 sm:pt-24 pb-10">
+      <div className="relative z-10 flex-1 flex flex-col w-full max-w-6xl mx-auto px-5 sm:px-8 pt-20 sm:pt-24 pb-8 sm:pb-10">
         <div className="flex items-baseline justify-between border-b hairline pb-4 timecode text-[10px] sm:text-[11px] text-ash uppercase">
           <span>{t.meta.eyebrowLeft}</span>
         </div>
@@ -124,9 +124,9 @@ export const Hero: React.FC = () => {
             )}
           </div>
 
-          {/* 40px below the button (gap + padding). Chips are 44px — a
-              comfortable finger target. */}
-          <div className="hero-jump-to animate-fade-up pt-6 sm:pt-5">
+          {/* Gap + padding below the button: 2rem on phones, 2.5rem from sm up.
+              Chips are 2.75rem (44px) — a comfortable finger target. */}
+          <div className="hero-jump-to animate-fade-up pt-4 sm:pt-5">
             <span className="slate-label block mb-2.5">{t.hero.jumpLabel}</span>
             <div className="flex flex-wrap gap-2">
               {episodes.map((ep) => (
@@ -134,7 +134,7 @@ export const Hero: React.FC = () => {
                   key={ep.number}
                   href={`#episode-${ep.number}`}
                   onClick={(e) => jumpToEpisode(e, ep.number)}
-                  className="jump-chip timecode inline-flex items-center justify-center w-11 h-11 text-[15px] text-ash border hairline rounded-full transition-colors
+                  className="jump-chip timecode inline-flex items-center justify-center w-11 h-11 text-[0.9375rem] text-ash border hairline rounded-full transition-colors
                              hover:text-accent hover:border-accent active:bg-accent active:border-accent active:text-dark"
                 >
                   {String(ep.number).padStart(2, '0')}
