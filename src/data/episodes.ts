@@ -292,7 +292,7 @@ export const defaultEpisodes: Episode[] = [
       de: 'Geboren 1865 in Augusta, Georgia. Er diente im Spanisch-Amerikanischen Krieg, arbeitete als Journalist und wurde dann Adjutant der Präsidenten Theodore Roosevelt und William Howard Taft. 1912 kehrte er nach einem sechswöchigen Urlaub in Europa nach Amerika zurück — sein Ticket erster Klasse war für die Titanic.',
       it: 'Nato nel 1865 ad Augusta, in Georgia. Prestò servizio nella guerra ispano-americana, lavorò come giornalista e in seguito divenne aiutante dei presidenti Theodore Roosevelt e William Howard Taft. Nel 1912 stava tornando in America dopo sei settimane di vacanza in Europa — il suo biglietto di prima classe era sul Titanic.',
     },
-    vimeoId: '',
+    vimeoId: 'https://vimeo.com/1249786115/d46d2c5b05',
     posterUrl: '',
   },
   {
