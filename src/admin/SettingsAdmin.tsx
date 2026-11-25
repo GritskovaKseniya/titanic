@@ -24,7 +24,7 @@ export const SettingsAdmin: React.FC = () => {
   return (
     <div>
       <div className="flex items-center justify-between mb-5">
-        <h2 className="font-heading uppercase text-lg text-bone">Соцсети и контакты</h2>
+        <h2 className="font-heading uppercase text-lg text-bone">Трейлер, соцсети и контакты</h2>
         <AdminButton
           variant="quiet"
           disabled={seeding}
@@ -43,6 +43,14 @@ export const SettingsAdmin: React.FC = () => {
 
       <Card className="max-w-2xl">
         <div className="grid gap-4">
+          <Field
+            label="Трейлер сериала (ссылка Vimeo, кнопка Watch Trailer)"
+            value={draft.trailerVimeoId}
+            onChange={(v) => {
+              setDraft((d) => ({ ...d, trailerVimeoId: v }));
+              setSaved(false);
+            }}
+          />
           <Field
             label="Контактный email"
             value={draft.contactEmail}

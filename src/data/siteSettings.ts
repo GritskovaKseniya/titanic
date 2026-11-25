@@ -9,11 +9,14 @@ export interface SocialLink {
 }
 
 export interface SiteSettings {
+  /** Series trailer for the hero's "Watch Trailer" button (Vimeo link with its privacy hash). Empty → the button scrolls to the episodes instead. */
+  trailerVimeoId: string;
   contactEmail: string;
   socialLinks: SocialLink[];
 }
 
 export const defaultSiteSettings: SiteSettings = {
+  trailerVimeoId: 'https://vimeo.com/1249566787/b77a078510',
   contactEmail: 'marmelaicorp@gmail.com',
   socialLinks: [
     { id: 'instagram', label: 'Instagram', url: 'https://www.instagram.com/titanictvseries' },
@@ -33,7 +36,9 @@ export const useSiteSettings = (): SiteSettings => {
     const ref = doc(db, ...SETTINGS_DOC);
     return onSnapshot(
       ref,
-      (snap) => setSettings(snap.exists() ? (snap.data() as SiteSettings) : defaultSiteSettings),
+      // Merge over the defaults so a field added after the doc was saved
+      // (e.g. trailerVimeoId) still has a value instead of going undefined.
+      (snap) => setSettings(snap.exists() ? { ...defaultSiteSettings, ...(snap.data() as Partial<SiteSettings>) } : defaultSiteSettings),
       () => setSettings(defaultSiteSettings),
     );
   }, []);

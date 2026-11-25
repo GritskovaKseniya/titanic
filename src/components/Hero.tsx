@@ -2,11 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useEpisodes } from '../data/episodes';
+import { useSiteSettings } from '../data/siteSettings';
+import { buildVimeoEmbed } from '../utils/video';
+import { VideoModal } from './VideoModal';
 import { resolveImageSrc } from '../utils/publicUrl';
 import { splitLastWord } from '../utils/splitAccent';
 
 export const Hero: React.FC = () => {
   const { t } = useLanguage();
+  const { trailerVimeoId } = useSiteSettings();
+  const hasTrailer = !!buildVimeoEmbed(trailerVimeoId);
+  const [trailerOpen, setTrailerOpen] = useState(false);
+  const ctaClass = 'btn btn-cta inline-flex items-center gap-2 px-6 py-3 text-sm sm:text-base';
+  const ctaContent = (
+    <>
+      {t.hero.cta}
+      <ChevronRight className="arrow w-5 h-5 transition-transform duration-150" strokeWidth={3} />
+    </>
+  );
   const episodes = useEpisodes();
   const [parallaxY, setParallaxY] = useState(0);
 
@@ -72,10 +85,17 @@ export const Hero: React.FC = () => {
           <p className="max-w-xl text-base text-ash leading-relaxed animate-fade-up">{t.hero.pitch}</p>
 
           <div className="hero-cta-row flex flex-wrap items-center gap-3 pt-1 animate-fade-up">
-            <a href="#episodes" className="btn btn-cta inline-flex items-center gap-2 px-6 py-3 text-sm sm:text-base">
-              {t.hero.cta}
-              <ChevronRight className="arrow w-5 h-5 transition-transform duration-150" strokeWidth={3} />
-            </a>
+            {/* Plays the series trailer; without one configured it falls back
+                to scrolling to the episodes. */}
+            {hasTrailer ? (
+              <button type="button" onClick={() => setTrailerOpen(true)} className={ctaClass}>
+                {ctaContent}
+              </button>
+            ) : (
+              <a href="#episodes" className={ctaClass}>
+                {ctaContent}
+              </a>
+            )}
           </div>
 
           <div className="hero-jump-to animate-fade-up pt-1">
@@ -94,6 +114,8 @@ export const Hero: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {trailerOpen && <VideoModal video={trailerVimeoId} title={t.hero.cta} onClose={() => setTrailerOpen(false)} />}
     </section>
   );
 };
