@@ -6,7 +6,7 @@
 //
 // Checks:
 //   page      no console errors, no horizontal scroll (each theme × width)
-//   seam      hero bottom blends into the next section with no visible line
+//   seam      hero photo fades into the next section with no visible line
 //   routes    /reconstructions renders; header nav leads back to home sections
 //   icons     tab icon, home-screen icon, manifest and theme-color swap per
 //             theme × language, and every referenced file loads
@@ -48,23 +48,42 @@ for (const theme of themes) {
     if (page.errors.length) fail('page', `${tag} console errors: ${page.errors.join(' | ')}`);
     if (await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)) fail('page', `${tag} horizontal scroll`);
 
-    // Seam: in two columns at the screen edges (left under the text scrim,
-    // right under the photo — clear of the content column), every pixel from
-    // 30px above the hero's bottom edge to 10px below it should be the next
-    // section's flat background color.
+    // Seam: the hero photo reaches past the hero's bottom edge, under the
+    // start of the episodes, and fades out there. Checked in two 12px strips
+    // at the screen edges (left under the text scrim, right under the photo,
+    // clear of the content column), averaged across the strip so the photo's
+    // own texture (waterline, glints) doesn't count:
+    // - no step in color at the hero's bottom edge (where a section would
+    //   end in a line);
+    // - the photo has fully faded before its own bottom edge, so that edge
+    //   can't show;
+    // - 220px below the hero there's only the flat page background.
     await page.evaluate(() => {
       const r = document.getElementById('top').getBoundingClientRect();
-      window.scrollTo({ top: r.bottom + scrollY - 450, behavior: 'instant' }); // page has smooth scrolling
+      window.scrollTo({ top: r.bottom + scrollY - 400, behavior: 'instant' }); // page has smooth scrolling
     });
     await page.waitForTimeout(300);
-    const bottom = await page.evaluate(() => document.getElementById('top').getBoundingClientRect().bottom);
-    for (const x of [4, width - 4]) {
-      const { h, px } = await rgba(await page.screenshot({ clip: { x, y: bottom - 30, width: 1, height: 40 } }));
-      const ref = px.slice((h - 1) * 4, (h - 1) * 4 + 3);
-      for (let y = 0; y < h; y++) {
-        const c = px.slice(y * 4, y * 4 + 3);
-        if (c.some((v, i) => Math.abs(v - ref[i]) > 2)) {
-          fail('seam', `${tag} x=${x}: rgb(${c}) at ${y - 30}px from hero bottom vs rgb(${ref}) below`);
+    const { bottom, photoBottom } = await page.evaluate(() => ({
+      bottom: document.getElementById('top').getBoundingClientRect().bottom,
+      photoBottom: document.querySelector('#top img').getBoundingClientRect().bottom,
+    }));
+    const top = Math.floor(bottom) - 4;
+    for (const x of [2, width - 14]) {
+      const { w, h, px } = await rgba(await page.screenshot({ clip: { x, y: top, width: 12, height: 228 } }));
+      const row = (y) => [0, 1, 2].map((ch) => {
+        let sum = 0;
+        for (let i = 0; i < w; i++) sum += px[(y * w + i) * 4 + ch];
+        return Math.round(sum / w);
+      });
+      const differs = (a, b, tol) => a.some((v, i) => Math.abs(v - b[i]) > tol);
+      const bg = row(h - 1);
+      const [above, below] = [row(2), row(5)];
+      if (differs(above, below, 4)) fail('seam', `${tag} x=${x}: line at the hero's bottom edge, rgb(${above}) → rgb(${below})`);
+      const edge = Math.round(photoBottom) - 2 - top;
+      if (edge > 0 && edge < h && differs(row(edge), bg, 2)) fail('seam', `${tag} x=${x}: photo not faded out at its bottom edge, rgb(${row(edge)}) vs rgb(${bg})`);
+      for (let y = h - 40; y < h; y++) {
+        if (differs(row(y), bg, 2)) {
+          fail('seam', `${tag} x=${x}: photo still visible ${y - 4}px below the hero, rgb(${row(y)}) vs rgb(${bg})`);
           break;
         }
       }
