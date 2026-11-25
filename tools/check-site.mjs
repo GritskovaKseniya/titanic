@@ -77,7 +77,11 @@ for (const theme of themes) {
       });
       const differs = (a, b, tol) => a.some((v, i) => Math.abs(v - b[i]) > tol);
       const bg = row(h - 1);
-      const [above, below] = [row(2), row(5)];
+      const band = (from, to) => {
+        const rs = Array.from({ length: to - from }, (_, i) => row(from + i));
+        return [0, 1, 2].map((ch) => Math.round(rs.reduce((sum, r) => sum + r[ch], 0) / rs.length));
+      };
+      const [above, below] = [band(0, 4), band(4, 8)]; // 4 rows each side of the edge (clip starts 4px above it)
       if (differs(above, below, 4)) fail('seam', `${tag} x=${x}: line at the hero's bottom edge, rgb(${above}) → rgb(${below})`);
       const edge = Math.round(photoBottom) - 2 - top;
       if (edge > 0 && edge < h && differs(row(edge), bg, 2)) fail('seam', `${tag} x=${x}: photo not faded out at its bottom edge, rgb(${row(edge)}) vs rgb(${bg})`);
@@ -90,6 +94,19 @@ for (const theme of themes) {
     }
     await page.close();
   }
+}
+
+// A visitor who picked another palette back when the picker existed still
+// gets the site's theme, and there's no picker button.
+{
+  const page = await openSite(browser, { width: 390, theme: 'blue' });
+  const r = await page.evaluate(() => ({
+    theme: document.documentElement.dataset.theme,
+    picker: !!document.querySelector('[aria-label="Переключить тестовую палитру"]'),
+  }));
+  if (themes.length === 1 && r.theme !== themes[0]) fail('page', `saved theme 'blue' overrides the site theme: data-theme=${r.theme}`);
+  if (themes.length === 1 && r.picker) fail('page', 'theme picker button is shown');
+  await page.close();
 }
 
 console.log('routes');

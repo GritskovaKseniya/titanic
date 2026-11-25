@@ -55,46 +55,44 @@ export const Hero: React.FC = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // The photo frame's height tracks width (55vw ≈ the photo's own ~1.8:1
-  // frame), so the ship keeps the same composition on any screen; 640px
-  // floor on phones. The section itself is only as tall as its text: the
-  // frame hangs below it, under the start of the episodes (which are drawn
-  // on top, transparent), and fades out there — no empty band between the
-  // episode chips and "Season 1", and nothing of the ship cropped.
+  // The photo is sized by the hero's own height, not the screen width: its
+  // frame is the section plus 10rem hanging under the start of the episodes
+  // (drawn on top, transparent), the image fills that height and is pinned
+  // right. So the ship sits the same way next to the text on any screen —
+  // top of the mast near the header, hull level with the episode chips —
+  // instead of growing with the width and sinking below the text on wide
+  // monitors. Where the screen is wider than the photo, its left edge fades
+  // into the background (that side is under the text scrim anyway).
   return (
     <section id="top" className="grain relative">
-      <div
-        className="absolute inset-x-0 top-0 z-0 overflow-hidden h-[max(100%,clamp(640px,55vw,1400px))] pointer-events-none"
-        aria-hidden="true"
-      >
+      <div className="absolute inset-x-0 top-0 z-0 overflow-hidden h-[calc(100%+10rem)] pointer-events-none" aria-hidden="true">
         {/* The dusk bow shot, with a scrim so the text on top stays legible. */}
         <img
           src={resolveImageSrc('hero/night-bow.webp')}
           alt=""
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ transform: `translateY(calc(${parallaxY}px - 10%)) scale(1.1)`, objectPosition: '75% 45%' }}
+          className="absolute top-0 right-0 h-full w-auto max-w-none"
+          style={{
+            // Narrower than the photo (phones, tablets): slide it right so
+            // the bow area stays in view, as object-position 75% would — the
+            // photo's 75% point on the screen's 75% point. Never further left
+            // than pinned to the right edge.
+            transform: `translateX(max(0px, calc(25% - 25vw))) translateY(calc(${parallaxY}px - 16%)) scale(1.1)`,
+            maskImage: 'linear-gradient(to right, transparent 0, #000 30%)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent 0, #000 30%)',
+          }}
         />
         {/* Horizontal scrim for text legibility on the left, plus a vertical
             fade into rgb(var(--color-dark)), the page's own background, fully
-            opaque by 90%: the photo is shifted up 10%, so its bottom edge sits
-            at ~95% of the frame and would show as a seam otherwise. */}
+            opaque by 85%: the photo is lifted 16%, so its bottom edge sits at
+            ~89% of the frame and would show as a seam otherwise. */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(100deg, rgb(var(--color-dark) / calc(0.96 * var(--hero-scrim, 1))) 0%, rgb(var(--color-dark) / calc(0.82 * var(--hero-scrim, 1))) 30%, rgb(var(--color-dark) / calc(0.45 * var(--hero-scrim, 1))) 60%, rgb(var(--color-dark) / calc(0.2 * var(--hero-scrim, 1))) 100%), linear-gradient(180deg, transparent 0%, transparent 55%, rgb(var(--color-dark)) 90%)',
+              'linear-gradient(100deg, rgb(var(--color-dark) / calc(0.96 * var(--hero-scrim, 1))) 0%, rgb(var(--color-dark) / calc(0.82 * var(--hero-scrim, 1))) 30%, rgb(var(--color-dark) / calc(0.45 * var(--hero-scrim, 1))) 60%, rgb(var(--color-dark) / calc(0.2 * var(--hero-scrim, 1))) 100%), linear-gradient(180deg, transparent 0%, transparent 50%, rgb(var(--color-dark)) 85%)',
           }}
         />
       </div>
-      {/* Caps how far the photo reaches under the episodes: from just above
-          the section's end it fades to the page color within 12rem. On wide
-          screens the frame is much taller than the text, and its lower half
-          (the hull) would otherwise sit behind the season intro and cards. */}
-      <div
-        className="absolute inset-x-0 top-[calc(100%-2rem)] z-0 h-[clamp(640px,55vw,1400px)] pointer-events-none"
-        style={{ background: 'linear-gradient(180deg, transparent 0, rgb(var(--color-dark)) 12rem)' }}
-        aria-hidden="true"
-      />
 
       <div className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-8 pt-20 sm:pt-24 pb-8 sm:pb-10">
         <div className="flex items-baseline justify-between border-b hairline pb-4 timecode text-[10px] sm:text-[11px] text-ash uppercase">

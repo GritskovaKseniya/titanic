@@ -14,14 +14,14 @@ const THEMES: { id: string; label: string; swatch: string; hidden?: boolean }[] 
   { id: 'green', label: 'Зелёный', swatch: '#3EB386', hidden: true },
   { id: 'red', label: 'Красный (Netflix)', swatch: '#E50914', hidden: true },
   { id: 'brightgreen', label: 'Ярко-зелёный (Hulu)', swatch: '#1CE783', hidden: true },
-  { id: 'blue', label: 'Ледяной бирюзово-синий', swatch: '#0EA5E9' },
-  { id: 'blue-serif', label: 'Ледяной бирюзово-синий + сериф', swatch: '#0EA5E9' },
+  { id: 'blue', label: 'Ледяной бирюзово-синий', swatch: '#0EA5E9', hidden: true },
+  { id: 'blue-serif', label: 'Ледяной бирюзово-синий + сериф', swatch: '#0EA5E9', hidden: true },
   { id: 'blue-sapphire', label: 'Сапфировый (строгий)', swatch: '#60A5FA', hidden: true },
   { id: 'blue-steel', label: 'Холодный стальной', swatch: '#5B9BD5', hidden: true },
   { id: 'wine-ruby', label: 'Рубиново-винный', swatch: '#E11D48', hidden: true },
   { id: 'wine-bordeaux', label: 'Королевский бордо', swatch: '#C81E51', hidden: true },
   { id: 'wine-steel', label: 'Винный + холодный стальной', swatch: '#BE123C', hidden: true },
-  { id: 'classic', label: 'Классика (сериф, монохром)', swatch: '#9FB1C4' },
+  { id: 'classic', label: 'Классика (сериф, монохром)', swatch: '#9FB1C4', hidden: true },
   { id: 'gold', label: 'Золотой', swatch: '#B68E53' },
 ];
 
@@ -39,12 +39,19 @@ const iconSetFor = (theme: string): IconSet => (theme === 'classic' || theme ===
 
 const STORAGE_KEY = 'titanic-theme-preview';
 
+// Gold is the chosen palette: the site always uses it and the picker button
+// is gone (a theme saved from the picker earlier is ignored). To bring the
+// picker back, set this to true and un-hide the themes to offer above.
+const PICKER_ENABLED = false;
+const FIXED_THEME = 'gold';
+
 export const ThemeSwitcher: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState('blue');
+  const [theme, setTheme] = useState(PICKER_ENABLED ? 'blue' : FIXED_THEME);
   const { language } = useLanguage();
 
   useEffect(() => {
+    if (!PICKER_ENABLED) return;
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) setTheme(saved);
   }, []);
@@ -56,7 +63,7 @@ export const ThemeSwitcher: React.FC = () => {
       document.documentElement.dataset.theme = theme;
     }
     try {
-      localStorage.setItem(STORAGE_KEY, theme);
+      if (PICKER_ENABLED) localStorage.setItem(STORAGE_KEY, theme);
     } catch {
       // Private browsing or storage disabled — the toggle still works, it just won't persist.
     }
@@ -80,6 +87,8 @@ export const ThemeSwitcher: React.FC = () => {
     const appleTitleMeta = document.querySelector<HTMLMetaElement>('meta[name="apple-mobile-web-app-title"]');
     if (appleTitleMeta) appleTitleMeta.content = HOME_SCREEN_NAME[language];
   }, [theme, language]);
+
+  if (!PICKER_ENABLED) return null;
 
   return (
     <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-2">
