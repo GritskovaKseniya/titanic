@@ -72,10 +72,12 @@ export const VideoModal: React.FC<{ video: string; title: string; onClose: () =>
         return;
       }
       if (msg?.event === 'ready') {
-        for (const value of ios ? ['ended', 'fullscreenchange'] : ['ended']) {
+        // Over postMessage the end of the video is called "finish" (the SDK
+        // renames it "ended"); subscribing to either gets "finish" events.
+        for (const value of ios ? ['finish', 'fullscreenchange'] : ['finish']) {
           iframeRef.current?.contentWindow?.postMessage(JSON.stringify({ method: 'addEventListener', value }), 'https://player.vimeo.com');
         }
-      } else if (msg?.event === 'ended') {
+      } else if (msg?.event === 'finish' || msg?.event === 'ended') {
         closeRef.current();
       } else if (msg?.event === 'fullscreenchange') {
         if (msg.data?.fullscreen) wasFullscreen = true;
