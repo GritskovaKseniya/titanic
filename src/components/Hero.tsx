@@ -106,7 +106,7 @@ export const Hero: React.FC = () => {
 
           <div className="flex flex-wrap items-center gap-2.5 animate-fade-up">
             <span className="badge badge-archival">{t.meta.genre}</span>
-            {/* "10 episodes · 25–30 min each · 2026": says plainly what the
+            {/* "10 episodes · about 25 min each · 2026": says plainly what the
                 minutes refer to. "Season 1" only heads the episodes section. */}
             {/* One run of text; the no-break space before each dot means a
                 narrow screen wraps after a dot, never in front of one. */}
