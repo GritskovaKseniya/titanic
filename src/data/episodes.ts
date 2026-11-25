@@ -175,7 +175,7 @@ export const defaultEpisodes: Episode[] = [
       de: 'Neshan Krekorian wurde 1886 in Keghi im Osmanischen Reich geboren und war ein armenischer Auswanderer auf der Suche nach einem neuen Leben in Kanada. 1912 ging er in Cherbourg als Passagier der dritten Klasse an Bord der Titanic. Seine Rettung im Rettungsboot Nr. 10 markierte den Beginn einer zweiten Chance – einer Zukunft in Ontario, für immer überschattet von der Erinnerung an jene Nacht.',
       it: "Nato nel 1886 a Keghi, nell'Impero ottomano, Neshan Krekorian era un emigrante armeno in cerca di una nuova vita in Canada. Nel 1912 salì a bordo del Titanic a Cherbourg come passeggero di terza classe. La sua fuga a bordo della scialuppa n. 10 segnò l'inizio di una seconda possibilità: un futuro in Ontario, per sempre segnato dal ricordo di quella notte.",
     },
-    vimeoId: '',
+    vimeoId: 'https://vimeo.com/1250136820/be089d8852',
     posterUrl: 'posters/05-neshan-krekorian.jpg',
   },
   {
