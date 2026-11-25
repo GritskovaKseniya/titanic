@@ -146,7 +146,7 @@ export const defaultEpisodes: Episode[] = [
       de: 'Geboren 1864 in die Vermögensdynastie der Astors, die auf Pelzhandel und Immobilien gegründet war; er selbst baute sie weiter aus und entwickelte das Astor Hotel sowie Abschnitte des Broadway. Er war auf dem Heimweg nach New York mit seiner jungen zweiten Frau Madeleine, nach einer Ehe, über die die Gesellschaft getratscht hatte — ihre Flitterwochen durch Europa und Ägypten neigten sich dem Ende zu.',
       it: "Nato nel 1864 nella fortuna di famiglia degli Astor, costruita sul commercio di pellicce e sul settore immobiliare; la ampliò lui stesso, sviluppando l'Astor Hotel e tratti di Broadway. Stava tornando a New York con la sua giovane seconda moglie, Madeleine, dopo un matrimonio di cui l'alta società aveva chiacchierato — la loro luna di miele attraverso Europa ed Egitto stava per finire.",
     },
-    vimeoId: '',
+    vimeoId: 'https://vimeo.com/1249772075/d87e6eb8ff',
     posterUrl: '',
   },
   {
