@@ -29,7 +29,7 @@ export interface TranslationsShape {
     eyebrowRight: string;
     year: string;
     genre: string;
-    /** Length of one episode, phrased per episode ("about 25 min each"). */
+    /** Length of one episode, phrased per episode ("~25 min each"). */
     runtime: string;
     /** "episode" in each plural form the language needs (Intl.PluralRules categories; `other` is the fallback). */
     episodeWord: Partial<Record<Intl.LDMLPluralRule, string>> & { other: string };
@@ -69,7 +69,7 @@ export const translations: Record<Language, TranslationsShape> = {
       eyebrowRight: 'Season 1',
       year: '2026',
       genre: 'Documentary',
-      runtime: 'about 25 min each',
+      runtime: '~25 min each',
       episodeWord: { one: 'episode', other: 'episodes' },
     },
     nav: {
@@ -130,7 +130,7 @@ export const translations: Record<Language, TranslationsShape> = {
       eyebrowRight: '1 сезон',
       year: '2026',
       genre: 'Документальный',
-      runtime: 'около 25 мин каждая',
+      runtime: '~25 мин каждая',
       episodeWord: { one: 'серия', few: 'серии', many: 'серий', other: 'серии' },
     },
     nav: {
@@ -191,7 +191,7 @@ export const translations: Record<Language, TranslationsShape> = {
       eyebrowRight: 'Saison 1',
       year: '2026',
       genre: 'Documentaire',
-      runtime: 'environ 25 min chacun',
+      runtime: '~25 min chacun',
       episodeWord: { one: 'épisode', other: 'épisodes' },
     },
     nav: {
@@ -252,7 +252,7 @@ export const translations: Record<Language, TranslationsShape> = {
       eyebrowRight: 'Temporada 1',
       year: '2026',
       genre: 'Documental',
-      runtime: 'unos 25 min cada uno',
+      runtime: '~25 min cada uno',
       episodeWord: { one: 'episodio', other: 'episodios' },
     },
     nav: {
@@ -313,7 +313,7 @@ export const translations: Record<Language, TranslationsShape> = {
       eyebrowRight: 'Staffel 1',
       year: '2026',
       genre: 'Dokumentation',
-      runtime: 'je ca. 25 Min.',
+      runtime: 'je ~25 Min.',
       episodeWord: { one: 'Folge', other: 'Folgen' },
     },
     nav: {
@@ -374,7 +374,7 @@ export const translations: Record<Language, TranslationsShape> = {
       eyebrowRight: 'Stagione 1',
       year: '2026',
       genre: 'Documentario',
-      runtime: 'circa 25 min ciascuno',
+      runtime: '~25 min ciascuno',
       episodeWord: { one: 'episodio', other: 'episodi' },
     },
     nav: {
