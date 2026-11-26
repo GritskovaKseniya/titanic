@@ -37,8 +37,19 @@ export async function launch() {
 
 // Opens `route` (relative to SITE_URL) with the theme/language preset before
 // the app boots, and collects console/page errors on `page.errors`.
-export async function openSite(browser, { route = '', width = 1280, height = 900, theme, lang, scale = 1 } = {}) {
-  const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: scale });
+// `device`: 'phone' (touch screen, as Android Chrome), 'iphone' (touch, iOS
+// user agent, no element fullscreen — like iPhone Safari), or desktop.
+const IPHONE_UA =
+  'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
+export async function openSite(browser, { route = '', width = 1280, height = 900, theme, lang, scale = 1, device } = {}) {
+  const touch = device === 'phone' || device === 'iphone';
+  const page = await browser.newPage({
+    viewport: { width, height },
+    deviceScaleFactor: scale,
+    ...(touch && { isMobile: true, hasTouch: true }),
+    ...(device === 'iphone' && { userAgent: IPHONE_UA }),
+  });
+  if (device === 'iphone') await page.addInitScript(() => delete Element.prototype.requestFullscreen);
   page.errors = [];
   page.on('console', (m) => m.type() === 'error' && page.errors.push(m.text()));
   page.on('pageerror', (e) => page.errors.push(String(e)));

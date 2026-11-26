@@ -7,6 +7,7 @@
 // Checks:
 //   page      no console errors, no horizontal scroll (each theme × width)
 //   seam      hero photo fades into the next section with no visible line
+//   player    the video overlay's ✕ is on top (not under the header) and closes it
 //   routes    /reconstructions renders; header nav leads back to home sections
 //   icons     tab icon, home-screen icon, manifest and theme-color swap per
 //             theme × language, and every referenced file loads
@@ -107,6 +108,42 @@ for (const theme of themes) {
   if (themes.length === 1 && r.theme !== themes[0]) fail('page', `saved theme 'blue' overrides the site theme: data-theme=${r.theme}`);
   if (themes.length === 1 && r.picker) fail('page', 'theme picker button is shown');
   await page.close();
+}
+
+console.log('player');
+// The video overlay must sit above everything — the fixed header included —
+// so its ✕ can be tapped, whether opened from an episode card (inside a
+// section with its own stacking context) or from the hero's trailer button.
+for (const [device, width] of [['iphone', 390], ['phone', 390], ['desktop', 1280]]) {
+  for (const from of ['episode', 'trailer']) {
+    const page = await openSite(browser, { width, device });
+    const opener = from === 'trailer'
+      ? page.locator('#top button.btn-cta')
+      : page.locator('#episodes .episode-thumb:not([disabled])').first();
+    if (!(await opener.count())) {
+      fail('player', `${device}: nothing to open the ${from} with`);
+      await page.close();
+      continue;
+    }
+    await opener.scrollIntoViewIfNeeded();
+    await opener.click();
+    await page.waitForTimeout(300);
+    const onTop = await page.evaluate(() => {
+      const btn = document.querySelector('button[aria-label="Close"]');
+      if (!btn) return 'no ✕';
+      const r = btn.getBoundingClientRect();
+      const hit = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2);
+      return btn.contains(hit) ? true : `covered by <${hit?.closest('header') ? 'header' : hit?.tagName.toLowerCase()}>`;
+    });
+    if (onTop !== true) fail('player', `${device} ${from}: ✕ ${onTop}`);
+    else {
+      const close = page.locator('button[aria-label="Close"]');
+      await (device === 'desktop' ? close.click() : close.tap());
+      await page.waitForTimeout(200);
+      if (await page.locator('iframe[src*="player.vimeo"]').count()) fail('player', `${device} ${from}: ✕ doesn't close the player`);
+    }
+    await page.close();
+  }
 }
 
 console.log('routes');

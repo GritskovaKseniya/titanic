@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 import { buildVimeoEmbed } from '../utils/video';
 
@@ -130,17 +131,16 @@ export const VideoModal: React.FC<{ video: string; title: string; onClose: () =>
     </button>
   );
 
+  let overlay: React.ReactElement;
   if (touch && ios) {
-    return (
+    overlay = (
       <div ref={modalRef} className="fixed inset-0 z-[100] bg-black overscroll-contain flex items-center justify-center">
         {closeButton('absolute top-3 right-3 z-10 rounded-full bg-black/60 p-2')}
         <div className="w-full max-w-[calc(100dvh*16/9)]">{player}</div>
       </div>
     );
-  }
-
-  if (touch) {
-    return (
+  } else if (touch) {
+    overlay = (
       <div ref={modalRef} className="fixed inset-0 z-[100] bg-black overscroll-contain">
         {/* The "stage" fills the screen; held upright it's swapped to
             screen-height × screen-width and turned 90°, so the video and the
@@ -154,15 +154,21 @@ export const VideoModal: React.FC<{ video: string; title: string; onClose: () =>
         </div>
       </div>
     );
+  } else {
+    overlay = (
+      <div ref={modalRef} className="fixed inset-0 z-[100] bg-black/85 p-4 sm:p-8 flex items-center justify-center" onClick={close}>
+        {/* Width also capped by height (16:9), leaving room for the ✕ above. */}
+        <div className="relative w-full max-w-[min(56rem,calc((100dvh-6rem)*16/9))]" onClick={(e) => e.stopPropagation()}>
+          {closeButton('absolute -top-10 right-0')}
+          {player}
+        </div>
+      </div>
+    );
   }
 
-  return (
-    <div ref={modalRef} className="fixed inset-0 z-[100] bg-black/85 p-4 sm:p-8 flex items-center justify-center" onClick={close}>
-      {/* Width also capped by height (16:9), leaving room for the ✕ above. */}
-      <div className="relative w-full max-w-[min(56rem,calc((100dvh-6rem)*16/9))]" onClick={(e) => e.stopPropagation()}>
-        {closeButton('absolute -top-10 right-0')}
-        {player}
-      </div>
-    </div>
-  );
+  // Rendered straight into <body>, not where it's used: a section that forms
+  // its own stacking context (the episodes are `relative z-10`, to sit over
+  // the hero photo) would otherwise trap the overlay under the fixed site
+  // header, which then hides the ✕.
+  return createPortal(overlay, document.body);
 };
